@@ -6,6 +6,13 @@ export const config: Phaser.Types.Core.GameConfig = {
     width: 800,
     height: 600,
     type: Phaser.AUTO,
+    scale: {
+        parent: gameId,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -13,6 +20,6 @@ export const config: Phaser.Types.Core.GameConfig = {
             debug: false
         }
     },
-    parent: gameId,
+    // parent: gameId,
 };
 

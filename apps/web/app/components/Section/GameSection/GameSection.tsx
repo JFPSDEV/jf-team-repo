@@ -1,9 +1,7 @@
 import React from "react";
 
-import { Phaser, PhaserContainer } from "@jfteam/phaser_next";
-
-import { gameId, config } from "./config";
-import MainScene from "./MainScene";
+import { PortfolioGame } from "@jfteam/portfolio_game";
+import { Container, Box, Button } from "@mantine/core";
 
 interface GameSectionProps {}
 
@@ -11,6 +9,10 @@ export const GameSection = (props: GameSectionProps) => {
   const {} = props;
 
   return (
-    <PhaserContainer gameId={gameId} config={config} mainScene={MainScene} />
+    <Container size="lg" style={{ border: "1px solid black" }}>
+      <Container>
+        <PortfolioGame />
+      </Container>
+    </Container>
   );
 };
