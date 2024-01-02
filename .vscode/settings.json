@@ -18,15 +18,15 @@
   "editor.formatOnType": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": false,
-    "source.fixAll": true,
-    "source.fixAll.eslint": true
+    "source.organizeImports": "never",
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false,
     "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": false
+      "source.fixAll.eslint": "never"
     }
   },
 
