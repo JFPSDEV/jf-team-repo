@@ -1,17 +1,22 @@
 import React from 'react';
 
-import { PhaserContainer } from '@jfteam/phaser_next';
+import {
+  PhaserContainer,
+  type PhaserContainerProps
+} from '@jfteam/phaser_next';
 
 import { gameId, config } from './config';
 import MainScene from './MainScene';
 
-interface PortfolioGameProps {}
+interface PortfolioGameProps
+  extends Pick<PhaserContainerProps, 'className' | 'style'> {}
 
 export const PortfolioGame = (props: PortfolioGameProps) => {
-  const {} = props;
+  const { ...phaserContainerProps } = props;
 
   return (
     <PhaserContainer
+      {...phaserContainerProps}
       gameId={gameId}
       config={config}
       mainScene={MainScene}

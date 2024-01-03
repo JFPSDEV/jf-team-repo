@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { loadGame } from "./loadGame";
-import { PhaserContainerProps } from "../PhaserContainer";
+import { loadGame } from './loadGame';
+import { PhaserContainerProps } from '../PhaserContainer';
 
-import "phaser";
+import 'phaser';
 
 const PhaserRender = (props: PhaserContainerProps) => {
-  const { gameId, config, mainScene } = props;
+  const { gameId, config, mainScene, className, style } = props;
 
   const phaserGameRef = useRef<any>(null);
   const [loaded, isLoaded] = useState<boolean>(false);
@@ -29,7 +29,9 @@ const PhaserRender = (props: PhaserContainerProps) => {
     };
   }, [loaded]);
 
-  return <div id={gameId} key={gameId} />;
+  return (
+    <div id={gameId} key={gameId} className={className} style={style} />
+  );
 };
 
 export default PhaserRender;

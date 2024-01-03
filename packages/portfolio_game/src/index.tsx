@@ -1,1 +1,2 @@
-export * from "./PortfolioGame";
+export * from './PortfolioGame';
+export * from './config';

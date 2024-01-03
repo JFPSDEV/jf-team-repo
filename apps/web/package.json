@@ -9,7 +9,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@jfteam/mantine_ui": "workspace:*",
+    "@jfteam/material": "workspace:*",
     "@jfteam/portfolio_game": "workspace:*",
     "@mantine/core": "6.0.21",
     "next": "^14.0.3",

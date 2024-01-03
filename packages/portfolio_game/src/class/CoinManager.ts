@@ -2,12 +2,8 @@
 
 import { Phaser } from '@jfteam/phaser_next';
 
+import { TCoordinate } from '../types';
 import coins from '../assets/coins.png';
-
-interface TCoordinate {
-  x: number;
-  y: number;
-}
 
 export class CoinManager {
   private score: number = 0;

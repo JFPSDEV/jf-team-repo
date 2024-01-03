@@ -3,20 +3,27 @@
 import { Phaser } from '@jfteam/phaser_next';
 
 import sky from './assets/sky.png';
+import bomb from './assets/bomb.png';
+import brick from './assets/brick.png';
 import platform from './assets/platform.png';
 import groundBlock1 from './assets/groundBlock1.png';
 import groundBlock2 from './assets/groundBlock2.png';
-import brick from './assets/brick.png';
-import bomb from './assets/bomb.png';
+
 import { DudePlayer } from './class/DudePlayer';
-import { GroundBlockManager } from './class/GroundBlockManager';
 import { CoinManager } from './class/CoinManager';
+import { SPBlockManager } from './class/SPBlockManager';
+import { GroundBlockManager } from './class/GroundBlockManager';
+import { CastleManager } from './class/CastleManager';
+import { FlagManager } from './class/FlagManager';
 
 export default class MainScene extends Phaser.Scene {
   private player!: DudePlayer;
   private groundBlockManager!: GroundBlockManager;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   private coinManager!: CoinManager;
+  private sPBlockManager!: SPBlockManager;
+  private castleManager!: CastleManager;
+  private flagManager!: FlagManager;
 
   preload(): void {
     this.load.image('sky', sky.src);
@@ -27,9 +34,15 @@ export default class MainScene extends Phaser.Scene {
     this.load.image('brick', brick.src);
     DudePlayer.loadSprite(this);
     CoinManager.loadSprite(this);
+    SPBlockManager.loadSprite(this);
+    CastleManager.loadSprite(this);
+    FlagManager.loadSprite(this);
   }
 
   create(): void {
+    const W = this.cameras.main.width;
+    var H = this.cameras.main.height;
+
     // Sky
     const sky = this.add.tileSprite(
       0,
@@ -43,7 +56,8 @@ export default class MainScene extends Phaser.Scene {
     this.groundBlockManager = new GroundBlockManager(this);
     this.groundBlockManager.createGroundBlocks();
 
-    this.player = new DudePlayer(this, 900, 450);
+    this.player = new DudePlayer(this, W / 12, 0);
+    this.player.setInteractive();
 
     this.physics.add.collider(
       this.player,
@@ -55,19 +69,40 @@ export default class MainScene extends Phaser.Scene {
     }
 
     // Brick
-    const brick = this.add.image(400, 300, 'brick');
-    brick.setScale(25 / brick.width, 25 / brick.height);
+    // const brick = this.add.image(400, H / 2, 'brick');
+    // brick.setScale(25 / brick.width, 25 / brick.height);
+
+    // Flag
+    this.flagManager = new FlagManager(this, {
+      x: W - 300,
+      y: H / 1.94
+    });
+
+    // Castle
+    this.castleManager = new CastleManager(this, {
+      x: W - 100,
+      y: H / 1.66
+    });
+
+    // SpBlock
+    this.sPBlockManager = new SPBlockManager(this, [
+      { x: W / 2 - 100, y: H / 2 },
+      { x: W / 2, y: H / 2 },
+      { x: W / 2 + 100, y: H / 2 }
+    ]);
 
     // Coins
     this.coinManager = new CoinManager(this, [
-      { x: 300, y: 530 },
-      { x: 400, y: 530 },
-      { x: 500, y: 530 }
+      { x: W / 2 - 100, y: H / 1.5 },
+      { x: W / 2, y: H / 1.5 },
+      { x: W / 2 + 100, y: H / 1.5 }
     ]);
 
     this.physics.add.collider(
-      this.coinManager.getCoinsGroup(),
-      this.groundBlockManager.getGroundBlocks()
+      this.sPBlockManager.getSpBlockGroup(),
+      this.player,
+      this.sPBlockManager
+        .handleSpBlockCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
     );
 
     this.physics.add.overlap(
