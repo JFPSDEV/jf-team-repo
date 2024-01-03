@@ -3,7 +3,7 @@ import { Phaser } from '@jfteam/phaser_next';
 export const gameId: string = 'phaser-game';
 
 export const config: Phaser.Types.Core.GameConfig = {
-  height: 500,
+  height: 550,
   type: Phaser.AUTO,
   scale: {
     parent: gameId,

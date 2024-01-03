@@ -75,13 +75,13 @@ export default class MainScene extends Phaser.Scene {
     // Flag
     this.flagManager = new FlagManager(this, {
       x: W - 300,
-      y: H / 1.94
+      y: H / 2.1
     });
 
     // Castle
     this.castleManager = new CastleManager(this, {
       x: W - 100,
-      y: H / 1.66
+      y: H / 1.8
     });
 
     // SpBlock

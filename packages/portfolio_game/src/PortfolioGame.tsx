@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   PhaserContainer,
@@ -14,6 +14,23 @@ interface PortfolioGameProps
 export const PortfolioGame = (props: PortfolioGameProps) => {
   const { ...phaserContainerProps } = props;
 
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const reloadOnWindowResize = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', reloadOnWindowResize);
+    return () => {
+      window.removeEventListener('resize', reloadOnWindowResize);
+    };
+  }, []);
+
+  if (loading) return null;
   return (
     <PhaserContainer
       {...phaserContainerProps}

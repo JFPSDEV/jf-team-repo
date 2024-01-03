@@ -13,21 +13,14 @@ export const GameSection = (props: GameSectionProps) => {
   const { classes } = useStyles(config);
 
   return (
-    <Box
-      sx={
-        {
-          //border: '4px solid'
-        }
-      }
-    >
-      <Box className={classes.container}>
-        <PortfolioGame />
-      </Box>
+    <Box className={classes.container}>
+      <PortfolioGame />
     </Box>
-    // <Container size="lg" style={{ border: "1px solid black" }}>
-    //   <Container>
-    //     <PortfolioGame />
-    //   </Container>
-    // </Container>
   );
 };
+
+// <Container size="lg" style={{ border: "1px solid black" }}>
+//   <Container>
+//     <PortfolioGame />
+//   </Container>
+// </Container>

@@ -15,17 +15,19 @@ export class GroundBlockManager {
     const W = this.scene.cameras.main.width;
 
     // Step 1
-    this.createGroundBlockLayer('groundBlock1', 0, 34);
     this.createGroundBlockLayer('groundBlock2', 0, 10);
+    this.createGroundBlockLayer('groundBlock2', 0, 34);
+    this.createGroundBlockLayer('groundBlock2', 0, 58);
+    this.createGroundBlockLayer('groundBlock1', 0, 80);
 
     // Step 2
-    this.createGroundBlockLayer('groundBlock1', W / 4, 58);
+    this.createGroundBlockLayer('groundBlock1', W / 4, 102);
 
     // Step 2
-    this.createGroundBlockLayer('groundBlock1', W / 2.5, 80);
+    this.createGroundBlockLayer('groundBlock1', W / 2.5, 124);
 
     // Step 3
-    this.createGroundBlockLayer('groundBlock1', W / 1.8, 102);
+    this.createGroundBlockLayer('groundBlock1', W / 1.8, 148);
   }
 
   private createGroundBlockLayer(
