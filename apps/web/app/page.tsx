@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { GameSection } from "./components";
+import { Header } from './components';
 
 export default function Page(): JSX.Element {
   return (
     <main>
-      <GameSection />
+      <Header />
     </main>
   );
 }
