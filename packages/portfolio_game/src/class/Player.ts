@@ -1,5 +1,7 @@
 // Player.ts
+
 import { Phaser } from '@jfteam/phaser_next';
+
 import { Direction } from '../enum/direction';
 
 export class Player extends Phaser.Physics.Arcade.Sprite {

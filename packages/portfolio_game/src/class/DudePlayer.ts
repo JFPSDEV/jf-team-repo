@@ -1,6 +1,7 @@
 // DudePlayer.ts
 
 import { Phaser } from '@jfteam/phaser_next';
+
 import { Player } from './Player';
 
 import dude from '../assets/dude.png';
