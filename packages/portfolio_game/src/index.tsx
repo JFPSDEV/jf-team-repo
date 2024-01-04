@@ -1,2 +1,2 @@
-export * from './PortfolioGame';
 export * from './config';
+export * from './MainScene';

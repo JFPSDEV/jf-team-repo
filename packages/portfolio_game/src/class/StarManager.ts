@@ -1,6 +1,6 @@
 // StarManager.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 export class StarManager {
   private scene: Phaser.Scene;

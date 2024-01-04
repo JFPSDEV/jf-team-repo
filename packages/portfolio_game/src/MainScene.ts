@@ -1,6 +1,6 @@
 // MainScene.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 import sky from './assets/sky.png';
 import bomb from './assets/bomb.png';
@@ -16,7 +16,7 @@ import { GroundBlockManager } from './class/GroundBlockManager';
 import { CastleManager } from './class/CastleManager';
 import { FlagManager } from './class/FlagManager';
 
-export default class MainScene extends Phaser.Scene {
+export class MainScene extends Phaser.Scene {
   private player!: DudePlayer;
   private groundBlockManager!: GroundBlockManager;
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;

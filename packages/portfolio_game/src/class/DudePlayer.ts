@@ -1,6 +1,6 @@
 // DudePlayer.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 import { Player } from './Player';
 

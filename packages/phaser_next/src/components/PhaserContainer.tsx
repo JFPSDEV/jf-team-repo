@@ -2,17 +2,24 @@ import React, { HTMLAttributes, useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 
+// export interface PhaserContainerProps {
+//   gameId: string;
+//   config: Phaser.Types.Core.GameConfig;
+//   mainScene: Phaser.Types.Scenes.SceneType;
+//   className?: HTMLAttributes<HTMLDivElement>['className'];
+//   style?: React.CSSProperties;
+// }
+
 export interface PhaserContainerProps {
-  gameId: string;
-  config: Phaser.Types.Core.GameConfig;
-  mainScene: Phaser.Types.Scenes.SceneType;
+  gameId: any;
+  config: any;
+  mainScene: any;
   className?: HTMLAttributes<HTMLDivElement>['className'];
   style?: React.CSSProperties;
 }
 
 const DynamicComponentWithNoSSRWrapper = dynamic<PhaserContainerProps>(
-  () =>
-    import('./PhaserTools/PhaserRender').then((module) => module.default),
+  () => import('./PhaserRender').then((module) => module.default),
   {
     ssr: false
   }

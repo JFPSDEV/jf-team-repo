@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { PortfolioGame, config } from '@jfteam/portfolio_game';
+import { Box } from '@jfteam/material';
 
 import { useStyles } from './Header.styles';
-import { Box } from '@jfteam/material';
 import { NavBar } from '../..';
 import { Section } from '../Section';
+import { Game } from '../../Game/Game';
 
 interface HeaderProps {}
 
 export const Header = (props: HeaderProps) => {
   const {} = props;
 
-  const { classes } = useStyles(config);
+  const { classes } = useStyles({ width: '100%', height: 550 });
 
   return (
     <>
@@ -23,14 +23,8 @@ export const Header = (props: HeaderProps) => {
       </Box>
 
       <Box className={classes.header}>
-        <PortfolioGame />
+        <Game />
       </Box>
     </>
   );
 };
-
-// <Container size="lg" style={{ border: "1px solid black" }}>
-//   <Container>
-//     <PortfolioGame />
-//   </Container>
-// </Container>

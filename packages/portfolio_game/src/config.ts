@@ -1,4 +1,4 @@
-import { Phaser } from '@jfteam/phaser_next';
+const Phaser = require('phaser');
 
 export const gameId: string = 'phaser-game';
 

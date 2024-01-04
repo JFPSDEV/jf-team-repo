@@ -1,6 +1,6 @@
 // GroundBlockManager.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 export class GroundBlockManager {
   private scene: Phaser.Scene;
@@ -47,6 +47,7 @@ export class GroundBlockManager {
 
     groundBlocks.children.iterate(function (block: any) {
       block.setScale(groundBlockSize / block.width);
+      return null;
     });
 
     this.groundBlocks.addMultiple(groundBlocks.getChildren());

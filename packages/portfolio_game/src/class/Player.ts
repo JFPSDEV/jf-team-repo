@@ -1,6 +1,6 @@
 // Player.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 import { Direction } from '../enum/direction';
 

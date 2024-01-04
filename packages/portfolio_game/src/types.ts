@@ -1,4 +1,4 @@
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 export interface PhaserGameType {
   PLAYER: Phaser.Physics.Arcade.Sprite;

@@ -1,6 +1,6 @@
 // FlagManager.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 import { TCoordinate } from '../types';
 import flag from '../assets/flag.png';

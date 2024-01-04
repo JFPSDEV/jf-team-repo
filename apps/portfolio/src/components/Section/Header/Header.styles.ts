@@ -1,7 +1,12 @@
 import { createStyles } from '@jfteam/material';
 
+interface TParams {
+  width?: string | number | undefined;
+  height?: string | number | undefined;
+}
+
 export const useStyles = createStyles(
-  (theme, phaserConfig: Phaser.Types.Core.GameConfig) => ({
+  (theme, { width, height }: TParams) => ({
     mainContainer: {
       position: 'absolute',
       width: '100%',
@@ -11,8 +16,8 @@ export const useStyles = createStyles(
       height: 100
     },
     header: {
-      width: phaserConfig.width,
-      height: phaserConfig.height,
+      width,
+      height,
       '-webkit-clip-path': 'polygon(0 0, 0 100%, 100% 80%, 100% 0)',
       clipPath: 'polygon(0 0, 0 100%, 100% 70%, 100% 0)'
     }

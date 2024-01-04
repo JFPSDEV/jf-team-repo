@@ -1,1 +1,1 @@
-export * from "./PhaserContainer"
+export * from './PhaserRender';

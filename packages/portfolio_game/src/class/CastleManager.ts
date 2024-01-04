@@ -1,6 +1,6 @@
 // CastleManager.ts
 
-import { Phaser } from '@jfteam/phaser_next';
+import 'phaser';
 
 import { TCoordinate } from '../types';
 import castle from '../assets/castle.png';
