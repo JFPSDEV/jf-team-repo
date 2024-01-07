@@ -1,0 +1,28 @@
+{
+  "name": "@jfteam/portfolio-game",
+  "version": "1.0.0",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "private": true,
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "generate:component": "turbo gen react-component"
+  },
+  "dependencies": {
+    "@jfteam/phaser-next": "workspace:*",
+    "@jfteam/phaser-utils": "workspace:*",
+    "next": "14.0.4",
+    "phaser": "^3.70.0",
+    "phaser3spectorjs": "^0.0.8",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "typescript": "^5"
+  }
+}

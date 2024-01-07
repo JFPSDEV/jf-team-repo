@@ -1,0 +1,41 @@
+.mainContainer {
+  position: 'relative';
+  height: 550px;
+  width: 100%;
+}
+
+.navBarContainer {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.navbar {
+  height: 100;
+}
+
+.header {
+  width: 100%;
+  height: 550px;
+  clip-path: polygon(0 0, 0 100%, 100% 70%, 100% 0);
+  z-index: 1;
+}
+
+.sectionBackground {
+  height: 100%;
+  width: 100%;
+}
+
+.sectionBackgroundContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 550px;
+}
+
+.skeletonBackground {
+  height: 550px;
+  width: 100%;
+  clip-path: polygon(0 0, 0% 95%, 100% 70%, 100% 0);
+}
