@@ -25,7 +25,11 @@ export function Carousel<T>(props: CarouselProps<T>) {
       h={h}
       slideGap='xl'
       withControls
-      plugins={delay ? [autoplay.current] : undefined}
+      plugins={
+        (delay
+          ? [autoplay.current]
+          : undefined) as MantineCarouselProps['plugins']
+      }
       {...other}
     >
       {rows.map((contentItem, index) => (

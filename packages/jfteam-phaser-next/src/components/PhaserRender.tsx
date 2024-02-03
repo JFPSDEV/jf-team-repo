@@ -2,8 +2,8 @@ import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import 'phaser';
 
-import { TGameParams, loadGame } from '@jfteam/phaser-utils';
-import type { TCallBacks } from '@jfteam/types';
+import { loadGame } from '@jfteam/phaser-utils';
+import type { TCallBacks, TGameParams } from '@jfteam/types';
 
 export interface PhaserRenderProps {
   gameId: string;
