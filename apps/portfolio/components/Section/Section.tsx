@@ -12,15 +12,15 @@ interface SectionProps extends ContainerProps {
 }
 
 export const Section = (props: SectionProps) => {
-  const { className, isDashed, ...containerProps } = props;
+  const { className, isDashed, bg, ...containerProps } = props;
 
   const { isMobile } = useResponsive();
 
   return (
-    <Box className={cx(className, classes.container)}>
-      <Container size="md" className={classes.section} {...containerProps} />
+    <Box className={cx(className, classes.container)} bg={bg}>
+      <Container size="lg" className={classes.section} {...containerProps} />
       {!isMobile && isDashed && (
-        <Container className={classes.gridContainer}>
+        <Container size="lg" className={classes.gridContainer}>
           <BgLinear />
         </Container>
       )}

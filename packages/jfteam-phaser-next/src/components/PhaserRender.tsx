@@ -2,7 +2,8 @@ import React, { HTMLAttributes, useEffect, useRef, useState } from 'react';
 
 import 'phaser';
 
-import { loadGame } from '@jfteam/phaser-utils';
+import { TGameParams, loadGame } from '@jfteam/phaser-utils';
+import type { TCallBacks } from '@jfteam/types';
 
 export interface PhaserRenderProps {
   gameId: string;
@@ -10,10 +11,20 @@ export interface PhaserRenderProps {
   mainScene: Phaser.Types.Scenes.SceneType;
   className?: HTMLAttributes<HTMLDivElement>['className'];
   style?: React.CSSProperties;
+  callBacks?: TCallBacks;
+  params?: TGameParams;
 }
 
 export const PhaserRender = (props: PhaserRenderProps) => {
-  const { gameId, config, mainScene, className, style } = props;
+  const {
+    gameId,
+    config,
+    mainScene,
+    className,
+    style,
+    callBacks,
+    params
+  } = props;
 
   const phaserGameRef = useRef<any>(null);
   const [loaded, isLoaded] = useState<boolean>(false);
@@ -24,7 +35,7 @@ export const PhaserRender = (props: PhaserRenderProps) => {
 
   useEffect(() => {
     if (loaded) {
-      loadGame(config, mainScene).then((game) => {
+      loadGame(config, mainScene, callBacks, params).then((game) => {
         phaserGameRef.current = game;
       });
     }

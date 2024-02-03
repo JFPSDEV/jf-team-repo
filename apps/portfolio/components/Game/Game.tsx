@@ -8,13 +8,5 @@ const DynamicComponentWithNoSSR = dynamic(() => import('./NoSsrGame'), {
 });
 
 export const Game = () => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  if (loading) return <Skeleton visible={true} h={550} w="100%" style={{ zIndex: 10 }} />;
-
   return <DynamicComponentWithNoSSR />;
 };

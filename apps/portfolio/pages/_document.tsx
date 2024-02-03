@@ -14,7 +14,7 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
-        <ColorSchemeScript />
+        <ColorSchemeScript defaultColorScheme="light" />
       </Head>
       <body style={style}>
         <Main />

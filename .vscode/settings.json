@@ -76,6 +76,8 @@
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml"
   },
 
+  "colorize.languages": ["typescript", "javascript", "css", "scss"],
+
   /**
    * Tabnine
    * ----------------

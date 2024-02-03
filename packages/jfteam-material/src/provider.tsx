@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-import { createTheme } from "@mantine/core";
+import { ReactNode } from 'react';
+import { createTheme } from '@mantine/core';
 
-import { MantineProvider, type MantineThemeOverride } from "@mantine/core";
+import { MantineProvider, type MantineThemeOverride } from '@mantine/core';
 
-import "@mantine/core/styles.css";
+import '@mantine/core/styles.css';
 
 export interface JfteamMaterialProviderProps {
   children: ReactNode;
@@ -12,9 +12,7 @@ export interface JfteamMaterialProviderProps {
 
 export const JfteamMaterialProvider = ({
   theme,
-  children,
+  children
 }: JfteamMaterialProviderProps) => (
-  <MantineProvider theme={createTheme(theme)} forceColorScheme="light">
-    {children}
-  </MantineProvider>
+  <MantineProvider theme={createTheme(theme)}>{children}</MantineProvider>
 );

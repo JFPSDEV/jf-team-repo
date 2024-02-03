@@ -11,6 +11,7 @@
   "dependencies": {
     "@jfteam/phaser-next": "workspace:*",
     "@jfteam/phaser-utils": "workspace:*",
+    "@jfteam/types": "workspace:*",
     "next": "14.0.4",
     "phaser": "^3.70.0",
     "phaser3spectorjs": "^0.0.8",

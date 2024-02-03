@@ -19,6 +19,10 @@ export class FlagManager {
 
   private createFlag(coordinate: TCoordinate): void {
     const flag = this.scene.add.image(coordinate.x, coordinate.y, 'flag');
-    flag.setScale(36 / flag.width, 255 / flag.height);
+    const x = 1.5;
+    flag.setScale(
+      (flag.width * x) / flag.width,
+      (flag.height * x) / flag.height
+    );
   }
 }

@@ -1,0 +1,10 @@
+.container {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--mantine-shadow-lg);
+}
+
+.websiteImage {
+  height: 340px;
+  width: auto;
+}

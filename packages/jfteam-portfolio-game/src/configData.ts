@@ -4,5 +4,5 @@ export interface configDataParams {
 }
 export const configData: configDataParams = {
   width: '100%',
-  height: 550
+  height: 450
 };

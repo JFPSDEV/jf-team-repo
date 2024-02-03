@@ -20,10 +20,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
-    "@mantine/core": "7.4.0",
-    "@mantine/hooks": "7.4.0",
     "@next/bundle-analyzer": "^14.0.1",
-    "@tabler/icons-react": "^2.40.0",
     "next": "14.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -71,10 +68,15 @@
     "typescript": "5.2.2",
     "@jfteam/material": "workspace:*",
     "@jfteam/theme": "workspace:*",
-    "@jfteam/portfolio-game":  "workspace:*",
-    "@jfteam/phaser-next":  "workspace:*",
-    "@jfteam/hooks":  "workspace:*", 
-    "@jfteam/icons":  "workspace:*"
+    "@jfteam/portfolio-game": "workspace:*",
+    "@jfteam/phaser-next": "workspace:*",
+    "@jfteam/hooks": "workspace:*",
+    "@jfteam/icons": "workspace:*",
+    "@jfteam/carousel": "workspace:*",
+    "@jfteam/animated": "workspace:*",
+    "@jfteam/form": "workspace:*",
+    "@jfteam/utils": "workspace:*",
+    "@jfteam/types": "workspace:*"
   },
   "packageManager": "yarn@4.0.1"
 }

@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface JFLogoIconProps extends IconProps {}
 
 export const JFLogoIcon = (props: JFLogoIconProps) => {
-  const { size, color } = props;
+  const { size, color, className } = props;
 
   return (
     <svg
@@ -15,6 +15,7 @@ export const JFLogoIcon = (props: JFLogoIconProps) => {
       height={size || '327'}
       viewBox='0 0 970.000000 628.000000'
       preserveAspectRatio='xMidYMid meet'
+      className={className}
     >
       <g
         transform='translate(0.000000,628.000000) scale(0.100000,-0.100000)'

@@ -1,0 +1,14 @@
+.container {
+  /* box-shadow: var(--mantine-shadow-lg);
+  border-radius: 8px;
+  border: 1px solid #e7e7e7; */
+}
+
+.pictureContainer {
+  position: relative;
+  width: 100%;
+}
+
+.testimonialPicture {
+  border-radius: 8px;
+}

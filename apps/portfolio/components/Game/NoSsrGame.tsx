@@ -1,11 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
-import { Skeleton } from '@jfteam/material';
 import { PhaserRender } from '@jfteam/phaser-next';
 import { gameId, config, MainScene } from '@jfteam/portfolio-game';
 
+import { useMantineColorScheme, useMantineTheme } from '@jfteam/material';
+
 const NoSsrGame = () => {
   const [loading, setLoading] = useState<boolean>(false);
+
+  const { colorScheme, setColorScheme } = useMantineColorScheme({
+    keepTransitions: true,
+  });
+
+  const theme = useMantineTheme();
+
+  console.log({ theme });
 
   const reloadOnWindowResize = () => {
     setLoading(true);
@@ -21,8 +30,19 @@ const NoSsrGame = () => {
     };
   }, []);
 
-  if (loading) return <Skeleton visible={true} h={550} w="100%" style={{ zIndex: 10 }} />;
-  return <PhaserRender gameId={gameId} config={config} mainScene={MainScene} />;
+  if (loading) return null;
+  return (
+    <PhaserRender
+      gameId={gameId}
+      config={config}
+      mainScene={MainScene}
+      params={{ colorScheme }}
+      callBacks={{
+        light: () => setColorScheme('light'),
+        dark: () => setColorScheme('dark'),
+      }}
+    />
+  );
 };
 
 export default NoSsrGame;

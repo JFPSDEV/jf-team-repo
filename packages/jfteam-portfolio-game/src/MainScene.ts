@@ -2,10 +2,7 @@
 
 import 'phaser';
 
-import sky from './assets/sky.png';
-import bomb from './assets/bomb.png';
 import brick from './assets/brick.png';
-import platform from './assets/platform.png';
 import groundBlock1 from './assets/groundBlock1.png';
 import groundBlock2 from './assets/groundBlock2.png';
 
@@ -13,8 +10,10 @@ import { DudePlayer } from './class/DudePlayer';
 import { CoinManager } from './class/CoinManager';
 import { SPBlockManager } from './class/SPBlockManager';
 import { GroundBlockManager } from './class/GroundBlockManager';
+import { PowBlockManager } from './class/PowBlockManager';
 import { CastleManager } from './class/CastleManager';
 import { FlagManager } from './class/FlagManager';
+import { SkyManager } from './class/SkyManager';
 
 export class MainScene extends Phaser.Scene {
   private player!: DudePlayer;
@@ -24,19 +23,21 @@ export class MainScene extends Phaser.Scene {
   private sPBlockManager!: SPBlockManager;
   private castleManager!: CastleManager;
   private flagManager!: FlagManager;
+  private powBlockManager!: PowBlockManager;
+  private isLightMode: boolean = true;
+  private sky!: SkyManager;
 
   preload(): void {
-    this.load.image('sky', sky.src);
     this.load.image('groundBlock1', groundBlock1.src);
     this.load.image('groundBlock2', groundBlock2.src);
-    this.load.image('platform', platform.src);
-    this.load.image('bomb', bomb.src);
     this.load.image('brick', brick.src);
+    SkyManager.loadSprite(this);
     DudePlayer.loadSprite(this);
     CoinManager.loadSprite(this);
     SPBlockManager.loadSprite(this);
     CastleManager.loadSprite(this);
     FlagManager.loadSprite(this);
+    PowBlockManager.loadSprite(this);
   }
 
   create(): void {
@@ -46,14 +47,7 @@ export class MainScene extends Phaser.Scene {
     const isMobile = this.cameras.main.width <= 600;
 
     // Sky
-    const sky = this.add.tileSprite(
-      0,
-      0,
-      this.cameras.main.width,
-      this.cameras.main.height,
-      'sky'
-    );
-    sky.setOrigin(0, 0);
+    this.sky = new SkyManager(this);
 
     this.groundBlockManager = new GroundBlockManager(this);
     this.groundBlockManager.createGroundBlocks();
@@ -77,14 +71,14 @@ export class MainScene extends Phaser.Scene {
       // Flag
       this.flagManager = new FlagManager(this, {
         x: W - 300,
-        y: H / 2.1
+        y: H / 2.27
       });
     }
 
     // Castle
     this.castleManager = new CastleManager(this, {
       x: W - (isMobile ? 40 : 100),
-      y: H / 1.8
+      y: H / 2.2
     });
 
     // SpBlock
@@ -94,12 +88,17 @@ export class MainScene extends Phaser.Scene {
       { x: W / 2 + 100, y: H / 2 }
     ]);
 
-    // Coins
-    this.coinManager = new CoinManager(this, [
-      { x: W / 2 - 100, y: H / 1.5 },
-      { x: W / 2, y: H / 1.5 },
-      { x: W / 2 + 100, y: H / 1.5 }
+    // PowBlock
+    this.powBlockManager = new PowBlockManager(this, [
+      { x: W / 2 - 600, y: H / 1.75 }
     ]);
+
+    // Coins
+    // this.coinManager = new CoinManager(this, [
+    //   { x: W / 2 - 100, y: H / 1.5 },
+    //   { x: W / 2, y: H / 1.5 },
+    //   { x: W / 2 + 100, y: H / 1.5 }
+    // ]);
 
     this.physics.add.collider(
       this.sPBlockManager.getSpBlockGroup(),
@@ -108,17 +107,25 @@ export class MainScene extends Phaser.Scene {
         .handleSpBlockCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
     );
 
-    this.physics.add.overlap(
-      this.player,
-      this.coinManager.getCoinsGroup(),
-      this.coinManager
-        .handleCoinCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-      undefined,
-      this
-    );
+    // this.physics.add.overlap(
+    //   this.player,
+    //   this.coinManager.getCoinsGroup(),
+    //   this.coinManager
+    //     .handleCoinCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+    //   undefined,
+    //   this
+    // );
   }
 
   update(): void {
     this.player.update(this.cursors);
+  }
+
+  public getIsLightMode(): boolean {
+    return this.isLightMode;
+  }
+
+  public setIsLightMode(value: boolean): void {
+    this.isLightMode = value;
   }
 }

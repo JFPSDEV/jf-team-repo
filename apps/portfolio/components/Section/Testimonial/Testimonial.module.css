@@ -1,0 +1,29 @@
+.icons {
+  width: 25px;
+  height: 25px;
+  color: black;
+}
+
+.iconRight {
+  margin-left: 2px;
+}
+
+.iconLeft {
+  margin-right: 1px;
+}
+
+.carouselButton {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border-color: #e7e7e7;
+  box-shadow: var(--mantine-shadow-lg);
+  background-color: #ffffff;
+}
+
+.carousel {
+  box-shadow: var(--mantine-shadow-lg);
+  border-radius: 8px;
+  border: 1px solid #e7e7e7;
+  background-color: #ffffff;
+}

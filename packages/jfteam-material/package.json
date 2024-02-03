@@ -28,7 +28,9 @@
     "@tiptap/starter-kit": "^2.1.13",
     "clsx": "^2.1.0",
     "dayjs": "^1.11.10",
+    "embla-carousel-autoplay": "7.1.0",
     "embla-carousel-react": "8.0.0-rc15",
+    "react-hot-toast": "^2.4.1",
     "recharts": "2"
   },
   "devDependencies": {
