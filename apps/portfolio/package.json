@@ -76,7 +76,8 @@
     "@jfteam/animated": "workspace:*",
     "@jfteam/form": "workspace:*",
     "@jfteam/utils": "workspace:*",
-    "@jfteam/types": "workspace:*"
+    "@jfteam/types": "workspace:*",
+    "@jfteam/mail": "workspace:*"
   },
   "packageManager": "yarn@4.0.1"
 }

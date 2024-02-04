@@ -2,14 +2,15 @@
   "name": "jf_team",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "dotenv -- turbo run dev",
+    "build": "dotenv -- turbo run build",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "dotenv-cli": "latest",
     "prettier": "^3.1.0",
     "turbo": "latest"
   },

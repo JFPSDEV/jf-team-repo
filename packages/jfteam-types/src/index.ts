@@ -5,3 +5,5 @@ export interface TGameParams {
 }
 
 export * from './email-form';
+
+export * from './auth-email';

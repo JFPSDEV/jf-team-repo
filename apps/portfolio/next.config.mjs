@@ -18,6 +18,7 @@ export default withBundleAnalyzer({
     '@jfteam/form',
     '@jfteam/utils',
     '@jfteam/types',
+    '@jfteam/mail',
   ],
   eslint: {
     ignoreDuringBuilds: true,

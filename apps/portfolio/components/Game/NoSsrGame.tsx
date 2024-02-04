@@ -14,8 +14,6 @@ const NoSsrGame = () => {
 
   const theme = useMantineTheme();
 
-  console.log({ theme });
-
   const reloadOnWindowResize = () => {
     setLoading(true);
     setTimeout(() => {
