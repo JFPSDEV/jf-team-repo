@@ -18,7 +18,7 @@ export const sendMail = async (
         subject,
         text: message,
         attachments,
-        html: `<p>${message}</p>`
+        html: `<b>${email}</b><p>${message}</p>`
       })
       .then(() => {
         return { success: true };

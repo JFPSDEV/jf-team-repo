@@ -1,4 +1,4 @@
-import React, { FormEventHandler } from 'react';
+import React from 'react';
 
 import { useForm } from '@jfteam/form';
 import { TEmailForm } from '@jfteam/types';
@@ -9,7 +9,7 @@ import { root } from '../../../../utils';
 import { ContactDrop, TFiles } from './ContactDrop/ContactDrop';
 import { Mail } from '@jfteam/mail';
 
-type TMail = TEmailForm<Mail.Attachment>;
+type TMail = TEmailForm<TFiles>;
 
 interface ContactFormProps {}
 
@@ -20,9 +20,9 @@ export const ContactForm = (props: ContactFormProps) => {
 
   const form = useForm<TMail>({
     initialValues: {
-      email: 'jfps.dev21@gmail.com',
-      subject: 'Subject TEST',
-      message: 'YOUP youpla',
+      email: '',
+      subject: '',
+      message: '',
       attachments: [],
     },
 
@@ -30,15 +30,31 @@ export const ContactForm = (props: ContactFormProps) => {
       email: (emailValue) => (/^\S+@\S+$/.test(emailValue) ? null : 'Invalid email'),
       message: (messageValue) =>
         messageValue.length < 1 ? 'First name must have a content' : null,
+      subject: (messageValue) => (messageValue.length < 1 ? 'Subject must have a content' : null),
     },
   });
 
-  const handleSendEMail = () => {
+  const handleSendEMail = (values: TMail, event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault();
+
     if (form.isValid()) {
+      const formatAttachments: Mail.Attachment[] = form.values.attachments.map((file, index) => ({
+        filename: `${index + 1}-${file.name}`,
+        path: file.base64,
+      }));
+
       toast.promise(
-        sendMail(form.values).then((res) => {
-          form.reset();
-        }),
+        sendMail({
+          ...values,
+          attachments: formatAttachments,
+        })
+          .then((res) => {
+            form.reset();
+          })
+          .catch((err) => {
+            console.log(err);
+            alert('stop');
+          }),
         {
           loading: 'Sending...',
           success: <b>The mail has been sent!</b>,
@@ -48,25 +64,8 @@ export const ContactForm = (props: ContactFormProps) => {
     }
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-    e.preventDefault();
-    handleSendEMail();
-  };
-
-  const handleAttachmentChange = (files: TFiles[]) => {
-    form.setFieldValue(
-      'attachments',
-      files.map((file) => ({
-        filename: file.name,
-        path: file.base64,
-        encoding: 'base64',
-        contentType: file.type,
-      }))
-    );
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={form.onSubmit((values, event) => handleSendEMail(values, event))}>
       <Stack px="xl">
         <TextInput
           disabled={loading}
@@ -82,7 +81,7 @@ export const ContactForm = (props: ContactFormProps) => {
           placeholder="subject..."
           {...form.getInputProps('subject')}
         />
-        <ContactDrop onChange={handleAttachmentChange} />
+        <ContactDrop disabled={loading} {...form.getInputProps('attachments')} />
         <Textarea
           withAsterisk
           disabled={loading}

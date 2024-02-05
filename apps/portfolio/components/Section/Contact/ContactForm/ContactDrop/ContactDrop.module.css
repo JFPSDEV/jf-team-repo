@@ -3,8 +3,8 @@
 }
 
 .removeAction,
+.removeAction:focus,
 .mantine-ActionIcon-root {
-  border: 5px solid black;
   position: absolute;
   top: 0;
   right: 0;

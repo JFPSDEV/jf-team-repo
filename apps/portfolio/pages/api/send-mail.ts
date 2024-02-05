@@ -6,7 +6,7 @@ import { TEmailForm } from '@jfteam/types';
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '500kb',
+      sizeLimit: '20000kb',
     },
   },
 };
