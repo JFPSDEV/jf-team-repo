@@ -6,13 +6,19 @@ import { Game, TCoordinate } from '../types';
 import DarkModeBlock from '../assets/DarkModeBlock.png';
 import { MainScene } from '../MainScene';
 const spriteKey = 'powBlock';
-
+type TCallBacks = (value: boolean) => void;
 export class PowBlockManager {
   private scene: MainScene;
   private powBlockGroup: Phaser.Physics.Arcade.Group;
+  private callBacks?: TCallBacks[] = [];
 
-  constructor(scene: MainScene, powBlocs: TCoordinate[]) {
+  constructor(
+    scene: MainScene,
+    powBlocs: TCoordinate[],
+    callBacks?: TCallBacks[]
+  ) {
     this.scene = scene;
+    this.callBacks = callBacks;
     this.powBlockGroup = this.scene.physics.add.group({
       allowGravity: false
     });
@@ -46,13 +52,25 @@ export class PowBlockManager {
     });
   }
 
+  public runCallBacks = (value: boolean): void => {
+    this.callBacks?.forEach((callback) => {
+      callback(value);
+    });
+  };
+
   private mousClick(): void {
     const game = this.scene.game as Game;
 
     if (this.scene.getIsLightMode()) {
+      this.callBacks?.forEach((callback) => {
+        callback(false);
+      });
       this.scene.setIsLightMode(false);
       game.callBacks.dark();
     } else {
+      this.callBacks?.forEach((callback) => {
+        callback(true);
+      });
       this.scene.setIsLightMode(true);
       game.callBacks.light();
     }

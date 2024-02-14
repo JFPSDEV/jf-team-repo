@@ -1,4 +1,5 @@
-import { Hero, Preface, Techno, Project, Testimonial, Contact } from '../components';
+import { Box } from '@jfteam/material';
+import { Hero, Preface, Techno, Project, Testimonial, Contact, Footer } from '../components';
 
 export default function HomePage() {
   return (
@@ -9,6 +10,7 @@ export default function HomePage() {
       <Project />
       <Testimonial />
       <Contact />
+      <Footer />
     </>
   );
 }

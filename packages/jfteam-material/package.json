@@ -4,6 +4,9 @@
   "private": true,
   "main": "./src/index.tsx",
   "types": "./src/index.tsx",
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component"
@@ -31,7 +34,8 @@
     "embla-carousel-autoplay": "7.1.0",
     "embla-carousel-react": "8.0.0-rc15",
     "react-hot-toast": "^2.4.1",
-    "recharts": "2"
+    "recharts": "2",
+    "typescript-plugin-css-modules": "^5.0.2"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
@@ -43,6 +47,7 @@
     "@types/react-dom": "^18.2.0",
     "eslint": "^8.53.0",
     "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.2.2"
   }
 }

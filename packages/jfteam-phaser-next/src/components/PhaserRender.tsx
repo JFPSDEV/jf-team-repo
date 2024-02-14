@@ -48,6 +48,15 @@ export const PhaserRender = (props: PhaserRenderProps) => {
   }, [loaded]);
 
   return (
-    <div id={gameId} key={gameId} className={className} style={style} />
+    <div
+      id={gameId}
+      key={gameId}
+      className={className}
+      style={{
+        ...style,
+        overflow: 'hidden',
+        height: config.height
+      }}
+    />
   );
 };

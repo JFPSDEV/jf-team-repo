@@ -11,9 +11,9 @@ export const ApolloIcon = (props: ApolloIconProps) => {
     <svg
       version='1.1'
       xmlns='http://www.w3.org/2000/svg'
-      width={size || '736px'}
-      height={size || '731px'}
-      viewBox='0 0 970.000000 628.000000'
+      width={size || '737px'}
+      height={size || '737px'}
+      viewBox='0 0 737 737'
       preserveAspectRatio='xMidYMid meet'
       className={className}
     >

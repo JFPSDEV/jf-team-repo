@@ -2,16 +2,27 @@ import { configData } from './configData';
 
 const Phaser = require('phaser');
 
-export const gameId: string = 'phaser-game';
+export enum EGameKey {
+  header = 'header',
+  footer = 'footer'
+}
 
-export const config: Phaser.Types.Core.GameConfig = {
+export type TGameKey = keyof typeof EGameKey;
+
+export const gameId: string = 'phaser-game';
+export const gameIdList: Record<TGameKey, string> = {
+  [EGameKey.header]: `${EGameKey.header}-${gameId}`,
+  [EGameKey.footer]: `${EGameKey.footer}-${gameId}`
+};
+
+export type TGameConfig = Phaser.Types.Core.GameConfig;
+
+export const config: TGameConfig = {
   height: configData.height,
   width: configData.width,
   type: Phaser.AUTO,
   scale: {
     parent: gameId,
-    // mode: Phaser.Scale.FIT,
-    // autoCenter: Phaser.Scale.CENTER_BOTH,
     width: '100%'
   },
   physics: {
@@ -21,7 +32,23 @@ export const config: Phaser.Types.Core.GameConfig = {
       debug: false
     }
   }
-  // parent: gameId,
+};
+
+export const gameConfig: Record<TGameKey, TGameConfig> = {
+  [EGameKey.header]: {
+    ...config,
+    scale: {
+      ...config.scale,
+      parent: gameIdList[EGameKey.header]
+    }
+  },
+  [EGameKey.footer]: {
+    ...config,
+    scale: {
+      ...config.scale,
+      parent: gameIdList[EGameKey.footer]
+    }
+  }
 };
 
 export const H: number = +(config?.height || 0);

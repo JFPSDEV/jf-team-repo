@@ -1,0 +1,18 @@
+.ImageContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.ImageContainer .zoomedImage {
+  transition: transform 0.3s ease;
+}
+
+.ImageContainer:hover .zoomedImage {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.ImageContainer:not(:hover) .zoomedImage {
+  transform: scale(1);
+  transition: transform 0.3s ease;
+}

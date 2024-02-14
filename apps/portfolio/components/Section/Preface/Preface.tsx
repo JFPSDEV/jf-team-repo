@@ -10,22 +10,24 @@ import { poppins } from '../../../utils';
 
 import classes from './Preface.module.css';
 
+const title = 'Full Stack Developper';
+
 export const Preface = () => {
-  const { isMobile, isTablet } = useResponsive();
+  const { isMobile, isDesktop } = useResponsive();
 
   return (
-    <Section isDashed={!isMobile} pb={125}>
+    <Section isDashed={!isMobile} pb={80}>
       <Grid>
         <Grid.Col span={{ base: 12, sm: 6 }}>
           <Stack style={{ width: '100%', height: '100%' }} pl="md" justify="center">
             <Stack>
-              <Title order={1}> FULL STACK DEVELOPPER</Title>
+              <Title order={1}>{title.toUpperCase()}</Title>
 
               <Text ff={poppins.style.fontFamily} fw={100} c="#707070" fz={21} lh="normal">
                 Expert en développement frontend et backend pour des applications performantes et
                 durables.
               </Text>
-              {!isMobile && !isTablet && <FunnyArrowIcon size={70} />}
+              {isDesktop && <FunnyArrowIcon size={70} />}
             </Stack>
           </Stack>
         </Grid.Col>

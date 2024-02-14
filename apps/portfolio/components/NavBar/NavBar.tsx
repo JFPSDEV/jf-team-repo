@@ -1,16 +1,18 @@
 import React from 'react';
 
+import Link from 'next/link';
+
 import { useResponsive } from '@jfteam/hooks';
 import { cx, Group, type GroupProps } from '@jfteam/material';
 import { GitHubIcon, LinkedInIcon, IconMenu2, JFLogoIcon } from '@jfteam/icons';
 
 import classes from './NavBar.module.css';
-import NavBarFont from './NavBarFont/NavBarFont';
+import NavBarLink from './NavBarLink/NavBarLink';
 
 export const NavBar = (props: GroupProps) => {
   const { className, ...groupProps } = props;
 
-  const { isMobile } = useResponsive();
+  const { isDesktop } = useResponsive();
 
   return (
     <Group
@@ -21,14 +23,14 @@ export const NavBar = (props: GroupProps) => {
     >
       <JFLogoIcon color="white" size={70} />
 
-      {isMobile ? (
+      {!isDesktop ? (
         <IconMenu2 color="white" size={50} />
       ) : (
         <>
           <Group gap="xl">
-            <NavBarFont>Mon CV</NavBarFont>
-            <NavBarFont>Mes projets</NavBarFont>
-            <NavBarFont>Contact</NavBarFont>
+            <NavBarLink href="cv">Mon CV</NavBarLink>
+            <NavBarLink href="/#project">Mes projets</NavBarLink>
+            <NavBarLink href="/#contact">Contact</NavBarLink>
           </Group>
           <Group gap="xl">
             <GitHubIcon color="white" size={32} />

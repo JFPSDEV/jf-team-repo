@@ -1,8 +1,22 @@
 {
   "extends": "@repo/typescript-config/react-library.json",
   "compilerOptions": {
-    "outDir": "dist"
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "outDir": "dist",
+    "rootDir": "src",
+    "declarationDir": "lib",
+    "target": "ES2015",
+    "lib": ["DOM", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "emitDeclarationOnly": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "composite": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["./declaration.d.ts", "src", "../../../@types"],
+  "exclude": ["node_modules", "dist", "./lib", "./esm", "./cjs"]
 }

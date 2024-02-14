@@ -10,6 +10,7 @@ import tentationsAustrales from '../../../public/images/tentations-australes.png
 import planningMedical from '../../../public/images/planning-medical.png';
 import { StaticImageData } from 'next/image';
 import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel';
+import { useResponsive } from '@jfteam/hooks';
 //: StaticImageData
 
 export interface TProject {
@@ -57,27 +58,35 @@ const list: TProject[] = [
 
 interface ProjectProps {}
 
+const title = 'Projets professionnels';
+
 export const Project = (props: ProjectProps) => {
   const {} = props;
+
+  const { isDesktop } = useResponsive();
 
   const [embla, setEmbla] = useState<Embla | null>(null);
   const [index, setIndex] = useState<number>(0);
 
   return (
-    <Section isDashed={false} py={125} px="md">
-      <Stack px="md" h={515} gap={30}>
-        <Title order={2}>Projet professionnels</Title>
-        <Grid>
-          <Grid.Col span={7}>
+    <Section isDashed={false} py={80} px="md" id="project">
+      <Title order={2} ta="center" mb={30}>
+        {title.toUpperCase()}
+      </Title>
+      <Stack px="md" h={!isDesktop ? undefined : 515} gap={30} justify="center">
+        <Grid h="100%">
+          <Grid.Col span={{ base: 12, sm: 7, md: 7 }}>
             <ProjectCarousel list={list} getEmblaApi={setEmbla} onIndexChange={setIndex} />
           </Grid.Col>
-          <Grid.Col span={5}>
-            <ProjectCardList
-              list={list}
-              index={index}
-              onClick={(_idx: number) => embla?.scrollTo(_idx)}
-            />
-          </Grid.Col>
+          {isDesktop && (
+            <Grid.Col span={5}>
+              <ProjectCardList
+                list={list}
+                index={index}
+                onClick={(_idx: number) => embla?.scrollTo(_idx)}
+              />
+            </Grid.Col>
+          )}
         </Grid>
       </Stack>
     </Section>

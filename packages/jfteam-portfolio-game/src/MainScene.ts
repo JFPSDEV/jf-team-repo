@@ -83,15 +83,17 @@ export class MainScene extends Phaser.Scene {
 
     // SpBlock
     this.sPBlockManager = new SPBlockManager(this, [
-      { x: W / 2 - 100, y: H / 2 },
-      { x: W / 2, y: H / 2 },
-      { x: W / 2 + 100, y: H / 2 }
+      { x: W / 2 - 100, y: H / 2.3 },
+      { x: W / 2, y: H / 2.3 },
+      { x: W / 2 + 100, y: H / 2.3 }
     ]);
 
     // PowBlock
-    this.powBlockManager = new PowBlockManager(this, [
-      { x: W / 2 - 600, y: H / 1.75 }
-    ]);
+    this.powBlockManager = new PowBlockManager(
+      this,
+      [{ x: W / 2 - 600, y: H / 2.3 }],
+      [this.castleManager.updateCastle]
+    );
 
     // Coins
     // this.coinManager = new CoinManager(this, [

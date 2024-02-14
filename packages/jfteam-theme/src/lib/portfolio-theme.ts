@@ -2,20 +2,6 @@ import { type MantineThemeOverride } from '@mantine/core';
 
 export const portfolioTheme: MantineThemeOverride = {
   colors: {
-    light: [
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD',
-      '#7AD1DD'
-    ],
-
     dark: [
       '#C9C9C9',
       '#B8B8B8',
@@ -24,7 +10,7 @@ export const portfolioTheme: MantineThemeOverride = {
       '#424242',
       '#3B3B3B',
       '#2E2E2E',
-      '#242424',
+      '#242424', // dark
       '#1F1F1F',
       '#141414'
     ],

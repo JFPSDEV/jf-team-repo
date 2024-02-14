@@ -11,8 +11,8 @@ export const AngularIcon = (props: AngularIconProps) => {
     <svg
       version='1.1'
       xmlns='http://www.w3.org/2000/svg'
-      width={70 || '736px'}
-      height={70 || '731px'}
+      width={size || '736px'}
+      height={size || '731px'}
       viewBox='0 0 736 731'
       className={className}
       style={{

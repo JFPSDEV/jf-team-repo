@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 
 import { PhaserRender } from '@jfteam/phaser-next';
-import { gameId, config, MainScene } from '@jfteam/portfolio-game';
+import { gameConfig, MainScene, gameIdList, EGameKey, type TGameKey } from '@jfteam/portfolio-game';
 
-import { useMantineColorScheme, useMantineTheme } from '@jfteam/material';
+import { useMantineColorScheme } from '@jfteam/material';
 
-const NoSsrGame = () => {
+interface NoSsrGameProps {
+  mode?: TGameKey;
+}
+
+const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { colorScheme, setColorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
-
-  const theme = useMantineTheme();
 
   const reloadOnWindowResize = () => {
     setLoading(true);
@@ -31,8 +33,8 @@ const NoSsrGame = () => {
   if (loading) return null;
   return (
     <PhaserRender
-      gameId={gameId}
-      config={config}
+      gameId={gameIdList[mode]}
+      config={gameConfig[mode]}
       mainScene={MainScene}
       params={{ colorScheme }}
       callBacks={{

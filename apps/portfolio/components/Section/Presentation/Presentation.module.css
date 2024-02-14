@@ -1,0 +1,16 @@
+.title {
+  position: absolute;
+  top: 325px;
+  left: 0;
+  z-index: 8;
+}
+
+.hTimelineTitle {
+  white-space: nowrap;
+}
+
+.mainPicture {
+  border-radius: 50%;
+  border: 5px solid #d18852;
+  z-index: 1;
+}

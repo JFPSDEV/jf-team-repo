@@ -1,0 +1,27 @@
+.groupItemContainer {
+  position: relative;
+}
+
+.itemContainer {
+  position: relative;
+  z-index: 1;
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  left: 0;
+}
+
+.actionIcon {
+  border-radius: 50%;
+}
+
+.childrenItemContainer {
+  position: absolute;
+  left: 50%;
+  bottom: -40px;
+  transform: translate(-50%);
+  width: fit-content;
+}
