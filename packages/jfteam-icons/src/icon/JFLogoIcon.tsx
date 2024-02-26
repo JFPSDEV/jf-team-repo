@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { IconProps } from '../types';
 
-interface JFLogoIconProps extends IconProps {}
+export interface JFLogoIconProps extends IconProps {}
 
 export const JFLogoIcon = (props: JFLogoIconProps) => {
   const { size, color, className } = props;

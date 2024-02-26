@@ -5,13 +5,13 @@ import Image from 'next/image';
 import { Carousel } from '@jfteam/carousel';
 import { Box, Stack, type Embla, Title, Text, Button } from '@jfteam/material';
 
-import { TProject } from '../Project';
 import classes from './ProjectCarousel.module.css';
 import { useResponsive } from '@jfteam/hooks';
 import { IconWorldWww } from '@jfteam/icons';
+import { IProjectRow } from '@/utils';
 
 interface ProjectCarouselProps {
-  list: TProject[];
+  list: IProjectRow[];
   getEmblaApi: ((embla: Embla) => void) | undefined;
   onIndexChange: (idx: number) => void;
 }
@@ -34,16 +34,14 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
         withIndicators={!isDesktop}
       >
         {(row) => (
-          <Stack>
+          <Stack mb="xl">
             <Box h={430} style={{ position: 'relative' }}>
               <Image
                 alt={row.title}
-                src={row.picture.src}
+                src={row.picture}
                 layout="fill"
                 objectFit="cover"
                 className={classes.websiteImage}
-                // width={row.picture.width}
-                // height={row.picture.height}
               />
             </Box>
             {!isDesktop && (

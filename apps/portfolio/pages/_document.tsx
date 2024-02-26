@@ -13,6 +13,7 @@ export default function Document() {
   return (
     <Html lang="fr">
       <Head>
+        <link rel="stylesheet" href={process.env.NEXT_PUBLIC_ICON_LIB} />
         <ColorSchemeScript defaultColorScheme="light" />
       </Head>
       <body style={style}>

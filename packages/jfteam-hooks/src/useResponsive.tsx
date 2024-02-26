@@ -16,7 +16,7 @@ export const useResponsive = (
     xl: useMediaQuery(`(min-width: ${xl})`)
   };
 
-  const isMobile = useMediaQuery(`(max-width: ${sm})`);
+  const isMobile = useMediaQuery(`(max-width: ${md})`);
   const isTablet = useMediaQuery(
     `(min-width: ${sm}) and (max-width: ${md})`
   );

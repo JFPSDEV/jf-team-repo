@@ -1,1 +1,3 @@
-export const root: Record<string, string> = { sendMail: '/api/send-mail' };
+export const root: Record<string, string> = {
+  sendMail: '/api/send-mail',
+};

@@ -1,13 +1,15 @@
-import type { AppProps } from 'next/app';
-import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
-import { JfteamMaterialProvider, Toaster } from '@jfteam/material';
-import { portfolioTheme } from '@jfteam/theme';
+import Head from 'next/head';
+import type { AppProps } from 'next/app';
+
 import { useWindowSize } from '@jfteam/hooks';
+import { portfolioTheme } from '@jfteam/theme';
+import { appWithTranslation } from 'next-i18next';
+import { JfteamMaterialProvider, Toaster } from '@jfteam/material';
 
 import '../utils/app.css';
 import { getFontTheme } from '../utils';
-import { useEffect, useState } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
   const { width } = useWindowSize();
@@ -39,3 +41,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </JfteamMaterialProvider>
   );
 }
+
+// export default appWithTranslation(App);

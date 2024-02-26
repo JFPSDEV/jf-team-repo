@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface ReactIconProps extends IconProps {}
 
 export const ReactIcon = (props: ReactIconProps) => {
-  const { size, color = '#222222', className } = props;
+  const { size, color = '#222222', ...other } = props;
 
   return (
     <svg
@@ -14,7 +14,7 @@ export const ReactIcon = (props: ReactIconProps) => {
       width={size || '400px'}
       height={size || '400px'}
       viewBox='0 0 400 400'
-      className={className}
+      {...other}
     >
       <g id='svgg'>
         <path

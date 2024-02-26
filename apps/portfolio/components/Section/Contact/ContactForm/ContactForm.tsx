@@ -5,17 +5,17 @@ import { TEmailForm } from '@jfteam/types';
 import { useLazyFetch } from '@jfteam/hooks';
 import { Button, Stack, TextInput, Textarea, toast } from '@jfteam/material';
 
-import { root } from '../../../../utils';
+import { IContactForm, root } from '@/utils';
 import { ContactDrop, TFiles } from './ContactDrop/ContactDrop';
 import { Mail } from '@jfteam/mail';
 
 type TMail = TEmailForm<TFiles>;
 
-interface ContactFormProps {}
+interface ContactFormProps {
+  row: IContactForm;
+}
 
-export const ContactForm = (props: ContactFormProps) => {
-  const {} = props;
-
+export const ContactForm = ({ row }: ContactFormProps) => {
   const [sendMail, { loading }] = useLazyFetch<TMail, Object>(root.sendMail, 'POST');
 
   const form = useForm<TMail>({
@@ -27,10 +27,9 @@ export const ContactForm = (props: ContactFormProps) => {
     },
 
     validate: {
-      email: (emailValue) => (/^\S+@\S+$/.test(emailValue) ? null : 'Invalid email'),
-      message: (messageValue) =>
-        messageValue.length < 1 ? 'First name must have a content' : null,
-      subject: (messageValue) => (messageValue.length < 1 ? 'Subject must have a content' : null),
+      email: (emailValue) => (/^\S+@\S+$/.test(emailValue) ? null : row.email.error),
+      message: (messageValue) => (messageValue.length < 1 ? row.message.error : null),
+      subject: (messageValue) => (messageValue.length < 1 ? row.subject.error : null),
     },
   });
 
@@ -48,17 +47,12 @@ export const ContactForm = (props: ContactFormProps) => {
           ...values,
           attachments: formatAttachments,
         })
-          .then((res) => {
-            form.reset();
-          })
-          .catch((err) => {
-            console.log(err);
-            alert('stop');
-          }),
+          .then(() => form.reset())
+          .catch(console.error),
         {
-          loading: 'Sending...',
-          success: <b>The mail has been sent!</b>,
-          error: <b>An error occurred while sending the email, please try again.</b>,
+          loading: row.toast.loading,
+          success: <b>{row.toast.success}</b>,
+          error: <b>{row.toast.error}</b>,
         }
       );
     }
@@ -70,28 +64,28 @@ export const ContactForm = (props: ContactFormProps) => {
         <TextInput
           disabled={loading}
           withAsterisk
-          label="Email"
-          placeholder="your@email.com"
+          label={row.email.label}
+          placeholder={row.email.placeholder}
           {...form.getInputProps('email')}
         />
         <TextInput
           disabled={loading}
           withAsterisk
-          label="Subject"
-          placeholder="subject..."
+          label={row.subject.label}
+          placeholder={row.subject.placeholder}
           {...form.getInputProps('subject')}
         />
         <ContactDrop disabled={loading} {...form.getInputProps('attachments')} />
         <Textarea
           withAsterisk
           disabled={loading}
-          label="Message"
-          placeholder="Message..."
+          label={row.message.label}
+          placeholder={row.message.placeholder}
           styles={{ input: { height: 250 } }}
           {...form.getInputProps('message')}
         />
         <Button type="submit" loading={loading}>
-          Send me
+          {row.button.label}
         </Button>
       </Stack>
     </form>

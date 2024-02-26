@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { Accordion, Button, Stack, Text } from '@jfteam/material';
-import { TProject } from '../../Project';
 import { IconWorldWww } from '@jfteam/icons';
+import { IProjectRow } from '@/utils';
 
-interface CardProjectProps extends Omit<TProject, 'picture'> {
+interface CardProjectProps extends Omit<IProjectRow, 'picture'> {
   onClick?: () => void;
   currentIndex: number;
 }
@@ -22,7 +22,6 @@ export const CardProject = (props: CardProjectProps) => {
         border: currentIndex === +id ? '1px solid #e7e7e7' : 'none',
       })}
       mb="md"
-      bg="white"
     >
       <Accordion.Control
         style={(theme) => ({

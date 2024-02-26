@@ -1,17 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Carousel } from '@jfteam/carousel';
-import {
-  Box,
-  type Embla,
-  cx,
-  Flex,
-  Group,
-  Button,
-  ActionIcon,
-  Stack,
-  Title,
-} from '@jfteam/material';
+import { type Embla, cx, Group, ActionIcon, Stack } from '@jfteam/material';
 import { Section } from '../Section';
 import { TestimonialCard } from './TestimonialCard/TestimonialCard';
 
@@ -24,8 +14,9 @@ import fabricePicture from '../../../public/images/fabrice-deydier.jpeg';
 import { IconChevronLeft, IconChevronRight } from '@jfteam/icons';
 
 import classes from './Testimonial.module.css';
-import { ESpoiler } from '@/utils';
+import { ITestimonial } from '@/utils';
 import { useResponsive } from '@jfteam/hooks';
+import { Title } from '@/components/Title/Title';
 
 export interface TTestimonial {
   id: string;
@@ -69,27 +60,24 @@ Ce qui distingue Jean-François, c'est sa capacité à prendre des initiatives e
   },
 ];
 
-interface TestimonialProps {}
+interface TestimonialProps {
+  row: ITestimonial;
+}
 
 const title = {
   line1: 'Quelque retour sur',
   line2: 'mes projets',
 };
 
-export const Testimonial = (props: TestimonialProps) => {
-  const {} = props;
-
+export const Testimonial = ({ row }: TestimonialProps) => {
   const { isDesktop } = useResponsive();
 
   const [embla, setEmbla] = useState<Embla | null>(null);
 
   return (
-    <Section isDashed={false} py={80} px="md" bg="#f0f0ff">
+    <Section py={80} px="md" variant="secondary">
       <Stack gap={30} px="md">
-        <Title order={2} ta="center">
-          {title.line1.toUpperCase()}
-          <br /> {title.line2.toUpperCase()}
-        </Title>
+        <Title order={2} ta="center" rows={row.title} />
 
         <Group justify="space-between">
           {isDesktop && (
@@ -104,7 +92,7 @@ export const Testimonial = (props: TestimonialProps) => {
           <Carousel
             loop
             w={!isDesktop ? '100%' : '80%'}
-            rows={list}
+            rows={row.rows}
             delay={8000}
             getEmblaApi={setEmbla}
             className={classes.carousel}

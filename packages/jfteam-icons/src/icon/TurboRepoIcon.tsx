@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface TurboRepoIconProps extends IconProps {}
 
 export const TurboRepoIcon = (props: TurboRepoIconProps) => {
-  const { size, color, className } = props;
+  const { size, color, ...other } = props;
 
   return (
     <svg
@@ -14,14 +14,7 @@ export const TurboRepoIcon = (props: TurboRepoIconProps) => {
       width={size || '400px'}
       height={size || '400px'}
       viewBox='0 0 400 400'
-      className={className}
-      style={{
-        shapeRendering: 'geometricPrecision',
-        textRendering: 'geometricPrecision'
-        // ['clip-rule']: 'evenodd',
-        // 'fill-rule': 'evenodd',
-        // 'image-rendering': 'optimizeQuality',
-      }}
+      {...other}
     >
       <g id='svgg'>
         <path

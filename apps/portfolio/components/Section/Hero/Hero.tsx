@@ -14,20 +14,15 @@ interface HeroProps {}
 export const Hero = (props: HeroProps) => {
   const {} = props;
 
-  const { colorScheme, setColorScheme } = useMantineColorScheme({
+  const { colorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
 
   const theme = useMantineTheme();
 
-  console.log({ theme });
-
   return (
     <header>
       <Box className={classes.mainContainer}>
-        {/* <Box className={classes.sectionBackgroundContainer}>
-          <Section className={classes.sectionBackground} isDashed={true} />
-        </Box> */}
         <HeroRadiusContainer
           className={classes.radiusBorderContainer}
           color="#d18852"
@@ -39,7 +34,7 @@ export const Hero = (props: HeroProps) => {
         />
 
         <Box className={classes.navBarContainer}>
-          <Section isDashed={false}>
+          <Section bg="none">
             <NavBar />
           </Section>
         </Box>

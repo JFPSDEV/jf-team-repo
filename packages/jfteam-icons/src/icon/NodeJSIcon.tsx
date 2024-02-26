@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface NodeJSIconProps extends IconProps {}
 
 export const NodeJSIcon = (props: NodeJSIconProps) => {
-  const { size, color = '#000000', className } = props;
+  const { size, color = '#000000', ...other } = props;
 
   return (
     <svg
@@ -15,14 +15,7 @@ export const NodeJSIcon = (props: NodeJSIconProps) => {
       height={size || '1197px'}
       viewBox='0 0 1197 1197'
       preserveAspectRatio='xMidYMid meet'
-      className={className}
-      style={{
-        shapeRendering: 'geometricPrecision',
-        textRendering: 'geometricPrecision'
-        // ['clip-rule']: 'evenodd',
-        // 'fill-rule': 'evenodd',
-        // 'image-rendering': 'optimizeQuality',
-      }}
+      {...other}
     >
       <g>
         <path

@@ -3,17 +3,29 @@ import { type MantineThemeOverride } from '@mantine/core';
 export const portfolioTheme: MantineThemeOverride = {
   colors: {
     dark: [
-      '#C9C9C9',
-      '#B8B8B8',
-      '#828282',
-      '#696969',
-      '#424242',
-      '#3B3B3B',
-      '#2E2E2E',
-      '#242424', // dark
-      '#1F1F1F',
-      '#141414'
+      '#C9C9C9', // var(--mantine-color-dark-0)
+      '#B8B8B8', // var(--mantine-color-dark-1)
+      '#828282', // var(--mantine-color-dark-2)
+      '#696969', // var(--mantine-color-dark-3)
+      '#424242', // var(--mantine-color-dark-4)
+      '#3B3B3B', // var(--mantine-color-dark-5)
+      '#2E2E2E', // var(--mantine-color-dark-6) // Dark 2
+      '#242424', // var(--mantine-color-dark-7) // Dark 1
+      '#1F1F1F', // var(--mantine-color-dark-8)
+      '#141414' // var(--mantine-color-dark-9)
     ],
+    // light: [
+    //   '#f0f0ff',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF',
+    //   '#FFFFFF'
+    // ],
 
     gray: [
       '#f8f9fa',

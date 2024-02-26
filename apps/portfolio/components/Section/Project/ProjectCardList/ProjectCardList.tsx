@@ -3,12 +3,12 @@ import React from 'react';
 import { Accordion } from '@jfteam/material';
 
 import { CardProject } from './CardProject/CardProject';
-import { TProject } from '../Project';
 
 import classes from './ProjectCardList.module.css';
+import { IProjectRow } from '@/utils';
 
 interface ProjectCardListProps {
-  list: TProject[];
+  list: IProjectRow[];
   index: number;
   onClick: (index: number) => void;
 }
@@ -18,12 +18,12 @@ const ProjectCardList = (props: ProjectCardListProps) => {
 
   return (
     <Accordion defaultValue={list[0].title} chevron={null} value={`${index}`}>
-      {list.map((item) => (
+      {list.map((item, idx) => (
         <CardProject
           key={item.title}
-          id={item.id}
+          id={idx.toString()}
           currentIndex={index}
-          onClick={() => onClick(+item.id)}
+          onClick={() => onClick(idx)}
           link={item.link}
           title={item.title}
           description={item.description}

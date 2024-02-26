@@ -1,4 +1,10 @@
-.container { 
-  
+.section {
+  transform: translateY(-50px);
+  z-index: 10;
 }
 
+.section {
+  @media (max-width: $mantine-breakpoint-sm) {
+    transform: translateY(-120px);
+  }
+}

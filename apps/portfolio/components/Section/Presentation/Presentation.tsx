@@ -2,100 +2,122 @@ import React from 'react';
 
 import Image from 'next/image';
 
-import { generateUUID } from '@jfteam/utils';
-import { IconMail, IconMoodSmileBeam, IconPhone } from '@jfteam/icons';
-import { Box, Timeline, Title, HTimeline, Text } from '@jfteam/material';
+import { IconStyle } from '@jfteam/icons';
+import { Box, HTimeline, Text, Title, Stack, List, ThemeIcon } from '@jfteam/material';
 
 import { Section } from '../Section';
 import classes from './Presentation.module.css';
 import { CVTimeline } from '@/components/CVTimeline/CVTimeline';
-
-const list = [
-  {
-    id: generateUUID(),
-    value: 'jfps.dev@gmail.com',
-    icon: <IconMail />,
-  },
-  {
-    id: generateUUID(),
-    value: '07 69 13 94 76',
-    icon: <IconPhone />,
-  },
-];
+import { useResponsive } from '@jfteam/hooks';
+import { IPresentation } from '@/utils';
+import { Title as MultiLineTitle } from '@/components/Title/Title';
 
 const lineWidth = '25%';
 const baseWidth = 270;
 
-const title = { line1: 'Full Stack', line2: 'Developper' };
+interface PresentationProps {
+  row: IPresentation;
+}
 
-export const Presentation = () => {
+export const Presentation = ({ row }: PresentationProps) => {
+  const { isMobile } = useResponsive();
+
+  const image = (
+    <Image
+      src={row.picture}
+      alt={row.title.join()}
+      layout="fill"
+      objectFit="cover"
+      className={classes.mainPicture}
+    />
+  );
+
   return (
     <>
-      <Title order={1} className={classes.title} w="100%" ta="center">
-        {title.line1.toUpperCase()}
-        <br />
-        {title.line2.toUpperCase()}
-      </Title>
-      <Section isDashed={false} px="xl" pb={80} pt={60}>
-        <Box h={440} style={{ position: 'relative' }}>
-          <HTimeline>
-            <HTimeline.Item bulletSize={265} lineHeight={5} lineWidth={lineWidth} color="#D18852" />
-
-            {list.map(({ id, value, icon }, index) => (
+      {row?.title && (
+        <MultiLineTitle order={1} rows={row.title} className={classes.title} w="100%" ta="center" />
+      )}
+      <Section px="xl" pb={80} pt={{ xs: 0, md: 60 }}>
+        {!isMobile && (
+          <Box h={440} style={{ position: 'relative' }}>
+            <HTimeline>
               <HTimeline.Item
-                key={id}
-                bulletSize={CVTimeline.bulletSize}
+                bulletSize={265}
                 lineHeight={5}
-                lineWidth={index + 1 < list?.length ? lineWidth : 0}
+                lineWidth={lineWidth}
                 color="#D18852"
-                icon={icon}
+              />
+
+              {row?.rows.map(({ id, value, icon }, index) => (
+                <HTimeline.Item
+                  key={id}
+                  bulletSize={CVTimeline.bulletSize}
+                  lineHeight={5}
+                  lineWidth={index + 1 < row.rows?.length ? lineWidth : 0}
+                  color="#D18852"
+                  icon={<IconStyle value={icon} />}
+                >
+                  <Title order={3} className={classes.hTimelineTitle}>
+                    {value}
+                  </Title>
+                </HTimeline.Item>
+              ))}
+
+              <CVTimeline
+                active={1}
+                align="left"
+                pl={baseWidth / 2}
+                style={{ position: 'absolute', bottom: 90 }}
+                pr="xl"
+                h={150}
               >
-                <Title order={3} className={classes.hTimelineTitle}>
-                  {value}
-                </Title>
-              </HTimeline.Item>
-            ))}
+                <CVTimeline.Item>
+                  <Box h={100} />
+                </CVTimeline.Item>
 
-            <CVTimeline
-              active={1}
-              align="left"
-              pl={baseWidth / 2}
-              style={{ position: 'absolute', bottom: 90 }}
-              pr="xl"
-              h={150}
-            >
-              <CVTimeline.Item>
-                <Box h={100} />
-              </CVTimeline.Item>
-
-              <CVTimeline.Item bullet={<IconMoodSmileBeam size={25} />}>
-                <Box>
-                  <Text style={{ transformOrigin: 'center', transform: 'translateY(-30%)' }}>
-                    Bonjour, je m'apelle <b>Jean-François Picherit-Steinbrucker</b>. Avec cinq
-                    années d'études spécialisées dans le développement web et trois années
-                    d'expérience en alternance, je suis un développeur full stack passionné par
-                    l'innovation et la création. Mon parcours m'a permis d'acquérir une solide
-                    expertise technique ainsi qu'une approche pragmatique dans la résolution de
-                    problèmes. Toujours avide de nouvelles connaissances et d'opportunités pour me
-                    surpasser, je suis convaincu que mon enthousiasme et mon dévouement sont des
-                    atouts précieux pour tout projet ambitieux.
-                  </Text>
+                <CVTimeline.Item bullet={<IconStyle value="ti ti-mood-smile-beam" />}>
+                  <Box>
+                    {row?.description && (
+                      <Text
+                        style={{ transformOrigin: 'center', transform: 'translateY(-30%)' }}
+                        dangerouslySetInnerHTML={{ __html: row.description }}
+                      />
+                    )}
+                  </Box>
+                </CVTimeline.Item>
+              </CVTimeline>
+              <Box style={{ position: 'absolute', top: 0, bottom: 0 }}>
+                <Box h={baseWidth} w={baseWidth} style={{ position: 'relative' }}>
+                  {image}
                 </Box>
-              </CVTimeline.Item>
-            </CVTimeline>
-            <Box style={{ position: 'absolute', top: 0, bottom: 0 }}>
-              <Box h={baseWidth} w={baseWidth} style={{ position: 'relative' }}>
-                <Image
-                  src="/jf_preface_2.png"
-                  alt="JF Picture"
-                  layout="fill"
-                  objectFit="cover"
-                  className={classes.mainPicture}
-                />
               </Box>
+            </HTimeline>
+          </Box>
+        )}
+        {isMobile && (
+          <Stack align="center" gap="xl">
+            <Box h={baseWidth} w={baseWidth} style={{ position: 'relative' }}>
+              {image}
             </Box>
-          </HTimeline>
-        </Box>
+
+            <Text ta="center" dangerouslySetInnerHTML={{ __html: row.description }} />
+
+            <List spacing="xl" size="sm" center>
+              {row.rows.map(({ id, value, icon }, index) => (
+                <List.Item
+                  key={id}
+                  icon={
+                    <ThemeIcon color="#D18852" size={32} radius="xl">
+                      <IconStyle value={icon} size={20} />
+                    </ThemeIcon>
+                  }
+                >
+                  <Text>{value}</Text>
+                </List.Item>
+              ))}
+            </List>
+          </Stack>
+        )}
       </Section>
     </>
   );

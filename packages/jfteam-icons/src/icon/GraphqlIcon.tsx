@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface GraphqlIconProps extends IconProps {}
 
 export const GraphqlIcon = (props: GraphqlIconProps) => {
-  const { size, color, className } = props;
+  const { size, color, ...other } = props;
 
   return (
     <svg
@@ -14,7 +14,7 @@ export const GraphqlIcon = (props: GraphqlIconProps) => {
       width={size}
       height={size}
       viewBox='0 0 412.000000 413.000000'
-      className={className}
+      {...other}
     >
       <g
         transform={`translate(0.000000,413.000000) scale(0.100000,-0.100000)`}

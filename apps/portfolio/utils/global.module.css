@@ -1,0 +1,15 @@
+[data-mantine-color-scheme='light'] .bgPrimary {
+  background-color: #ffffff;
+}
+
+[data-mantine-color-scheme='dark'] .bgPrimary {
+  background-color: #242424;
+}
+
+[data-mantine-color-scheme='light'] .bgSecondary {
+  background-color: #f0f0ff;
+}
+
+[data-mantine-color-scheme='dark'] .bgSecondary {
+  background-color: #1f1f1f;
+}

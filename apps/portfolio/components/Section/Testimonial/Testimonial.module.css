@@ -18,6 +18,13 @@
   border-radius: 50px;
   border-color: #e7e7e7;
   box-shadow: var(--mantine-shadow-lg);
+}
+
+[data-mantine-color-scheme='dark'] .icons {
+  color: #ffffff;
+}
+
+[data-mantine-color-scheme='light'] .carouselButton {
   background-color: #ffffff;
 }
 
@@ -25,5 +32,8 @@
   box-shadow: var(--mantine-shadow-lg);
   border-radius: 8px;
   border: 1px solid #e7e7e7;
+}
+
+[data-mantine-color-scheme='light'] .carousel {
   background-color: #ffffff;
 }

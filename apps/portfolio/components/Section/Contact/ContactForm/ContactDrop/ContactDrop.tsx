@@ -139,11 +139,8 @@ export const ContactDrop = (props: ContactDropProps) => {
           </Dropzone.Idle>
 
           <div>
-            <Text size="xl" inline>
+            <Text size="xl" p="md" ta="center" inline>
               Clicker, ou glisser vos images et pdf ici
-            </Text>
-            <Text size="sm" c="dimmed" inline mt={7}>
-              Attach as many files as you like, each file should not exceed 500kb
             </Text>
           </div>
         </Group>

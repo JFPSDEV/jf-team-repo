@@ -5,3 +5,4 @@
 export * from './icon';
 export * from '@tabler/icons-react';
 export * from './types';
+export * from './IconStyle/IconStyle';

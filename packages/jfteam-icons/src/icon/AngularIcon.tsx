@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface AngularIconProps extends IconProps {}
 
 export const AngularIcon = (props: AngularIconProps) => {
-  const { size, color, className } = props;
+  const { size, color, ...other } = props;
 
   return (
     <svg
@@ -14,14 +14,7 @@ export const AngularIcon = (props: AngularIconProps) => {
       width={size || '736px'}
       height={size || '731px'}
       viewBox='0 0 736 731'
-      className={className}
-      style={{
-        shapeRendering: 'geometricPrecision',
-        textRendering: 'geometricPrecision'
-        // ['clip-rule']: 'evenodd',
-        // 'fill-rule': 'evenodd',
-        // 'image-rendering': 'optimizeQuality',
-      }}
+      {...other}
     >
       <g>
         <path

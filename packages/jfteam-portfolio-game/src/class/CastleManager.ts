@@ -29,9 +29,6 @@ export class CastleManager {
   }
 
   public updateCastle(isLightMode: boolean): void {
-    console.log('---------------------------------------');
-    console.log({ isLightMode });
-    console.log('---------------------------------------');
     if (isLightMode) {
       this.scene.load.image('castle', castle.src);
     } else {

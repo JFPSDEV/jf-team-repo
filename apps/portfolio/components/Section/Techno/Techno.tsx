@@ -17,6 +17,8 @@ import {
 import classes from './Techno.module.css';
 import { generateUUID } from '@jfteam/utils';
 
+import { lightDarkModeClasses } from '@/utils';
+
 const technoList = [
   {
     id: 1,
@@ -65,14 +67,14 @@ interface TechnoProps {}
 export const Techno = () => {
   const iconBand = (
     <Box>
-      {[...technoList, ...technoList].map(({ id, Icon }, index) => (
-        <Icon key={generateUUID()} size={70} />
+      {[...technoList, ...technoList].map(({ Icon }) => (
+        <Icon key={generateUUID()} size={70} className={classes.icon} />
       ))}
     </Box>
   );
 
   return (
-    <Flex className={classes.container} align="center">
+    <Flex className={cx(classes.container, lightDarkModeClasses.bgSecondary)} align="center">
       <Box className={cx(classes.scroll, classes.imgBox)}>
         {iconBand}
         {iconBand}

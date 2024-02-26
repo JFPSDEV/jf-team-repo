@@ -2,28 +2,29 @@ import React from 'react';
 
 import { Box, Container, type ContainerProps, cx } from '@jfteam/material';
 
-import { BgLinear } from './BgLinear/BgLinear';
-
 import classes from './Section.module.css';
-import { useResponsive } from '@jfteam/hooks';
+
+import { EVartiant, type TVariant, lightDarkModeClasses } from '@/utils';
 
 interface SectionProps extends ContainerProps {
-  isDashed: boolean;
+  variant?: TVariant;
 }
 
 export const Section = (props: SectionProps) => {
-  const { className, isDashed, bg, ...containerProps } = props;
-
-  const { isMobile } = useResponsive();
+  const { className, bg, variant = EVartiant.primary, ...containerProps } = props;
 
   return (
-    <Box className={cx(className, classes.container)} bg={bg}>
-      <Container size="lg" className={classes.section} {...containerProps} />
-      {!isMobile && isDashed && (
-        <Container size="lg" className={classes.gridContainer}>
-          <BgLinear />
-        </Container>
+    <Box
+      className={cx(
+        className,
+        classes.container,
+        variant === EVartiant.primary
+          ? lightDarkModeClasses.bgPrimary
+          : lightDarkModeClasses.bgSecondary
       )}
+      bg={bg}
+    >
+      <Container size="lg" className={classes.section} {...containerProps} />
     </Box>
   );
 };

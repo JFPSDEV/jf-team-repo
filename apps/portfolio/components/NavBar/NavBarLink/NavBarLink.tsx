@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { Text, type TextProps } from '@jfteam/material';
 
@@ -6,16 +6,22 @@ import { poppins } from '../../../utils';
 import Link, { LinkProps } from 'next/link';
 
 interface NavBarLinkProps extends Pick<LinkProps, 'href'> {
-  children: string;
+  children: ReactNode;
   fw?: number;
 }
 
 const NavBarLink = (props: NavBarLinkProps) => {
-  const { fw, href, ...textProps } = props;
+  const { fw, href, children, ...textProps } = props;
 
   return (
     <Link href={href} style={{ textDecoration: 'none' }}>
-      <Text ff={poppins.style.fontFamily} fw={fw} c="white" fz={20} {...textProps} />
+      {typeof children === 'string' ? (
+        <Text ff={poppins.style.fontFamily} fw={fw} c="white" fz={20} {...textProps}>
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
     </Link>
   );
 };

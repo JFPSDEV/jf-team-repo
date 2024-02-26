@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface NestJsIconProps extends IconProps {}
 
 export const NestJsIcon = (props: NestJsIconProps) => {
-  const { size, color = '#EC2844', className } = props;
+  const { size, color = '#EC2844', ...other } = props;
 
   return (
     <svg
@@ -14,7 +14,7 @@ export const NestJsIcon = (props: NestJsIconProps) => {
       width={size || '737px'}
       height={size || '737px'}
       viewBox='0 0 737 737'
-      className={className}
+      {...other}
     >
       <g
         transform='translate(0.000000,737.000000) scale(0.100000,-0.100000)'

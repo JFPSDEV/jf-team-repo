@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 export default withBundleAnalyzer({
   reactStrictMode: false,
+
   transpilePackages: [
     '@jfteam/material',
     '@jfteam/phaser-next',
@@ -20,6 +21,9 @@ export default withBundleAnalyzer({
     '@jfteam/types',
     '@jfteam/mail',
   ],
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

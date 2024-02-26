@@ -1,82 +1,45 @@
 import React from 'react';
 
-import { Section } from '../Section';
 import {
   ActionIcon,
-  Box,
   Flex,
-  Group,
   Stack,
   Text,
-  Timeline,
   Title,
   Tooltip,
+  useMantineColorScheme,
 } from '@jfteam/material';
-import {
-  IconDownload,
-  IconFileTypePdf,
-  IconGitBranch,
-  IconGitCommit,
-  IconGitPullRequest,
-  IconMessageDots,
-  IconPdf,
-  IconSchool,
-  NewTabIcon,
-} from '@jfteam/icons';
-import { generateUUID } from '@jfteam/utils';
-import { CVTimeline } from '@/components/CVTimeline/CVTimeline';
-
 import { useResponsive } from '@jfteam/hooks';
+import { IconPdf, IconStyle } from '@jfteam/icons';
 
-const list = [
-  {
-    id: generateUUID(),
-    date: '10/2023',
-    title: 'Master Expert Développement Web',
-    description: 'Titre RNCP d’Expert Informatique et Systèmes d’Information de niveau 7',
-    link: '/docs/MASTER-WEB-Jean-Francois-Picherit-Steinbrucker.pdf',
-  },
-  {
-    id: generateUUID(),
-    date: '08/2021',
-    title: 'LP (DAWIN) Développement en applications web et innovation numérique',
-    description: 'Titre RNCP de Spécialiste Informatique et Systèmes d’Information de niveau 6',
-    link: '/docs/LP-DAWIN-Jean-Francois-Picherit-Steinbrucker.pdf',
-  },
-  {
-    id: generateUUID(),
-    date: '06/2020',
-    title:
-      'BTS (SIO) Service Informatiques aux Organisations option Solution Application Logiciel et Métier',
-    description:
-      'Titre RNCP de Maîtrise des Solutions Informatique et Systèmes d’Information de niveau 5',
-    link: '/docs/BTS-SIO-Jean-Francois-Picherit-Steinbrucker.pdf',
-  },
-  {
-    id: generateUUID(),
-    date: '07/2018',
-    title: 'Baccalauréat ES option Maths mention « assez bien »',
-    description: 'Titre RNCP de niveau 4',
-    link: '/docs/BAC-ES-Jean-Francois-Picherit-Steinbrucker.pdf',
-  },
-];
+import { IStudy } from '@/utils';
+import { Section } from '../Section';
+import { CVTimeline } from '@/components/CVTimeline/CVTimeline';
+import { Title as MultiLineTitle } from '@/components/Title/Title';
 
-const title = 'Formation';
+interface StudyProps {
+  row: IStudy;
+}
 
-interface StudyProps {}
-
-export const Study = (props: StudyProps) => {
+export const Study = ({ row }: StudyProps) => {
   const { isMobile } = useResponsive();
 
+  const { colorScheme } = useMantineColorScheme({
+    keepTransitions: true,
+  });
+
+  const darkProps = {
+    borderWidth: 1,
+    borderColor: 'var(--mantine-color-gray-3)',
+  };
+
   return (
-    <Section isDashed={false} py={80} bg="#f0f0ff">
-      <Title order={2} ta="center" pb={50}>
-        {title.toUpperCase()}
-      </Title>
-      <CVTimeline active={list.length}>
-        {list.map(({ id, title: studyTitle, description, date, link }) => (
-          <CVTimeline.Item bullet={<IconSchool size={CVTimeline.iconSize} />} key={id}>
-            <CVTimeline.Card direction="Right">
+    <Section py={80} variant="secondary">
+      <MultiLineTitle order={2} ta="center" pb={50} rows={row.title} />
+      <CVTimeline active={row.rows.length}>
+        {row.rows.map(({ id, title: studyTitle, description, date, link, icon }) => (
+          <CVTimeline.Item bullet={<IconStyle value={icon} size={CVTimeline.iconSize} />} key={id}>
+            <CVTimeline.Card direction="Right" {...(colorScheme === 'dark' && darkProps)}>
               <Flex align={isMobile ? 'end' : 'center'}>
                 <Stack gap="sm" style={{ flex: 1 }}>
                   <Title order={3}>{studyTitle}</Title>
@@ -87,7 +50,7 @@ export const Study = (props: StudyProps) => {
                     <b>{date}</b>
                   </Text>
                 </Stack>
-                <Tooltip label="Baccalauréat">
+                <Tooltip label={studyTitle}>
                   <ActionIcon
                     w={50}
                     h={50}

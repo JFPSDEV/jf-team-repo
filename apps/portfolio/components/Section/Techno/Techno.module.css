@@ -3,6 +3,15 @@
   background-color: #f0f0ff;
 }
 
+.icon {
+  background-color: white;
+}
+
+[data-mantine-color-scheme='dark'] .icon {
+  border: 2px solid var(--mantine-color-gray-3);
+  border-radius: 15px;
+}
+
 .scroll {
   position: relative;
   display: flex;

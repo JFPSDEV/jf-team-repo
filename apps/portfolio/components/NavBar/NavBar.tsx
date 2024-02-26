@@ -1,18 +1,23 @@
 import React from 'react';
 
-import Link from 'next/link';
-
 import { useResponsive } from '@jfteam/hooks';
-import { cx, Group, type GroupProps } from '@jfteam/material';
-import { GitHubIcon, LinkedInIcon, IconMenu2, JFLogoIcon } from '@jfteam/icons';
+import { cx, Group, Tooltip, type GroupProps, ActionIcon } from '@jfteam/material';
+import { IconMenu2 } from '@jfteam/icons';
 
 import classes from './NavBar.module.css';
 import NavBarLink from './NavBarLink/NavBarLink';
+import { ELocale, headerLink } from '@/utils';
+import { useLocale } from '@/hooks';
 
 export const NavBar = (props: GroupProps) => {
   const { className, ...groupProps } = props;
 
+  const linkLocale = useLocale();
   const { isDesktop } = useResponsive();
+
+  const { logo, navlink, socialMedia } = headerLink;
+
+  const locale: ELocale = linkLocale || ELocale.FR;
 
   return (
     <Group
@@ -21,20 +26,42 @@ export const NavBar = (props: GroupProps) => {
       {...groupProps}
       py="md"
     >
-      <JFLogoIcon color="white" size={70} />
+      <NavBarLink href={`${logo.link}${locale === ELocale.FR ? '' : locale}`}>
+        <logo.Icon color="white" size={70} />
+      </NavBarLink>
 
       {!isDesktop ? (
         <IconMenu2 color="white" size={50} />
       ) : (
         <>
           <Group gap="xl">
-            <NavBarLink href="cv">Mon CV</NavBarLink>
-            <NavBarLink href="/#project">Mes projets</NavBarLink>
-            <NavBarLink href="/#contact">Contact</NavBarLink>
+            {Object.values(navlink).map((nav, index) => {
+              const current = nav[locale]?.anchor;
+              const anchor = current ? '#' + current : '';
+
+              return (
+                <NavBarLink key={index} href={`/${locale}/${nav[locale].link}${anchor}`}>
+                  {nav[locale].value}
+                </NavBarLink>
+              );
+            })}
           </Group>
           <Group gap="xl">
-            <GitHubIcon color="white" size={32} />
-            <LinkedInIcon color="white" size={32} />
+            {socialMedia.map(({ Icon, link, label }, index) => (
+              <Tooltip key={index} label={label}>
+                <ActionIcon
+                  w={50}
+                  h={50}
+                  variant="transparent"
+                  component="a"
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon color="white" size={32} />
+                </ActionIcon>
+              </Tooltip>
+            ))}
           </Group>
         </>
       )}

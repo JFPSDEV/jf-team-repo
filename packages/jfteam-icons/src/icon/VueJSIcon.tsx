@@ -5,7 +5,7 @@ import type { IconProps } from '../types';
 interface VueJSIconProps extends IconProps {}
 
 export const VueJSIcon = (props: VueJSIconProps) => {
-  const { size, color, className } = props;
+  const { size, color, ...other } = props;
 
   return (
     <svg
@@ -14,7 +14,7 @@ export const VueJSIcon = (props: VueJSIconProps) => {
       width={size || '400px'}
       height={size || '400px'}
       viewBox='0 0 400 400'
-      className={className}
+      {...other}
     >
       <g id='svgg'>
         <path
