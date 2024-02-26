@@ -4,6 +4,7 @@ import { PhaserRender } from '@jfteam/phaser-next';
 import { gameConfig, MainScene, gameIdList, EGameKey, type TGameKey } from '@jfteam/portfolio-game';
 
 import { useMantineColorScheme } from '@jfteam/material';
+import { useResponsive } from '@jfteam/hooks';
 
 interface NoSsrGameProps {
   mode?: TGameKey;
@@ -12,6 +13,7 @@ interface NoSsrGameProps {
 const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
+  const { isMobile } = useResponsive();
   const { colorScheme, setColorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
@@ -24,10 +26,14 @@ const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
   };
 
   useEffect(() => {
-    window.addEventListener('resize', reloadOnWindowResize);
-    return () => {
-      window.removeEventListener('resize', reloadOnWindowResize);
-    };
+    if (!isMobile) {
+      window.addEventListener('resize', reloadOnWindowResize);
+      return () => {
+        window.removeEventListener('resize', reloadOnWindowResize);
+      };
+    } else {
+      setLoading(false);
+    }
   }, []);
 
   if (loading) return null;

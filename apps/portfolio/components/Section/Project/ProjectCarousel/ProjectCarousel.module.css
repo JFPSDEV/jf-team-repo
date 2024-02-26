@@ -4,11 +4,6 @@
   box-shadow: var(--mantine-shadow-lg);
 }
 
-.websiteImage {
-  height: 340px;
-  width: auto;
-}
-
 [data-mantine-color-scheme='dark'] .container {
   background-color: #1f1f1f;
   box-shadow: none;

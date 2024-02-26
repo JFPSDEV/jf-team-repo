@@ -75,8 +75,8 @@ export const Testimonial = ({ row }: TestimonialProps) => {
   const [embla, setEmbla] = useState<Embla | null>(null);
 
   return (
-    <Section py={80} px="md" variant="secondary">
-      <Stack gap={30} px="md">
+    <Section py={80} variant="secondary">
+      <Stack gap={30}>
         <Title order={2} ta="center" rows={row.title} />
 
         <Group justify="space-between">
@@ -97,7 +97,6 @@ export const Testimonial = ({ row }: TestimonialProps) => {
             getEmblaApi={setEmbla}
             className={classes.carousel}
             withControls={!isDesktop}
-            withIndicators
           >
             {(row) => <TestimonialCard row={row} />}
           </Carousel>

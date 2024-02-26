@@ -26,9 +26,9 @@ export const Project = ({ row }: ProjectProps) => {
     <Section py={80} px="md" id={anchor}>
       {row?.title && <Title order={2} ta="center" mb={30} rows={row.title} />}
 
-      <Stack px="md" h={!isDesktop ? undefined : 515} gap={30} justify="center">
+      <Stack h={!isDesktop ? undefined : 515} gap={30} justify="center">
         <Grid h="100%">
-          <Grid.Col span={{ base: 12, sm: 7, md: 7 }}>
+          <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 7 }}>
             <ProjectCarousel list={row.rows} getEmblaApi={setEmbla} onIndexChange={setIndex} />
           </Grid.Col>
           {isDesktop && (

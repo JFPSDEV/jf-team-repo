@@ -17,7 +17,7 @@ export const Contact = ({ row }: ContactProps) => {
   const anchor = headerLink.navlink[ENavlink.CONTACT][locale].anchor;
 
   return (
-    <Section py={80} px="md" id={anchor}>
+    <Section py={80} id={anchor}>
       <Stack gap={30}>
         <Title order={2} ta="center" rows={row.title} />
         {row.fields && <ContactForm row={row.fields} />}

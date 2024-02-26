@@ -19,7 +19,7 @@ interface ProjectCarouselProps {
 export const ProjectCarousel = (props: ProjectCarouselProps) => {
   const { list, getEmblaApi, onIndexChange } = props;
 
-  const { isDesktop } = useResponsive();
+  const { isDesktop, isMobile } = useResponsive();
 
   return (
     <Box className={classes.container}>
@@ -31,24 +31,22 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
         onSlideChange={onIndexChange}
         className={classes.carousel}
         withControls={!isDesktop}
-        withIndicators={!isDesktop}
       >
         {(row) => (
-          <Stack mb="xl">
-            <Box h={430} style={{ position: 'relative' }}>
-              <Image
-                alt={row.title}
-                src={row.picture}
-                layout="fill"
-                objectFit="cover"
-                className={classes.websiteImage}
-              />
+          <Stack>
+            <Box
+              h={isMobile ? 210 : 430}
+              style={{
+                position: 'relative',
+              }}
+            >
+              <Image alt={row.title} src={row.picture} layout="fill" objectFit="cover" />
             </Box>
             {!isDesktop && (
               <>
-                <Stack justify="space-evenly" h={200} p="md">
+                <Stack justify="space-evenly" align="center" h={200} p="md">
                   <Title order={3}> {row.title}</Title>
-                  <Text>{row.description}</Text>
+                  <Text ta="center">{row.description}</Text>
                   <Button
                     variant="subtle"
                     component="a"

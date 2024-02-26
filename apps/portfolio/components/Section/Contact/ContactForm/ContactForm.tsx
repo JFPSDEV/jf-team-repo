@@ -60,7 +60,7 @@ export const ContactForm = ({ row }: ContactFormProps) => {
 
   return (
     <form onSubmit={form.onSubmit((values, event) => handleSendEMail(values, event))}>
-      <Stack px="xl">
+      <Stack>
         <TextInput
           disabled={loading}
           withAsterisk
