@@ -1,11 +1,19 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
+import withPWA from 'next-pwa';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
 export default withBundleAnalyzer({
-  reactStrictMode: false,
+  reactStrictMode: true,
+
+  ...withPWA({
+    dest: 'public',
+    register: true,
+    skipWaitin: true,
+    disable: process.env.NODE_ENV === 'development',
+  }),
 
   transpilePackages: [
     '@jfteam/material',
