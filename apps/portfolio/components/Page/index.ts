@@ -1,2 +1,2 @@
 export * from './HomePage/HomePage';
-export * from './CVPage/CVPage';
+export * from './CVPage';

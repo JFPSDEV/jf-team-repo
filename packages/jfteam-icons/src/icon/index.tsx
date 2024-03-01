@@ -13,3 +13,5 @@ export * from './TurboRepoIcon';
 export * from './TypescriptIcon';
 export * from './VueJSIcon';
 export * from './NewTabIcon';
+export * from './ENIcon';
+export * from './FRIcon';

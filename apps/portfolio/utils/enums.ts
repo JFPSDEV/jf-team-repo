@@ -4,8 +4,9 @@ export enum ESpoiler {
 }
 
 export enum EVartiant {
-  primary,
-  secondary,
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  TERTIARY = 'tertiary',
 }
 
 export type TVariant = keyof typeof EVartiant;

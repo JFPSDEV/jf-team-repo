@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 
-import { ENavlink, IProject, headerLink } from '@/utils';
-import { Section } from '../Section';
 import { useResponsive } from '@jfteam/hooks';
+import { ETrigger, FadeTrigger, ScrollTrigger } from '@jfteam/animated';
+import { Grid, Stack, type Embla, Box } from '@jfteam/material';
+
+import { useLocale } from '@/hooks';
+import { Section } from '../Section';
 import { Title } from '@/components/Title/Title';
-import { Grid, Stack, type Embla } from '@jfteam/material';
 import ProjectCardList from './ProjectCardList/ProjectCardList';
 import { ProjectCarousel } from './ProjectCarousel/ProjectCarousel';
-import { useLocale } from '@/hooks';
+import { ENavlink, IProject, type TSectionProps, headerLink } from '@/utils';
 
-interface ProjectProps {
+interface ProjectProps extends TSectionProps {
   row: IProject;
 }
 
-export const Project = ({ row }: ProjectProps) => {
-  const locale = useLocale();
+export const Project = ({ row, isMobile }: ProjectProps) => {
+  const { locale } = useLocale();
   const { isDesktop } = useResponsive();
 
   const [embla, setEmbla] = useState<Embla | null>(null);
@@ -23,25 +25,31 @@ export const Project = ({ row }: ProjectProps) => {
   const anchor = headerLink.navlink[ENavlink.PROJECT][locale].anchor;
 
   return (
-    <Section py={80} px="md" id={anchor}>
-      {row?.title && <Title order={2} ta="center" mb={30} rows={row.title} />}
+    <Section id={anchor}>
+      <FadeTrigger trigger={ETrigger.ScrollTrigger}>
+        {row?.title && <Title order={2} ta="center" mb={30} rows={row.title} />}
 
-      <Stack h={!isDesktop ? undefined : 515} gap={30} justify="center">
-        <Grid h="100%">
-          <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 7 }}>
-            <ProjectCarousel list={row.rows} getEmblaApi={setEmbla} onIndexChange={setIndex} />
-          </Grid.Col>
-          {isDesktop && (
-            <Grid.Col span={5}>
-              <ProjectCardList
-                list={row.rows}
-                index={index}
-                onClick={(_idx: number) => embla?.scrollTo(_idx)}
-              />
+        <Box h={isMobile ? 210 : 440}>
+          <Grid>
+            <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 7 }}>
+              <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="down">
+                <ProjectCarousel list={row.rows} getEmblaApi={setEmbla} onIndexChange={setIndex} />
+              </FadeTrigger>
             </Grid.Col>
-          )}
-        </Grid>
-      </Stack>
+            {isDesktop && (
+              <Grid.Col span={5}>
+                <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="right">
+                  <ProjectCardList
+                    list={row.rows}
+                    index={index}
+                    onClick={(_idx: number) => embla?.scrollTo(_idx)}
+                  />
+                </FadeTrigger>
+              </Grid.Col>
+            )}
+          </Grid>
+        </Box>
+      </FadeTrigger>
     </Section>
   );
 };

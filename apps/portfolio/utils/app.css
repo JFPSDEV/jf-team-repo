@@ -1,3 +1,10 @@
 html {
-  --game-canvas-height: 450px;
+  --gradiant-color-section: linear-gradient(to bottom, #9290ff, #9492ff, #9d9aff, #a6a4ff);
+  @media (min-width: $mantine-breakpoint-md) {
+    --game-canvas-height: 450px;
+    --section-spacing: 80px;
+  }
+  @media (max-width: $mantine-breakpoint-md) {
+    --section-spacing: 40px;
+  }
 }

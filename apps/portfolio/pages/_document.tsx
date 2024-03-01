@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import React, { type CSSProperties } from 'react';
 
 import { ColorSchemeScript } from '@jfteam/material';
 import { Html, Head, Main, NextScript } from 'next/document';

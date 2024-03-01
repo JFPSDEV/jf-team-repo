@@ -1,0 +1,61 @@
+.scrollTopButton,
+.scrollTopButton:focus,
+.mantine-ActionIcon-root {
+  z-index: 1000;
+  position: fixed;
+  transition: opacity 0.8s ease;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  box-shadow: var(--mantine-shadow-lg);
+
+  @media (min-width: $mantine-breakpoint-md) {
+    bottom: 0;
+    right: 0;
+    margin: 40px;
+  }
+  @media (max-width: $mantine-breakpoint-md) {
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    margin-bottom: 40px;
+  }
+}
+
+.fadeIn {
+  opacity: 1; /* Rendre le bouton visible */
+}
+
+.fadeOut {
+  opacity: 0; /* Rendre le bouton invisible */
+}
+
+[data-mantine-color-scheme='light'] .scrollTopButton {
+  background-color: black;
+  color: #ffffff;
+}
+
+[data-mantine-color-scheme='light'] .scrollTopButton:focus {
+  background-color: black;
+  color: #ffffff;
+}
+
+[data-mantine-color-scheme='light'] .scrollTopButton:hover {
+  background-color: black;
+  color: #ffffff;
+}
+
+[data-mantine-color-scheme='dark'] .scrollTopButton {
+  background-color: #ffffff;
+  color: black;
+}
+
+[data-mantine-color-scheme='dark'] .scrollTopButton:focus {
+  background-color: #ffffff;
+  color: black;
+}
+
+[data-mantine-color-scheme='dark'] .scrollTopButton:hover {
+  background-color: #ffffff;
+  color: black;
+}

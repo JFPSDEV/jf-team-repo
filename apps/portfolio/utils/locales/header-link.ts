@@ -25,6 +25,7 @@ interface TSocialMedia {
 
 interface TNavLink extends Record<ELocale, TNavLinkItem> {
   Icon: TIcon;
+  default?: ELocale;
 }
 
 interface THeader {
@@ -68,3 +69,30 @@ export const headerLink: THeader = {
     },
   ],
 };
+
+export function getAllRoutes(navlinks: TNavLink[], locales: ELocale[]): string[] {
+  const routes = new Set<string>();
+
+  navlinks.forEach((navlinkParam: TNavLink) => {
+    Object.values(locales).forEach((localeKey) => {
+      const localeItem = navlinkParam[localeKey];
+      const link = localeItem?.link;
+      const anchor = localeItem?.anchor;
+
+      if (link) {
+        const baseRoute = `/${localeKey}${link.length <= 1 ? '' : link}`;
+        routes.add(baseRoute);
+        if (anchor) {
+          routes.add(`${baseRoute}#${localeItem.anchor}`);
+        }
+      }
+    });
+  });
+
+  return Array.from(routes);
+}
+
+export const navLinks = Object.values(headerLink.navlink);
+export const locales = Object.values(ELocale);
+
+export const routes = [headerLink.logo.link, ...getAllRoutes(navLinks, locales)];

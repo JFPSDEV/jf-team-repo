@@ -12,7 +12,6 @@ export default withBundleAnalyzer({
     dest: 'public',
     register: true,
     skipWaitin: true,
-    disable: process.env.NODE_ENV === 'development',
   }),
 
   transpilePackages: [
@@ -30,7 +29,13 @@ export default withBundleAnalyzer({
     '@jfteam/mail',
   ],
   images: {
-    domains: ['res.cloudinary.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '**',
+      },
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,

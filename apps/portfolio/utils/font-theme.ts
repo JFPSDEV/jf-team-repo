@@ -2,9 +2,8 @@ import { breakpoints } from '@jfteam/utils';
 import { rem, type MantineThemeOverride, MantineBreakpointsValues } from '@jfteam/material';
 
 import { poetsenOneRegular, montserrat } from './fonts';
-import { getResponsiveFontSize } from './get-responsive-font-size';
 
-export const getFontTheme = (width: number): MantineThemeOverride => ({
+export const fontTheme: MantineThemeOverride = {
   breakpoints: breakpoints as Record<(MantineBreakpointsValues & string) | number | symbol, string>,
   fontFamily: montserrat.style.fontFamily,
   headings: {
@@ -12,7 +11,7 @@ export const getFontTheme = (width: number): MantineThemeOverride => ({
     fontWeight: '400',
     sizes: {
       h1: {
-        fontSize: getResponsiveFontSize({ current: width, desktop: 64, mobile: 34 }),
+        fontSize: rem(64),
         lineHeight: 'normal',
       },
       h2: {
@@ -28,4 +27,4 @@ export const getFontTheme = (width: number): MantineThemeOverride => ({
       h6: {},
     },
   },
-});
+};

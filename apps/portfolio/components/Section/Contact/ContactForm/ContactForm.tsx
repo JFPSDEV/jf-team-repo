@@ -5,9 +5,10 @@ import { TEmailForm } from '@jfteam/types';
 import { useLazyFetch } from '@jfteam/hooks';
 import { Button, Stack, TextInput, Textarea, toast } from '@jfteam/material';
 
-import { IContactForm, root } from '@/utils';
+import { IContactForm, routesApi } from '@/utils';
 import { ContactDrop, TFiles } from './ContactDrop/ContactDrop';
 import { Mail } from '@jfteam/mail';
+import { ETrigger, FadeTrigger } from '@jfteam/animated';
 
 type TMail = TEmailForm<TFiles>;
 
@@ -16,7 +17,7 @@ interface ContactFormProps {
 }
 
 export const ContactForm = ({ row }: ContactFormProps) => {
-  const [sendMail, { loading }] = useLazyFetch<TMail, Object>(root.sendMail, 'POST');
+  const [sendMail, { loading }] = useLazyFetch<TMail, Object>(routesApi.sendMail, 'POST');
 
   const form = useForm<TMail>({
     initialValues: {
@@ -59,34 +60,51 @@ export const ContactForm = ({ row }: ContactFormProps) => {
   };
 
   return (
-    <form onSubmit={form.onSubmit((values, event) => handleSendEMail(values, event))}>
-      <Stack>
-        <TextInput
-          disabled={loading}
-          withAsterisk
-          label={row.email.label}
-          placeholder={row.email.placeholder}
-          {...form.getInputProps('email')}
-        />
-        <TextInput
-          disabled={loading}
-          withAsterisk
-          label={row.subject.label}
-          placeholder={row.subject.placeholder}
-          {...form.getInputProps('subject')}
-        />
-        <ContactDrop disabled={loading} {...form.getInputProps('attachments')} />
-        <Textarea
-          withAsterisk
-          disabled={loading}
-          label={row.message.label}
-          placeholder={row.message.placeholder}
-          styles={{ input: { height: 250 } }}
-          {...form.getInputProps('message')}
-        />
-        <Button type="submit" loading={loading}>
-          {row.button.label}
-        </Button>
+    <form
+      onSubmit={form.onSubmit((values, event) => handleSendEMail(values, event))}
+      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+    >
+      <Stack w={{ base: '100%', md: 900 }}>
+        <FadeTrigger trigger={ETrigger.ScrollTrigger}>
+          <TextInput
+            disabled={loading}
+            withAsterisk
+            label={row.email.label}
+            placeholder={row.email.placeholder}
+            {...form.getInputProps('email')}
+          />
+        </FadeTrigger>
+        <FadeTrigger trigger={ETrigger.ScrollTrigger}>
+          <TextInput
+            disabled={loading}
+            withAsterisk
+            label={row.subject.label}
+            placeholder={row.subject.placeholder}
+            {...form.getInputProps('subject')}
+          />
+        </FadeTrigger>
+        <FadeTrigger trigger={ETrigger.ScrollTrigger}>
+          {' '}
+          <ContactDrop disabled={loading} {...form.getInputProps('attachments')} />
+        </FadeTrigger>
+        <FadeTrigger
+          trigger={ETrigger.ScrollTrigger}
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
+          <Textarea
+            w="100%"
+            withAsterisk
+            disabled={loading}
+            label={row.message.label}
+            placeholder={row.message.placeholder}
+            styles={{ input: { height: 250 } }}
+            {...form.getInputProps('message')}
+          />
+
+          <Button type="submit" loading={loading} w={{ base: '100%', md: 200 }} mt="md">
+            {row.button.label}
+          </Button>
+        </FadeTrigger>
       </Stack>
     </form>
   );

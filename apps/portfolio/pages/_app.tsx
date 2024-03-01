@@ -1,46 +1,16 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 
-import Head from 'next/head';
 import type { AppProps } from 'next/app';
 
-import { useWindowSize } from '@jfteam/hooks';
-import { portfolioTheme } from '@jfteam/theme';
-import { appWithTranslation } from 'next-i18next';
-import { JfteamMaterialProvider, Toaster } from '@jfteam/material';
+import { AppContent } from '@/components';
+import { AppProvider } from '@/provider';
 
 import '../utils/app.css';
-import { getFontTheme } from '../utils';
 
-export default function App({ Component, pageProps }: AppProps) {
-  const { width } = useWindowSize();
-
-  const [loaded, setLoaded] = useState<boolean>(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
-
-  if (!loaded) return <p>Loading...</p>;
+export default function App(props: AppProps) {
   return (
-    <JfteamMaterialProvider
-      theme={{
-        ...getFontTheme(width),
-        ...portfolioTheme,
-      }}
-    >
-      <Head>
-        <title>Jean-François Picherit-Steinbrucker</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
-        />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="shortcut icon" href="/favicon.svg" />
-      </Head>
-      <Toaster />
-      <Component {...pageProps} />
-    </JfteamMaterialProvider>
+    <AppProvider>
+      <AppContent {...props} />
+    </AppProvider>
   );
 }
-
-// export default appWithTranslation(App);

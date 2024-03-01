@@ -70,14 +70,17 @@ export class MainScene extends Phaser.Scene {
     if (!isMobile) {
       // Flag
       this.flagManager = new FlagManager(this, {
-        x: W - 300,
+        x: W - 170,
         y: H / 2.27
       });
     }
 
+    // console.log('===========================');
+    // alert(W);
+
     // Castle
     this.castleManager = new CastleManager(this, {
-      x: W - (isMobile ? 40 : 100),
+      x: W - 40,
       y: H / 2.2
     });
 
@@ -88,10 +91,15 @@ export class MainScene extends Phaser.Scene {
       { x: W / 2 + 100, y: H / 2.3 }
     ]);
 
+    const powBlockDistance = W >= 1200 ? 300 : 250;
+
     // PowBlock
     this.powBlockManager = new PowBlockManager(
       this,
-      [{ x: W / 2 - 600, y: H / 2.3 }],
+      [
+        { x: W / 2 - powBlockDistance, y: H / 2.3 },
+        { x: W / 2 + powBlockDistance, y: H / 2.3 }
+      ],
       [this.castleManager.updateCastle]
     );
 

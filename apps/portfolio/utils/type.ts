@@ -1,3 +1,5 @@
+import { TUseResponsiveResult } from '@jfteam/hooks';
+
 export interface IPresentationRow {
   id: string;
   value: string;
@@ -145,3 +147,5 @@ export interface IHomePage {
   testimonial: ITestimonial;
   contact: IContact;
 }
+
+export interface TSectionProps extends TUseResponsiveResult {}

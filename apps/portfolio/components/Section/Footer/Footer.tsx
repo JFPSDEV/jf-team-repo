@@ -1,12 +1,12 @@
 import React from 'react';
 
+import { Box } from '@jfteam/material';
+
+import { TSectionProps } from '@/utils';
 import classes from './Footer.module.css';
-import { Box, Skeleton } from '@jfteam/material';
-import { Section } from '../Section';
-import { NavBar } from '../..';
 import { FooterGame } from '../../Game/FooterGame';
 
-interface FooterProps {}
+interface FooterProps extends TSectionProps {}
 
 export const Footer = (props: FooterProps) => {
   const {} = props;

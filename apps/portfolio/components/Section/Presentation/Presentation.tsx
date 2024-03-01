@@ -7,21 +7,19 @@ import { Box, HTimeline, Text, Title, Stack, List, ThemeIcon } from '@jfteam/mat
 
 import { Section } from '../Section';
 import classes from './Presentation.module.css';
-import { CVTimeline } from '@/components/CVTimeline/CVTimeline';
-import { useResponsive } from '@jfteam/hooks';
-import { IPresentation } from '@/utils';
+import { IPresentation, type TSectionProps } from '@/utils';
+import { CVTimeline } from '@/components';
 import { Title as MultiLineTitle } from '@/components/Title/Title';
+import { FadeTrigger, RotationTrigger } from '@jfteam/animated';
 
 const lineWidth = '25%';
 const baseWidth = 270;
 
-interface PresentationProps {
+interface PresentationProps extends TSectionProps {
   row: IPresentation;
 }
 
-export const Presentation = ({ row }: PresentationProps) => {
-  const { isMobile } = useResponsive();
-
+export const Presentation = ({ row, isMobile }: PresentationProps) => {
   const image = (
     <Image
       src={row.picture}
@@ -32,14 +30,28 @@ export const Presentation = ({ row }: PresentationProps) => {
     />
   );
 
+  const title = (
+    <FadeTrigger
+      className={classes.titleContainer}
+      direction="up"
+      duration={1.5}
+      startPosition={50}
+    >
+      <MultiLineTitle order={1} rows={row.title} w="100%" ta="center" />
+    </FadeTrigger>
+  );
+
   return (
     <>
-      {row?.title && (
-        <MultiLineTitle order={1} rows={row.title} className={classes.title} w="100%" ta="center" />
-      )}
+      {!isMobile && row?.title && title}
       <Section px="xl" pb={80} pt={{ xs: 0, md: 60 }}>
+        {isMobile && title}
         {!isMobile && (
-          <Box h={440} style={{ position: 'relative' }}>
+          <FadeTrigger
+            style={{ position: 'relative', height: 440 }}
+            direction="right"
+            duration={1.5}
+          >
             <HTimeline>
               <HTimeline.Item
                 bulletSize={265}
@@ -76,23 +88,25 @@ export const Presentation = ({ row }: PresentationProps) => {
                 </CVTimeline.Item>
 
                 <CVTimeline.Item bullet={<IconStyle value="ti ti-mood-smile-beam" />}>
-                  <Box>
+                  <FadeTrigger direction="up" duration={1.5}>
                     {row?.description && (
                       <Text
                         style={{ transformOrigin: 'center', transform: 'translateY(-30%)' }}
                         dangerouslySetInnerHTML={{ __html: row.description }}
                       />
                     )}
-                  </Box>
+                  </FadeTrigger>
                 </CVTimeline.Item>
               </CVTimeline>
               <Box style={{ position: 'absolute', top: 0, bottom: 0 }}>
-                <Box h={baseWidth} w={baseWidth} style={{ position: 'relative' }}>
+                <RotationTrigger
+                  style={{ width: baseWidth, height: baseWidth, position: 'relative', zIndex: 2 }}
+                >
                   {image}
-                </Box>
+                </RotationTrigger>
               </Box>
             </HTimeline>
-          </Box>
+          </FadeTrigger>
         )}
         {isMobile && (
           <Stack align="center" gap="xl">

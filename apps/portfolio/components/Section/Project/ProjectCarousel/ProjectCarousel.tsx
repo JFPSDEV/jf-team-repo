@@ -35,7 +35,7 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
         {(row) => (
           <Stack>
             <Box
-              h={isMobile ? 210 : 430}
+              h={isMobile ? 210 : 440}
               style={{
                 position: 'relative',
               }}

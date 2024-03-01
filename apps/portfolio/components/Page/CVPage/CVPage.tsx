@@ -1,19 +1,29 @@
+import React from 'react';
+
+import { useResponsive } from '@jfteam/hooks';
+
+import { ELocale, ICVPage } from '@/utils';
 import { Experience, Hero, Hobby, Presentation, Skill, Study } from '@/components/Section';
-import { ICVPage } from '@/utils';
 
 interface CVPageProps {
   page: ICVPage;
 }
 
 export const CVPage = ({ page }: CVPageProps) => {
+  const { ...props } = useResponsive();
+
+  if (!page) return null;
+
+  const { presentation, study, experience, skill, hobby } = page;
+
   return (
     <>
-      <Hero />
-      {page?.presentation && <Presentation row={page.presentation} />}
-      {page?.study && <Study row={page.study} />}
-      {page?.experience && <Experience row={page.experience} />}
-      {page?.skill && <Skill row={page.skill} />}
-      {page?.hobby && <Hobby row={page.hobby} />}
+      <Hero {...props} />
+      <Presentation row={presentation} {...props} />
+      <Study row={study} {...props} />
+      <Experience row={experience} {...props} />
+      <Skill row={skill} {...props} />
+      <Hobby row={hobby} {...props} />
     </>
   );
 };

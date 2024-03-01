@@ -1,21 +1,22 @@
-import { ELocale, EPageId, EPageProps, IHomePage, PageProps } from '@/utils';
-import { HomePage } from '../../components';
+import React from 'react';
+
 import { getPage } from '@/utils/get-page';
+import { ELocale, EPageId, EPageProps, IHomePage, PageProps, pageFound } from '@/utils';
+
+import { HomePage } from '../../components';
 
 interface LocaleHomePageProps extends PageProps {
   page: IHomePage;
 }
 
-export default function LocaleHomePage(props: LocaleHomePageProps) {
-  const { page } = props;
-
+export default function LocaleHomePage({ page }: LocaleHomePageProps) {
   return <HomePage page={page} />;
 }
 
-// /**
-//  * STATIC PATHS
-//  * -----------
-//  */
+/**
+ * STATIC PATHS
+ * -----------
+ */
 export const getStaticPaths = async () => {
   const paths = Object.values(ELocale).map((key) => ({
     params: { locale: key, pageName: EPageId.HOME },
@@ -27,16 +28,23 @@ export const getStaticPaths = async () => {
   };
 };
 
-// /**
-//  * STATIC PROPS
-//  * -----------
-//  */
+/**
+ * STATIC PROPS
+ * -----------
+ */
 export const getStaticProps = async (context: {
   params: {
     locale: ELocale;
   };
 }) => {
-  const locale = context?.params?.locale || ELocale.FR;
+  if (!pageFound(context?.params?.locale)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const locale: ELocale = context?.params?.locale;
+
   const page = await getPage<IHomePage>(EPageId.HOME, locale);
 
   return {

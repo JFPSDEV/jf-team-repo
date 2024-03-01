@@ -1,19 +1,21 @@
 import React, { Fragment } from 'react';
 
+import { IconMenu2, IconMinus } from '@jfteam/icons';
 import { useDisclosure, useResponsive } from '@jfteam/hooks';
 import { cx, Group, Tooltip, type GroupProps, ActionIcon } from '@jfteam/material';
-import { IconMenu2, IconMinus } from '@jfteam/icons';
 
-import classes from './NavBar.module.css';
-import NavBarLink from './NavBarLink/NavBarLink';
-import { ELocale, headerLink, poppins } from '@/utils';
 import { useLocale } from '@/hooks';
+import classes from './NavBar.module.css';
+import { ELocale, headerLink } from '@/utils';
+import NavBarLink from './NavBarLink/NavBarLink';
 import NavBarMobile from './NavBarMobile/NavBarMobile';
 
-export const NavBar = (props: GroupProps) => {
+interface NavBarProps extends GroupProps {}
+
+export const NavBar = (props: NavBarProps) => {
   const { className, ...groupProps } = props;
 
-  const linkLocale = useLocale();
+  const { locale: linkLocale } = useLocale();
   const { isDesktop } = useResponsive();
   const [opened, { open, close }] = useDisclosure(false);
 

@@ -4,27 +4,34 @@ import { Box, Container, type ContainerProps, cx } from '@jfteam/material';
 
 import classes from './Section.module.css';
 
-import { EVartiant, type TVariant, lightDarkModeClasses } from '@/utils';
+import { EVartiant, lightDarkModeClasses } from '@/utils';
 
-interface SectionProps extends ContainerProps {
-  variant?: TVariant;
+interface SectionProps extends Omit<ContainerProps, 'variant'> {
+  variant?: EVartiant;
 }
 
 export const Section = (props: SectionProps) => {
-  const { className, bg, variant = EVartiant.primary, ...containerProps } = props;
+  const { className, bg, variant = EVartiant.PRIMARY, ...containerProps } = props;
 
   return (
     <Box
       className={cx(
         className,
         classes.container,
-        variant === EVartiant.primary
+        variant === EVartiant.PRIMARY
           ? lightDarkModeClasses.bgPrimary
-          : lightDarkModeClasses.bgSecondary
+          : variant === EVartiant.SECONDARY
+            ? lightDarkModeClasses.bgSecondary
+            : lightDarkModeClasses.bgTertiary
       )}
       bg={bg}
     >
-      <Container size="lg" className={classes.section} {...containerProps} />
+      <Container
+        size="lg"
+        className={classes.section}
+        py="var(--section-spacing)"
+        {...containerProps}
+      />
     </Box>
   );
 };

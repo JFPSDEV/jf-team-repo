@@ -4,17 +4,16 @@ import {
   breakpoints as defaultBreakpoints
 } from '@jfteam/utils';
 
+export interface TUseResponsiveResult {
+  isMobile?: boolean;
+  isTablet?: boolean;
+  isDesktop?: boolean;
+}
+
 export const useResponsive = (
   breakpoints: TBreakPoints = defaultBreakpoints
-) => {
-  const { xs, sm, md, lg, xl } = breakpoints;
-  const isBreakpoints = {
-    xs: useMediaQuery(`(min-width: ${xs})`),
-    sm: useMediaQuery(`(min-width: ${sm})`),
-    md: useMediaQuery(`(min-width: ${md})`),
-    lg: useMediaQuery(`(min-width: ${lg})`),
-    xl: useMediaQuery(`(min-width: ${xl})`)
-  };
+): TUseResponsiveResult => {
+  const { sm, md } = breakpoints;
 
   const isMobile = useMediaQuery(`(max-width: ${md})`);
   const isTablet = useMediaQuery(
@@ -22,5 +21,5 @@ export const useResponsive = (
   );
   const isDesktop = useMediaQuery(`(min-width: ${md})`);
 
-  return { isMobile, isTablet, isDesktop, ...isBreakpoints };
+  return { isMobile, isTablet, isDesktop };
 };

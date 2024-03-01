@@ -16,8 +16,8 @@ import {
 
 import classes from './Techno.module.css';
 import { generateUUID } from '@jfteam/utils';
-
-import { lightDarkModeClasses } from '@/utils';
+import { lightDarkModeClasses, type TSectionProps } from '@/utils';
+import { ETrigger, FadeTrigger } from '@jfteam/animated';
 
 const technoList = [
   {
@@ -62,9 +62,9 @@ const technoList = [
   },
 ];
 
-interface TechnoProps {}
+interface TechnoProps extends TSectionProps {}
 
-export const Techno = () => {
+export const Techno = (props: TechnoProps) => {
   const iconBand = (
     <Box>
       {[...technoList, ...technoList].map(({ Icon }) => (
@@ -74,11 +74,19 @@ export const Techno = () => {
   );
 
   return (
-    <Flex className={cx(classes.container, lightDarkModeClasses.bgSecondary)} align="center">
-      <Box className={cx(classes.scroll, classes.imgBox)}>
+    <Flex
+      className={cx(classes.container, lightDarkModeClasses.bgSecondary)}
+      align="center"
+      py="var(--section-spacing)"
+    >
+      <FadeTrigger
+        className={cx(classes.scroll, classes.imgBox)}
+        trigger={ETrigger.ScrollTrigger}
+        startPosition={100}
+      >
         {iconBand}
         {iconBand}
-      </Box>
+      </FadeTrigger>
     </Flex>
   );
 };

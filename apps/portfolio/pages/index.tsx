@@ -1,14 +1,15 @@
-import { ELocale, EPageId, EPageProps, IHomePage, PageProps } from '@/utils';
-import { HomePage } from '../components';
+import React from 'react';
+
 import { getPage } from '@/utils/get-page';
+import { ELocale, EPageId, EPageProps, IHomePage, PageProps } from '@/utils';
+
+import { HomePage } from '../components';
 
 interface IndexPageProps extends PageProps {
   page: IHomePage;
 }
 
-export default function IndexPage(props: IndexPageProps) {
-  const { page } = props;
-
+export default function IndexPage({ page, locale }: IndexPageProps) {
   return <HomePage page={page} />;
 }
 

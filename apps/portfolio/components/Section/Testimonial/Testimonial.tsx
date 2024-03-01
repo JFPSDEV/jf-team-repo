@@ -1,116 +1,66 @@
 import React, { useState } from 'react';
 
 import { Carousel } from '@jfteam/carousel';
-import { type Embla, cx, Group, ActionIcon, Stack } from '@jfteam/material';
-import { Section } from '../Section';
-import { TestimonialCard } from './TestimonialCard/TestimonialCard';
-
-import { type StaticImageData } from 'next/image';
-
-import alexisPicture from '../../../public/images/alexis-filia.jpeg';
-import tonyPicture from '../../../public/images/tony-maublanc.jpeg';
-import fabricePicture from '../../../public/images/fabrice-deydier.jpeg';
-
 import { IconChevronLeft, IconChevronRight } from '@jfteam/icons';
+import { type Embla, cx, Group, ActionIcon, Stack } from '@jfteam/material';
 
+import { Section } from '../Section';
 import classes from './Testimonial.module.css';
-import { ITestimonial } from '@/utils';
-import { useResponsive } from '@jfteam/hooks';
 import { Title } from '@/components/Title/Title';
+import { EVartiant, ITestimonial, TSectionProps } from '@/utils';
+import { TestimonialCard } from './TestimonialCard/TestimonialCard';
+import { ETrigger, FadeTrigger } from '@jfteam/animated';
 
-export interface TTestimonial {
-  id: string;
-  title: string;
-  subTitle: string;
-  link: string;
-  description: string;
-  picture: StaticImageData;
-  rating: number;
-}
-
-const list: TTestimonial[] = [
-  {
-    id: '1',
-    title: 'Alexis Filia',
-    subTitle: 'Co fondateur de dots',
-    link: 'https://www.linkedin.com/in/alexis-filia/?originalSubdomain=fr',
-    description: `Je recommande notre cher Jeff avec qui j'ai eu le plaisir de bosser pendant deux ans dans mon entreprise, dots, alors qu'il était en alternance en tant que Dev fullstack. Toujours motivé, de bonne humeur, curieux et vraiment impliqué, on a apprécié son travail et aussi le fait qu'au besoin, on savait qu'on pouvait compter sur lui. Il a énormément évolué pendant ces deux années, et il va encore progresser. On lui souhaite plein de succès avec ses prochaines structures d'accueil et de manière générale dans sa carrière !`,
-    picture: alexisPicture,
-    rating: 5,
-  },
-  {
-    id: '2',
-    title: 'Tony Maublanc',
-    subTitle: 'Responsable de projet de PMC',
-    link: 'https://www.linkedin.com/in/tony-maublanc-45b383105/?originalSubdomain=fr',
-    description:
-      'Jean-François a été super durant son alternance chez nous ! Motivé, persévérant, son travail est toujours en fonctionnement aujourd’hui. Bref, je recommande vivement ☺️',
-    picture: tonyPicture,
-    rating: 5,
-  },
-  {
-    id: '3',
-    title: 'Fabrice Deydier',
-    subTitle: 'Co-fondateur et gérant de PMC',
-    link: 'https://www.linkedin.com/in/fabrice-deydier-1532022b/',
-    description: `Je recommande vivement Jean-François dans le domaine du développement informatique. Pendant son alternance chez Planning-Services.fr, il a brillamment démontré ses compétences en PHP, HTML, CSS, et JavaScript. 
-Ce qui distingue Jean-François, c'est sa capacité à prendre des initiatives et à apporter des solutions innovantes aux problèmes. Il a non seulement amélioré nos processus, mais a aussi positivement impacté l'ambiance de notre équipe. Sa passion pour l'apprentissage et son engagement pour la qualité du travail en font un collaborateur extrêmement précieux. Jean-François est sans aucun doute un atout pour toute équipe.`,
-    picture: fabricePicture,
-    rating: 5,
-  },
-];
-
-interface TestimonialProps {
+interface TestimonialProps extends TSectionProps {
   row: ITestimonial;
 }
 
-const title = {
-  line1: 'Quelque retour sur',
-  line2: 'mes projets',
-};
-
-export const Testimonial = ({ row }: TestimonialProps) => {
-  const { isDesktop } = useResponsive();
-
+export const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
   const [embla, setEmbla] = useState<Embla | null>(null);
 
   return (
-    <Section py={80} variant="secondary">
-      <Stack gap={30}>
-        <Title order={2} ta="center" rows={row.title} />
+    <Section variant={EVartiant.SECONDARY}>
+      <FadeTrigger trigger={ETrigger.ScrollTrigger}>
+        <Stack gap={30}>
+          <Title order={2} ta="center" rows={row.title} />
 
-        <Group justify="space-between">
-          {isDesktop && (
-            <ActionIcon
-              className={classes.carouselButton}
-              variant="outline"
-              onClick={() => embla?.scrollPrev()}
+          <Group justify="space-between">
+            {isDesktop && (
+              <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="right" duration={1.5}>
+                <ActionIcon
+                  className={classes.carouselButton}
+                  variant="outline"
+                  onClick={() => embla?.scrollPrev()}
+                >
+                  <IconChevronLeft className={cx(classes.icons, classes.iconLeft)} />
+                </ActionIcon>
+              </FadeTrigger>
+            )}
+            <Carousel
+              loop
+              w={!isDesktop ? '100%' : '80%'}
+              rows={row.rows}
+              delay={8000}
+              getEmblaApi={setEmbla}
+              className={classes.carousel}
+              withControls={!isDesktop}
             >
-              <IconChevronLeft className={cx(classes.icons, classes.iconLeft)} />
-            </ActionIcon>
-          )}
-          <Carousel
-            loop
-            w={!isDesktop ? '100%' : '80%'}
-            rows={row.rows}
-            delay={8000}
-            getEmblaApi={setEmbla}
-            className={classes.carousel}
-            withControls={!isDesktop}
-          >
-            {(row) => <TestimonialCard row={row} />}
-          </Carousel>
-          {isDesktop && (
-            <ActionIcon
-              className={classes.carouselButton}
-              variant="outline"
-              onClick={() => embla?.scrollNext()}
-            >
-              <IconChevronRight className={cx(classes.icons, classes.iconRight)} />
-            </ActionIcon>
-          )}
-        </Group>
-      </Stack>
+              {(row) => <TestimonialCard row={row} />}
+            </Carousel>
+            {isDesktop && (
+              <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="left" duration={1.5}>
+                <ActionIcon
+                  className={classes.carouselButton}
+                  variant="outline"
+                  onClick={() => embla?.scrollNext()}
+                >
+                  <IconChevronRight className={cx(classes.icons, classes.iconRight)} />
+                </ActionIcon>
+              </FadeTrigger>
+            )}
+          </Group>
+        </Stack>
+      </FadeTrigger>
     </Section>
   );
 };

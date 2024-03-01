@@ -13,3 +13,11 @@
 [data-mantine-color-scheme='dark'] .bgSecondary {
   background-color: #1f1f1f;
 }
+
+[data-mantine-color-scheme='light'] .bgTertiary {
+  background: var(--gradiant-color-section);
+}
+
+[data-mantine-color-scheme='dark'] .bgTertiary {
+  background-color: #1f1f1f;
+}

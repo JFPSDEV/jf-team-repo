@@ -1,8 +1,14 @@
-.title {
-  position: absolute;
-  top: 325px;
-  left: 0;
-  z-index: 8;
+.titleContainer {
+  width: 100%;
+  @media (min-width: $mantine-breakpoint-md) {
+    position: absolute;
+    top: 325px;
+    left: 0;
+    z-index: 8;
+  }
+  @media (max-width: $mantine-breakpoint-md) {
+    padding-bottom: 20px;
+  }
 }
 
 .hTimelineTitle {
