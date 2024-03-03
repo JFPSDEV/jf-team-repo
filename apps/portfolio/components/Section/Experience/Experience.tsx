@@ -18,7 +18,7 @@ interface ExperienceProps extends TSectionProps {
 
 export const Experience = ({ row, isDesktop }: ExperienceProps) => {
   return (
-    <Section py={80}>
+    <Section>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <MultiLineTitle order={2} ta="center" pb={50} rows={row.title} />
       </FadeTrigger>
@@ -27,12 +27,7 @@ export const Experience = ({ row, isDesktop }: ExperienceProps) => {
         {row?.rows.map(({ id, title: studyTitle, description, duration, link, img }) => (
           <CVTimeline.Item bullet={<IconBuilding size={CVTimeline.iconSize} />} key={id}>
             <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="right" duration={1}>
-              <CVTimeline.Card
-                p={0}
-                borderWidth={1}
-                borderColor="var(--mantine-color-gray-3)"
-                direction="Left"
-              >
+              <CVTimeline.Card p={0} direction="Left">
                 <Grid>
                   <Grid.Col span={{ base: 12, md: 6 }} h={!isDesktop ? 150 : undefined}>
                     <Link href={link} target="_blank">

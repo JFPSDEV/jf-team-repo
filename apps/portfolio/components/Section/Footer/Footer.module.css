@@ -1,47 +1,7 @@
-.footerContainer {
-  position: relative;
-  padding: 0;
-  margin: 0;
+[data-mantine-color-scheme='light'] .footerContainer {
+  border-top: 1px solid var(--mantine-color-gray-3);
 }
 
-.container {
-  position: 'relative';
-  height: var(--game-canvas-height);
-  width: 100%;
-}
-
-.navBarContainer {
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-}
-
-.navbar {
-  height: 100;
-}
-
-.game {
-  width: 100%;
-  height: var(--game-canvas-height);
-  /* clip-path: polygon(0 35%, 0 100%, 100% 100%, 100% 0); */
-  z-index: 1;
-}
-
-.sectionBackground {
-  height: 100%;
-  width: 100%;
-}
-
-.sectionBackgroundContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--game-canvas-height);
-}
-
-.skeletonBackground {
-  height: var(--game-canvas-height);
-  width: 100%;
-  /* clip-path: polygon(0 0, 0% 95%, 100% 67%, 100% 0); */
+[data-mantine-color-scheme='dark'] .footerContainer {
+  border-top: 1px solid var(--mantine-color-gray-7);
 }

@@ -1,25 +1,24 @@
 import 'phaser';
 
-import { MainScene } from '../MainScene';
-
 import sky from '../assets/sky.png';
 import skySprite from '../assets/skySprite.png';
+import { Level } from '../level';
 
 const spriteKey = 'skyItem';
 
 export class SkyManager {
-  private scene: MainScene;
+  private scene: Level;
   private skySprite!: Phaser.GameObjects.TileSprite;
   private frameIndex: number = 0;
   private frameRate: number = 4;
 
-  constructor(scene: MainScene) {
+  constructor(scene: Level) {
     this.scene = scene;
     this.createSky();
     this.initAnims();
   }
 
-  static loadSprite(loadScene: MainScene): void {
+  static loadSprite(loadScene: Level): void {
     loadScene.load.image('sky', sky.src);
     loadScene.load.spritesheet(spriteKey, skySprite.src, {
       frameWidth: 1067.7,

@@ -2,31 +2,35 @@
 
 import 'phaser';
 
-export class GroundBlockManager {
-  private scene: Phaser.Scene;
-  private groundBlocks: Phaser.Physics.Arcade.StaticGroup;
+import groundBlock1 from '../assets/groundBlock1-bis.png';
+import groundBlock2 from '../assets/groundBlock2-bis.png';
 
-  constructor(scene: Phaser.Scene) {
+import { Level } from '../level';
+
+const sizeEl = 25;
+
+export class GroundBlockManager {
+  private scene: Level;
+  private groundBlocks: Phaser.Physics.Arcade.StaticGroup;
+  static groundSize = sizeEl * 7;
+
+  constructor(scene: Level) {
     this.scene = scene;
     this.groundBlocks = this.scene.physics.add.staticGroup();
+  }
+
+  static loadSprite(loadScene: Level): void {
+    loadScene.load.image('groundBlock1', groundBlock1.src);
+    loadScene.load.image('groundBlock2', groundBlock2.src);
   }
 
   createGroundBlocks(): void {
     const W = this.scene.cameras.main.width;
 
-    // Step 1
-    this.createGroundBlockLayer('groundBlock2', 0, 10);
-    this.createGroundBlockLayer('groundBlock2', 0, 34);
-    this.createGroundBlockLayer('groundBlock2', 0, 58);
-    this.createGroundBlockLayer('groundBlock2', 0, 80);
+    for (let i = 0; i < 6; i++) {
+      this.createGroundBlockLayer('groundBlock2', 0, i * sizeEl + 1);
+    }
 
-    // Step 2
-    this.createGroundBlockLayer('groundBlock2', 0, 102);
-
-    // Step 2
-    this.createGroundBlockLayer('groundBlock2', 0, 124);
-
-    // Step 3
     this.createGroundBlockLayer('groundBlock1', 0, 148);
   }
 
@@ -37,16 +41,14 @@ export class GroundBlockManager {
   ): void {
     var H = this.scene.cameras.main.height;
 
-    const groundBlockSize = 25;
-
     const groundBlocks = this.scene.physics.add.staticGroup({
       key: key,
       repeat: 100,
-      setXY: { x: width, y: H - height, stepX: groundBlockSize }
+      setXY: { x: width, y: H - height, stepX: sizeEl }
     });
 
     groundBlocks.children.iterate(function (block: any) {
-      block.setScale(groundBlockSize / block.width);
+      block.setScale(sizeEl / block.width);
       return null;
     });
 

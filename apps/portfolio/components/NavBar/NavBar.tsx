@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { IconMenu2, IconMinus } from '@jfteam/icons';
 import { useDisclosure, useResponsive } from '@jfteam/hooks';
-import { cx, Group, Tooltip, type GroupProps, ActionIcon } from '@jfteam/material';
+import { cx, Group, Tooltip, type GroupProps, ActionIcon, Box } from '@jfteam/material';
 
 import { useLocale } from '@/hooks';
 import classes from './NavBar.module.css';

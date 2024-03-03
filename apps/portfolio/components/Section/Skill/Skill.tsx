@@ -14,7 +14,7 @@ interface SkillProps extends TSectionProps {
 
 export const Skill = ({ row }: SkillProps) => {
   return (
-    <Section py={80} variant={EVartiant.SECONDARY}>
+    <Section variant={EVartiant.SECONDARY}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <MultiLineTitle order={2} ta="center" pb={50} rows={row.title} />
       </FadeTrigger>

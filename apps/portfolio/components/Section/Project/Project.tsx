@@ -29,10 +29,14 @@ export const Project = ({ row, isMobile }: ProjectProps) => {
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         {row?.title && <Title order={2} ta="center" mb={30} rows={row.title} />}
 
-        <Box h={isMobile ? 210 : 440}>
+        <Box h={isMobile ? undefined : 440}>
           <Grid>
             <Grid.Col span={{ base: 12, xs: 12, sm: 12, md: 7 }}>
-              <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="down">
+              <FadeTrigger
+                trigger={ETrigger.ScrollTrigger}
+                direction="down"
+                style={{ height: '100%' }}
+              >
                 <ProjectCarousel list={row.rows} getEmblaApi={setEmbla} onIndexChange={setIndex} />
               </FadeTrigger>
             </Grid.Col>

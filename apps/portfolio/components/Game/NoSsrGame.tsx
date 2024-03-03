@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 import { PhaserRender } from '@jfteam/phaser-next';
-import { gameConfig, MainScene, gameIdList, EGameKey, type TGameKey } from '@jfteam/portfolio-game';
-
 import { useMantineColorScheme } from '@jfteam/material';
-import { useResponsive } from '@jfteam/hooks';
+import { gameConfig, gameIdList, levels, EGameKey } from '@jfteam/portfolio-game';
 
 interface NoSsrGameProps {
-  mode?: TGameKey;
+  mode?: 'home' | 'cv';
 }
 
-const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
+const NoSsrGame = ({ mode = EGameKey.HOME }: NoSsrGameProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { isMobile } = useResponsive();
   const { colorScheme, setColorScheme } = useMantineColorScheme({
     keepTransitions: true,
   });
@@ -26,14 +23,10 @@ const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
   };
 
   useEffect(() => {
-    if (!isMobile) {
-      window.addEventListener('resize', reloadOnWindowResize);
-      return () => {
-        window.removeEventListener('resize', reloadOnWindowResize);
-      };
-    } else {
-      setLoading(false);
-    }
+    window.addEventListener('resize', reloadOnWindowResize);
+    return () => {
+      window.removeEventListener('resize', reloadOnWindowResize);
+    };
   }, []);
 
   if (loading) return null;
@@ -41,7 +34,7 @@ const NoSsrGame = ({ mode = EGameKey.header }: NoSsrGameProps) => {
     <PhaserRender
       gameId={gameIdList[mode]}
       config={gameConfig[mode]}
-      mainScene={MainScene}
+      mainScene={levels[mode]}
       params={{ colorScheme }}
       callBacks={{
         light: () => setColorScheme('light'),

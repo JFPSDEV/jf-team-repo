@@ -4,16 +4,17 @@ import 'phaser';
 
 import { Game, TCoordinate } from '../types';
 import DarkModeBlock from '../assets/DarkModeBlock.png';
-import { MainScene } from '../MainScene';
+
+import { Level } from '../level';
 const spriteKey = 'powBlock';
 type TCallBacks = (value: boolean) => void;
 export class PowBlockManager {
-  private scene: MainScene;
+  private scene: Level;
   private powBlockGroup: Phaser.Physics.Arcade.Group;
   private callBacks?: TCallBacks[] = [];
 
   constructor(
-    scene: MainScene,
+    scene: Level,
     powBlocs: TCoordinate[],
     callBacks?: TCallBacks[]
   ) {

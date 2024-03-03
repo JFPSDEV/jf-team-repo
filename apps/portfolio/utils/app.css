@@ -1,5 +1,7 @@
 html {
-  --gradiant-color-section: linear-gradient(to bottom, #9290ff, #9492ff, #9d9aff, #a6a4ff);
+  --gradiant-color-section-1: linear-gradient(to bottom, #9290ff, #9492ff, #9d9aff, #a6a4ff);
+  --gradiant-color-section-2: linear-gradient(to top, #9290ff, #9492ff, #9d9aff, #a6a4ff);
+  --orange-main: #d18852;
   @media (min-width: $mantine-breakpoint-md) {
     --game-canvas-height: 450px;
     --section-spacing: 80px;

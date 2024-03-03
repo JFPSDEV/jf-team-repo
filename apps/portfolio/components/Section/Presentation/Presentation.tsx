@@ -44,7 +44,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
   return (
     <>
       {!isMobile && row?.title && title}
-      <Section px="xl" pb={80} pt={{ xs: 0, md: 60 }}>
+      <Section px="xl" pb="var(--section-spacing)" pt={{ xs: 0, md: 60 }}>
         {isMobile && title}
         {!isMobile && (
           <FadeTrigger
@@ -57,7 +57,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
                 bulletSize={265}
                 lineHeight={5}
                 lineWidth={lineWidth}
-                color="#D18852"
+                color="var(--orange-main)"
               />
 
               {row?.rows.map(({ id, value, icon }, index) => (
@@ -66,7 +66,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
                   bulletSize={CVTimeline.bulletSize}
                   lineHeight={5}
                   lineWidth={index + 1 < row.rows?.length ? lineWidth : 0}
-                  color="#D18852"
+                  color="var(--orange-main)"
                   icon={<IconStyle value={icon} />}
                 >
                   <Title order={3} className={classes.hTimelineTitle}>
@@ -121,7 +121,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
                 <List.Item
                   key={id}
                   icon={
-                    <ThemeIcon color="#D18852" size={32} radius="xl">
+                    <ThemeIcon color="var(--orange-main)" size={32} radius="xl">
                       <IconStyle value={icon} size={20} />
                     </ThemeIcon>
                   }

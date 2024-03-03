@@ -24,7 +24,7 @@ export const Contact = ({ row }: ContactProps) => {
         <FadeTrigger trigger={ETrigger.ScrollTrigger}>
           <Title order={2} ta="center" rows={row.title} />
         </FadeTrigger>
-        {row.fields && <ContactForm row={row.fields} />}
+        {row.fields && <ContactForm row={row.fields}  />}
       </Stack>
     </Section>
   );

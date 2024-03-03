@@ -14,7 +14,8 @@ import {
 
 import NavBarLink from '../NavBarLink/NavBarLink';
 import NavBarMobileLink from './NavBarMobileLink/NavBarMobileLink';
-import { ENIcon, FRIcon } from '@jfteam/icons';
+import { ENIcon, FRIcon, IconMoonStars, IconSun } from '@jfteam/icons';
+import { capitalize } from '@jfteam/utils';
 
 interface NavBarMobileProps extends DrawerProps {}
 
@@ -23,9 +24,10 @@ const NavBarMobile = (props: NavBarMobileProps) => {
 
   const { locale: linkLocale, switchLocale } = useLocale();
   const { navlink, socialMedia } = headerLink;
-  const { colorScheme } = useMantineColorScheme();
+  const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   const color = colorScheme === 'dark' ? 'white' : 'black';
+  const viewMode = colorScheme === 'dark' ? 'light' : 'dark';
 
   const locale: ELocale = linkLocale || ELocale.FR;
   const otherLocale = locale === ELocale.FR ? ELocale.EN : ELocale.FR;
@@ -74,6 +76,17 @@ const NavBarMobile = (props: NavBarMobileProps) => {
           style={{ cursor: 'pointer' }}
         >
           {otherLocale.toUpperCase()}
+        </NavBarMobileLink>
+
+        <Divider />
+
+        <NavBarMobileLink
+          onClick={() => setColorScheme(viewMode)}
+          Icon={colorScheme === 'dark' ? IconSun : IconMoonStars}
+          color={color}
+          style={{ cursor: 'pointer' }}
+        >
+          {capitalize(`${viewMode} mode`)}
         </NavBarMobileLink>
 
         <Divider />

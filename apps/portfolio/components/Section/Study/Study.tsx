@@ -15,24 +15,16 @@ import { Section } from '../Section';
 import { EVartiant, IStudy, type TSectionProps } from '@/utils';
 import { CVTimeline } from '@/components';
 import { Title as MultiLineTitle } from '@/components/Title/Title';
-import { ETrigger, FadeTrigger, RotationTrigger } from '@jfteam/animated';
+import { ETrigger, FadeTrigger } from '@jfteam/animated';
+import classes from './Study.module.css';
 
 interface StudyProps extends TSectionProps {
   row: IStudy;
 }
 
 export const Study = ({ row, isMobile }: StudyProps) => {
-  const { colorScheme } = useMantineColorScheme({
-    keepTransitions: true,
-  });
-
-  const darkProps = {
-    borderWidth: 1,
-    borderColor: 'var(--mantine-color-gray-3)',
-  };
-
   return (
-    <Section py={80} variant={EVartiant.SECONDARY}>
+    <Section variant={EVartiant.SECONDARY} className={classes.container}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <MultiLineTitle order={2} ta="center" pb={50} rows={row.title} />
       </FadeTrigger>
@@ -40,7 +32,7 @@ export const Study = ({ row, isMobile }: StudyProps) => {
         {row.rows.map(({ id, title: studyTitle, description, date, link, icon }) => (
           <CVTimeline.Item bullet={<IconStyle value={icon} size={CVTimeline.iconSize} />} key={id}>
             <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="left" duration={1}>
-              <CVTimeline.Card direction="Right" {...(colorScheme === 'dark' && darkProps)}>
+              <CVTimeline.Card direction="Right">
                 <Flex align={isMobile ? 'end' : 'center'}>
                   <Stack gap="sm" style={{ flex: 1 }}>
                     <Title order={3}>{studyTitle}</Title>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Timeline, type TimelineProps, Card, CardProps, Box, BoxProps } from '@jfteam/material';
+import { Timeline, type TimelineProps, Card, CardProps, Box, BoxProps, cx } from '@jfteam/material';
 
 import classes from './CVTimeline.module.css';
 
@@ -50,11 +50,8 @@ export const Triangle = ({
       }}
       {...svgProps}
     >
-      {/* Triangle principal */}
       <polygon points={points} fill={color} strokeWidth={0} />
-      {/* Bordure */}
       <polygon points={borderPoints} fill="none" strokeWidth={borderWidth} stroke={borderColor} />
-      {/* Bordure supplémentaire pour les côtés plats */}
       <polygon points={sideBorderPoints} fill="none" strokeWidth={borderWidth} stroke={'white'} />
     </svg>
   );
@@ -73,31 +70,24 @@ export const CVTimelineCard = ({
   direction,
   bg,
   style,
-  borderWidth,
+  borderWidth = 1,
   borderColor,
+  className,
   ...cardProps
 }: CVTimelineCardProps) => (
   <Box className={classes.cardContainer}>
-    <Card
-      bg={bg}
-      style={{
-        boxShadow: 'var(--mantine-shadow-sm)',
-        border: `${borderWidth || 0}px solid ${borderColor || 'white'}`,
-        ...style,
-      }}
-      {...cardProps}
-    />
+    <Card bg={bg} className={cx(className, classes.card)} {...cardProps} />
     <Triangle
       color={bg ? `${bg}` : undefined}
       direction={direction}
-      borderWidth={borderWidth}
-      borderColor={borderColor}
+      borderWidth={1}
+      borderColor={'var(--mantine-color-gray-3)'}
       h={height}
       w={width}
       style={{
         position: 'absolute',
         top: 15,
-        ...(direction === 'Right' ? { left: -width } : { right: -width + 1 }),
+        ...(direction === 'Right' ? { left: -width + 1 } : { right: -width + 1 }),
       }}
     />
   </Box>
@@ -106,7 +96,15 @@ export const CVTimelineCard = ({
 const bulletSize = 50;
 
 export const CVTimeline = (props: TimelineProps) => {
-  return <Timeline bulletSize={bulletSize} lineWidth={5} color="#D18852" w="100%" {...props} />;
+  return (
+    <Timeline
+      bulletSize={bulletSize}
+      lineWidth={5}
+      color="var(--orange-main)"
+      w="100%"
+      {...props}
+    />
+  );
 };
 
 CVTimeline.Item = Timeline.Item;

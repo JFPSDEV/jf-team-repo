@@ -2,7 +2,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import { FunnyArrowIcon } from '@jfteam/icons';
-import { Grid, Stack, Text, Flex } from '@jfteam/material';
+import { Grid, Stack, Text, Flex, Box } from '@jfteam/material';
 
 import { Section } from '../Section';
 import classes from './Preface.module.css';
@@ -24,13 +24,14 @@ export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <Stack w="100%" h="100%" align="end">
               <Stack
+                gap="lg"
                 justify="center"
                 w={{ base: '100%', md: sizeBlock }}
                 h={{ base: '100%', md: sizeBlock }}
               >
                 <FadeTrigger direction="down">
                   {row?.title && (
-                    <Title order={1} rows={row.title} ta={isMobile ? 'center' : 'left'} />
+                    <Title order={1} rows={row.title} ta={isMobile ? 'center' : 'left'} mb="lg" />
                   )}
 
                   {row?.description && (
@@ -38,15 +39,14 @@ export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
                       ff={poppins.style.fontFamily}
                       ta={isMobile ? 'center' : 'left'}
                       fw={100}
-                      c="#707070"
-                      fz={21}
+                      fz={16}
                       lh="normal"
                     >
                       {row.description}
                     </Text>
                   )}
                 </FadeTrigger>
-                {isDesktop && <FunnyArrowIcon size={70} />}
+                {isDesktop && <FunnyArrowIcon size={70} className={classes.arrow} />}
               </Stack>
             </Stack>
           </Grid.Col>

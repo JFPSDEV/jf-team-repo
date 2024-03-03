@@ -13,3 +13,11 @@
     padding-bottom: var(--section-spacing);
   }
 }
+
+[data-mantine-color-scheme='light'] .arrow {
+  fill: var(--mantine-color-dark-7);
+}
+
+[data-mantine-color-scheme='dark'] .arrow {
+  fill: var(--mantine-color-dark-0);
+}

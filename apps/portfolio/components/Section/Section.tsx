@@ -22,7 +22,9 @@ export const Section = (props: SectionProps) => {
           ? lightDarkModeClasses.bgPrimary
           : variant === EVartiant.SECONDARY
             ? lightDarkModeClasses.bgSecondary
-            : lightDarkModeClasses.bgTertiary
+            : variant === EVartiant.TERTIARY
+              ? lightDarkModeClasses.bgTertiary
+              : lightDarkModeClasses.bgQuaternary
       )}
       bg={bg}
     >

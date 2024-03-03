@@ -15,9 +15,17 @@
 }
 
 [data-mantine-color-scheme='light'] .bgTertiary {
-  background: var(--gradiant-color-section);
+  background: var(--gradiant-color-section-1);
 }
 
 [data-mantine-color-scheme='dark'] .bgTertiary {
+  background-color: #1f1f1f;
+}
+
+[data-mantine-color-scheme='light'] .bgQuaternary {
+  background: var(--gradiant-color-section-2);
+}
+
+[data-mantine-color-scheme='dark'] .bgQuaternary {
   background-color: #1f1f1f;
 }

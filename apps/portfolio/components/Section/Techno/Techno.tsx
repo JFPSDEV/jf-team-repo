@@ -64,7 +64,7 @@ const technoList = [
 
 interface TechnoProps extends TSectionProps {}
 
-export const Techno = (props: TechnoProps) => {
+export const Techno = ({ isMobile }: TechnoProps) => {
   const iconBand = (
     <Box>
       {[...technoList, ...technoList].map(({ Icon }) => (
@@ -82,7 +82,7 @@ export const Techno = (props: TechnoProps) => {
       <FadeTrigger
         className={cx(classes.scroll, classes.imgBox)}
         trigger={ETrigger.ScrollTrigger}
-        startPosition={100}
+        startPosition={isMobile ? 0 : 100}
       >
         {iconBand}
         {iconBand}

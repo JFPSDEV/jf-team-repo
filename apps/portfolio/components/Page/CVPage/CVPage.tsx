@@ -2,8 +2,8 @@ import React from 'react';
 
 import { useResponsive } from '@jfteam/hooks';
 
-import { ELocale, ICVPage } from '@/utils';
-import { Experience, Hero, Hobby, Presentation, Skill, Study } from '@/components/Section';
+import { ELocale, EPageId, ICVPage } from '@/utils';
+import { Experience, Footer, Hero, Hobby, Presentation, Skill, Study } from '@/components/Section';
 
 interface CVPageProps {
   page: ICVPage;
@@ -18,12 +18,13 @@ export const CVPage = ({ page }: CVPageProps) => {
 
   return (
     <>
-      <Hero {...props} />
+      <Hero {...props} mode={EPageId.CV} />
       <Presentation row={presentation} {...props} />
       <Study row={study} {...props} />
       <Experience row={experience} {...props} />
       <Skill row={skill} {...props} />
       <Hobby row={hobby} {...props} />
+      <Footer {...props} />
     </>
   );
 };

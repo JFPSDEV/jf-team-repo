@@ -53,4 +53,34 @@
   z-index: 5;
   width: 100%;
   position: absolute;
+  fill: var(--orange-main);
+}
+
+[data-mantine-color-scheme='light'] .fill {
+  fill: var(--mantine-color-white);
+}
+
+[data-mantine-color-scheme='dark'] .fill {
+  fill: var(--mantine-color-dark-7);
+}
+
+.navMobile {
+  @media (max-width: $mantine-breakpoint-md) {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: var(--mantine-shadow-lg);
+  }
+}
+
+[data-mantine-color-scheme='light'] .navMobile {
+  @media (max-width: $mantine-breakpoint-md) {
+    border-bottom: 1px solid var(--mantine-color-gray-3);
+  }
+}
+
+[data-mantine-color-scheme='dark'] .navMobile {
+  @media (max-width: $mantine-breakpoint-md) {
+    border-bottom: 1px solid var(--mantine-color-gray-7);
+  }
 }

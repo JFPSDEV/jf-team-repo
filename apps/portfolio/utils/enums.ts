@@ -7,6 +7,7 @@ export enum EVartiant {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   TERTIARY = 'tertiary',
+  QUATERNARY = 'quaternary',
 }
 
 export type TVariant = keyof typeof EVartiant;

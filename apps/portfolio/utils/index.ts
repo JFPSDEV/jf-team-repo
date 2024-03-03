@@ -7,6 +7,7 @@ export * from './enums';
 export * from './type';
 export * from './locales';
 export * from './page-found';
+export * from './const';
 
 import lightDarkModeClasses from './global.module.css';
 

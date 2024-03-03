@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger as GsapScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { ETrigger } from '..';
+import { useWindowSize } from '../hooks';
 
 gsap.registerPlugin(GsapScrollTrigger);
 
@@ -30,7 +31,6 @@ interface FadeTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const FadeTrigger = (props: FadeTriggerProps) => {
   const {
-    children,
     direction = 'up',
     startPosition = 190,
     endPosition = 0,
@@ -42,6 +42,9 @@ export const FadeTrigger = (props: FadeTriggerProps) => {
     trigger,
     ...divProps
   } = props;
+
+  const { loading, isMobile } = useWindowSize();
+
   const ref = useRef<HTMLDivElement>(null);
 
   const conf: Record<Direction, Record<TimeAnime, ICoordinate>> = {
@@ -53,7 +56,8 @@ export const FadeTrigger = (props: FadeTriggerProps) => {
 
   useEffect(() => {
     const el = ref?.current;
-    if (el) {
+
+    if (!loading && el) {
       const position = conf[direction];
       const animation = gsap.fromTo(
         el,
@@ -62,7 +66,7 @@ export const FadeTrigger = (props: FadeTriggerProps) => {
           opacity: endOpacity,
           ...position.end,
           duration,
-          ...(trigger
+          ...(trigger && !isMobile
             ? {
                 [trigger]: {
                   trigger: el,
@@ -79,11 +83,7 @@ export const FadeTrigger = (props: FadeTriggerProps) => {
         animation.kill();
       };
     }
-  }, [direction, startOpacity, endOpacity, duration, startTrigger]);
+  }, [loading, isMobile]);
 
-  return (
-    <div ref={ref} {...divProps}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} {...divProps} />;
 };

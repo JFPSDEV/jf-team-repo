@@ -1,3 +1,8 @@
 .cardContainer {
   position: relative;
 }
+
+.card {
+  box-shadow: var(--mantine-shadow-sm);
+  border: 1px solid var(--mantine-color-gray-3);
+}

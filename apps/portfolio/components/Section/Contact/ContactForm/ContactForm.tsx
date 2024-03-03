@@ -14,6 +14,8 @@ type TMail = TEmailForm<TFiles>;
 
 interface ContactFormProps {
   row: IContactForm;
+  loading?: boolean;
+  isMobile?: boolean;
 }
 
 export const ContactForm = ({ row }: ContactFormProps) => {

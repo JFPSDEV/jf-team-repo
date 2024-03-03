@@ -5,12 +5,12 @@ import 'phaser';
 import { TCoordinate } from '../types';
 import castle from '../assets/castle.png';
 import castleDark from '../assets/castleDark.png';
-import { MainScene } from '..';
+import { Level } from '../level';
 
 export class CastleManager {
-  private scene: MainScene;
+  private scene: Level;
 
-  constructor(scene: MainScene, coordinate: TCoordinate) {
+  constructor(scene: Level, coordinate: TCoordinate) {
     this.scene = scene;
     this.createCastle(coordinate);
   }

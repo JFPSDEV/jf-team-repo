@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { useResponsive } from '@jfteam/hooks';
+import { useLoading, useResponsive } from '@jfteam/hooks';
 
-import { IHomePage } from '@/utils';
+import { EPageId, IHomePage } from '@/utils';
 import { Contact, Footer, Hero, Preface, Project, Techno, Testimonial } from '@/components/Section';
-import { ETrigger, FadeTrigger } from '@jfteam/animated';
 
 interface HomePageProps {
   page: IHomePage;
@@ -13,20 +12,21 @@ interface HomePageProps {
 export const HomePage = ({ page }: HomePageProps) => {
   const { ...props } = useResponsive();
 
+  const loading = useLoading();
+
   if (!page) return null;
 
   const { preface, project, testimonial, contact } = page;
 
   return (
     <>
-      <Hero {...props} />
+      <Hero {...props} mode={EPageId.HOME} />
       <Preface row={preface} {...props} />
-
-      <Techno />
+      <Techno {...props} />
       <Project row={project} {...props} />
       <Testimonial row={testimonial} {...props} />
       <Contact row={contact} {...props} />
-      {/* <Footer {...props} /> */}
+      <Footer {...props} />
     </>
   );
 };

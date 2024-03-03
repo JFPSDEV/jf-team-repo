@@ -1,18 +1,21 @@
 import { configData } from './configData';
+import { HomeLevel } from './level';
+import { CVLevel } from './level/CVLevel';
 
 const Phaser = require('phaser');
 
 export enum EGameKey {
-  header = 'header',
-  footer = 'footer'
+  HOME = 'home',
+  CV = 'cv'
 }
 
-export type TGameKey = keyof typeof EGameKey;
+export type EGameValueType = (typeof EGameKey)[keyof typeof EGameKey];
 
 export const gameId: string = 'phaser-game';
-export const gameIdList: Record<TGameKey, string> = {
-  [EGameKey.header]: `${EGameKey.header}-${gameId}`,
-  [EGameKey.footer]: `${EGameKey.footer}-${gameId}`
+
+export const gameIdList: Record<EGameKey, string> = {
+  [EGameKey.HOME]: `${EGameKey.HOME}-${gameId}`,
+  [EGameKey.CV]: `${EGameKey.CV}-${gameId}`
 };
 
 export type TGameConfig = Phaser.Types.Core.GameConfig;
@@ -34,21 +37,26 @@ export const config: TGameConfig = {
   }
 };
 
-export const gameConfig: Record<TGameKey, TGameConfig> = {
-  [EGameKey.header]: {
+export const gameConfig: Record<EGameKey, TGameConfig> = {
+  [EGameKey.HOME]: {
     ...config,
     scale: {
       ...config.scale,
-      parent: gameIdList[EGameKey.header]
+      parent: gameIdList[EGameKey.HOME]
     }
   },
-  [EGameKey.footer]: {
+  [EGameKey.CV]: {
     ...config,
     scale: {
       ...config.scale,
-      parent: gameIdList[EGameKey.footer]
+      parent: gameIdList[EGameKey.CV]
     }
   }
+};
+
+export const levels: Record<EGameKey, Phaser.Types.Scenes.SceneType> = {
+  [EGameKey.HOME]: HomeLevel,
+  [EGameKey.CV]: CVLevel
 };
 
 export const H: number = +(config?.height || 0);

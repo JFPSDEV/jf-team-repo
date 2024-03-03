@@ -32,7 +32,7 @@ export const Hobby = ({ row }: HobbyProps) => {
     </Grid.Col>
   );
   return (
-    <Section py={80}>
+    <Section>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <Title order={2} ta="center" pb={50} rows={row.title} />
 
@@ -51,7 +51,7 @@ export const Hobby = ({ row }: HobbyProps) => {
                       <List.Item
                         key={id}
                         icon={
-                          <ThemeIcon color="#D18852" size={32} radius="xl">
+                          <ThemeIcon color="var(--orange-main)" size={32} radius="xl">
                             <IconStyle value={icon} size={20} />
                           </ThemeIcon>
                         }

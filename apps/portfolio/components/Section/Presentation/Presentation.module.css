@@ -2,7 +2,7 @@
   width: 100%;
   @media (min-width: $mantine-breakpoint-md) {
     position: absolute;
-    top: 325px;
+    top: 370px;
     left: 0;
     z-index: 8;
   }
@@ -17,6 +17,6 @@
 
 .mainPicture {
   border-radius: 50%;
-  border: 5px solid #d18852;
+  border: 5px solid var(--orange-main);
   z-index: 1;
 }
