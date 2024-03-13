@@ -11,7 +11,7 @@ export default function IndexPage() {
  * -----------
  */
 export const getStaticProps = async () => {
-  if (process.env.event === 'build')
+  if (process.env.npm_lifecycle_event === 'build')
     return {
       notFound: true,
     };
