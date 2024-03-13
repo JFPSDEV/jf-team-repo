@@ -1,0 +1,12 @@
+.slideBottomFade {
+  opacity: 0;
+  transform: translateY(40%);
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.slideBottomFade.visible {
+  opacity: 1;
+  transform: translateX(0);
+}

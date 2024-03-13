@@ -1,16 +1,9 @@
 import React from 'react';
 
-import { getPage } from '@/utils/get-page';
-import { ELocale, EPageId, EPageProps, IHomePage, PageProps } from '@/utils';
+import { ELocale } from '@/utils';
 
-import { HomePage } from '../components';
-
-interface IndexPageProps extends PageProps {
-  page: IHomePage;
-}
-
-export default function IndexPage({ page }: IndexPageProps) {
-  return <HomePage page={page} />;
+export default function IndexPage() {
+  return null;
 }
 
 /**
@@ -18,15 +11,14 @@ export default function IndexPage({ page }: IndexPageProps) {
  * -----------
  */
 export const getStaticProps = async () => {
-  const page = await getPage<IHomePage>(EPageId.HOME, ELocale.FR);
-
+  if (process.env.event === 'build')
+    return {
+      notFound: true,
+    };
   return {
-    props: {
-      [EPageProps.page]: page,
-      [EPageProps.locale]: ELocale.FR,
-      [EPageProps.pageName]: EPageId.HOME,
-      preview: false,
+    redirect: {
+      destination: '/' + ELocale.FR,
+      permanent: true,
     },
-    revalidate: 10,
   };
 };

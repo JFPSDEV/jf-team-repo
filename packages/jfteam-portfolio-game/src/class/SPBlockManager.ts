@@ -1,16 +1,13 @@
-// SPBlockManager.ts
-
 import 'phaser';
 
-import { EAnimation, TCoordinate, TSpBlocks } from '../types';
+import { EAnimation, TSpBlocks } from '../types';
 
 import spBlock from '../assets/box-surprise.png';
 import { Level } from '../level';
+import { spBlockSize } from '../utils';
 
 const spriteKey = 'spBlock';
-
-const ElSize = spBlock.height;
-const ElScale = 30;
+const ElScale = spBlockSize;
 
 export class SPBlockManager {
   public scene: Level;
@@ -54,20 +51,12 @@ export class SPBlockManager {
     });
   }
 
-  public colider(
-    player: Phaser.Physics.Arcade.Sprite,
-    el: Phaser.Physics.Arcade.Sprite
-  ): void {
-    console.log({ scene: this.scene });
-  }
-
   private createSpBlock(spBlocks: TSpBlocks[]): void {
     spBlocks.forEach((_spBlock) => {
       this.spBlockGroup.create(_spBlock.x, _spBlock.y, spriteKey);
     });
 
-    this.spBlockGroup.children.iterate((child, index) => {
-      const skillEffect = spBlocks[index].skills;
+    this.spBlockGroup.children.iterate((child) => {
       const spBlock = child as Phaser.Physics.Arcade.Sprite;
       spBlock.setImmovable(true);
       spBlock.anims.play(EAnimation.BLOCK_FULL);

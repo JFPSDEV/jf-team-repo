@@ -4,11 +4,11 @@ import { Level } from '../level';
 import { Game, TCoordinate, TTarget } from '../types';
 import theme from '../assets/theme.png';
 import { ETheme } from '@jfteam/types';
-import { handleImpactColision, handleImpactTrigger } from '../utils';
+import { WebSiteBlockSize, handleImpactTrigger } from '../utils';
 
 const spriteKey = 'theme';
 
-const sizeEl = 50;
+const sizeEl = WebSiteBlockSize;
 
 export class ThemeManager {
   private scene: Level;
@@ -19,9 +19,9 @@ export class ThemeManager {
     this.themeGroup = this.scene.physics.add.group({
       allowGravity: false
     });
-    this.initLightMode();
+    this.initTheme();
     this.initAnims();
-    this.createSpBlock(themeList);
+    this.createThemeBlock(themeList);
   }
 
   static load(loadScene: Phaser.Scene): void {
@@ -31,7 +31,7 @@ export class ThemeManager {
     });
   }
 
-  private initLightMode(): void {
+  private initTheme(): void {
     const game = this.scene.game as Game;
     this.scene.setTheme(game.params.colorScheme as ETheme);
   }
@@ -74,28 +74,39 @@ export class ThemeManager {
     }
   }
 
-  private createSpBlock(spBlocks: TCoordinate[]): void {
-    spBlocks.forEach((_spBlock) => {
-      this.themeGroup.create(_spBlock.x, _spBlock.y, spriteKey);
+  private createThemeBlock(themeBlocks: TCoordinate[]): void {
+    themeBlocks.forEach((_themeBlock) => {
+      this.themeGroup.create(_themeBlock.x, _themeBlock.y, spriteKey);
     });
 
     const handleAction = (target: TTarget) => () => {
-      handleImpactTrigger(
-        {
-          scene: this.scene,
-          scale: 150,
-          callBack: this.handleTrigger
-        },
-        target
-      );
+      if (!this.scene.getIsColider()) {
+        handleImpactTrigger(
+          {
+            scene: this.scene,
+            scale: 150,
+            callBack: this.handleTrigger
+          },
+          target
+        );
+      }
     };
+
+    const isLightMode = this.scene.getTheme() === ETheme.LIGHT;
 
     this.themeGroup.children.iterate(function (child) {
       const theme = child as Phaser.Physics.Arcade.Sprite;
+      theme.setDepth(1);
       theme.setImmovable(true);
       theme.setInteractive();
       theme.on('pointerdown', handleAction(child));
       theme.setScale(sizeEl / theme.width, sizeEl / theme.height);
+      if (isLightMode) {
+        theme.play(ETheme.DARK);
+      } else {
+        theme.play(ETheme.LIGHT);
+      }
+
       return null;
     });
   }

@@ -13,7 +13,7 @@ import {
   handleBlockSpColision,
   handleImpactColision
 } from '../utils';
-import { EAnimation, TCoordinate, TSpBlocks } from '../types';
+import { EAnimation, EKey, TCoordinate, TSpBlocks } from '../types';
 import { LocaleManager } from '../class/LocaleManager';
 import { DecorManager } from '../class/DecorManager';
 
@@ -35,9 +35,11 @@ export class Level extends Phaser.Scene {
   protected locale: ELocale = ELocale.FR;
   protected localeManager!: LocaleManager;
 
+  protected isColider: boolean = false;
+
   protected spBlockList: TSpBlocks[] = [];
 
-  protected sky!: SkyManager;
+  protected skyManager!: SkyManager;
   protected player!: DudePlayer;
   protected coinManager!: CoinManager;
   protected sPBlockManager!: SPBlockManager;
@@ -57,7 +59,7 @@ export class Level extends Phaser.Scene {
         frameHeight: dialogueControls.height
       }
     );
-    this.load.spritesheet(EAnimation.IMPACT, impact.src, {
+    this.load.spritesheet(EKey.IMPACT_KEY, impact.src, {
       frameWidth: 415,
       frameHeight: 416
     });
@@ -79,29 +81,6 @@ export class Level extends Phaser.Scene {
     var H = this.cameras.main.height;
 
     /**
-     * SKY
-     * -----------
-     */
-    this.sky = new SkyManager(this);
-
-    /**
-     * CONTROLS
-     * -----------
-     */
-    if (this.input?.keyboard) {
-      this.cursors = this.input.keyboard.createCursorKeys();
-    }
-
-    /**
-     * BLOCK [?]
-     * -----------
-     */
-    if (spBlocks && spBlocks?.length) {
-      this.setSpBlockList(spBlocks);
-      this.sPBlockManager = new SPBlockManager(this, spBlocks);
-    }
-
-    /**
      * THEME
      * -----------
      */
@@ -120,6 +99,29 @@ export class Level extends Phaser.Scene {
     this.localeManager = new LocaleManager(this, [
       { x: getPercent(isSmallScreen ? 70 : 65, W), y: getPercent(40, H) }
     ]);
+
+    /**
+     * SKY
+     * -----------
+     */
+    this.skyManager = new SkyManager(this);
+
+    /**
+     * CONTROLS
+     * -----------
+     */
+    if (this.input?.keyboard) {
+      this.cursors = this.input.keyboard.createCursorKeys();
+    }
+
+    /**
+     * BLOCK [?]
+     * -----------
+     */
+    if (spBlocks && spBlocks?.length) {
+      this.setSpBlockList(spBlocks);
+      this.sPBlockManager = new SPBlockManager(this, spBlocks);
+    }
 
     /**
      * GROUND
@@ -276,5 +278,13 @@ export class Level extends Phaser.Scene {
 
   public setSpBlockList(value: TSpBlocks[]): void {
     this.spBlockList = value;
+  }
+
+  public getIsColider(): boolean {
+    return this.isColider;
+  }
+
+  public setIsColider(value: boolean): void {
+    this.isColider = value;
   }
 }

@@ -1,6 +1,7 @@
-import { EAnimation, TSpBlocks, TTarget } from '../../types';
+import { EAnimation, EKey, TSpBlocks, TTarget } from '../../types';
 import { Level } from '../../level';
 import { ELocale, ETheme } from '@jfteam/types';
+import { WebSiteBlockSize, blockY, spBlockSize } from '..';
 
 type EnumKeys = EAnimation | ETheme | ELocale;
 
@@ -32,6 +33,8 @@ export const handleImpactTrigger = (
     callBack
   } = params;
 
+  scene.setIsColider(true);
+
   el.anims.play(startAnim);
 
   let animationStop: EnumKeys = endAnim;
@@ -42,11 +45,11 @@ export const handleImpactTrigger = (
   }
 
   if (!impactDisable) {
-    impactSprite = scene.add.sprite(el.x - 5, el.y - 5, EAnimation.IMPACT);
+    impactSprite = scene.add.sprite(el.x - 5, el.y - 5, EKey.IMPACT_KEY);
 
     scene.anims.create({
-      key: EAnimation.IMPACT,
-      frames: scene.anims.generateFrameNumbers(EAnimation.IMPACT, {
+      key: EAnimation.IMPACT_ANIM,
+      frames: scene.anims.generateFrameNumbers(EKey.IMPACT_KEY, {
         start: 0,
         end: 8
       }),
@@ -55,7 +58,7 @@ export const handleImpactTrigger = (
     });
 
     impactSprite.setScale(scale / 415, scale / 416);
-    impactSprite.anims.play(EAnimation.IMPACT);
+    impactSprite.anims.play(EAnimation.IMPACT_ANIM);
   }
 
   scene.tweens?.add({
@@ -65,6 +68,7 @@ export const handleImpactTrigger = (
     yoyo: true,
     ease: 'Linear',
     onComplete: () => {
+      scene.setIsColider(false);
       if (!impactDisable) impactSprite.destroy();
       el.anims.play(animationStop);
     }
@@ -77,6 +81,8 @@ const handleSpBlockTrigger = (
   player?: Phaser.Physics.Arcade.Sprite
 ) => {
   const { scene, group } = params;
+
+  scene.setIsColider(true);
 
   const emptyBlock = {
     ...params,
@@ -128,7 +134,15 @@ export const handleImpactColision = (params: TParams) => {
   return (
     player: Phaser.Physics.Arcade.Sprite,
     el: Phaser.Physics.Arcade.Sprite
-  ) => handleImpactTrigger(params, el, player);
+  ) => {
+    const playerY = parseInt(`${player.y}`);
+    const collisionRefused =
+      parseInt(`${playerY}`) < blockY + WebSiteBlockSize;
+
+    if (!collisionRefused && !params.scene.getIsColider()) {
+      handleImpactTrigger(params, el, player);
+    }
+  };
 };
 
 export const handleBlockSpColision = (params: TSpBlockParams) => {
@@ -136,6 +150,12 @@ export const handleBlockSpColision = (params: TSpBlockParams) => {
     player: Phaser.Physics.Arcade.Sprite,
     el: Phaser.Physics.Arcade.Sprite
   ) => {
-    handleSpBlockTrigger(params, el, player);
+    const playerY = parseInt(`${player.y}`);
+    const bottomBlockY = blockY + spBlockSize;
+    const collisionRefused = parseInt(`${playerY}`) < bottomBlockY;
+
+    if (!collisionRefused && !params.scene.getIsColider()) {
+      handleSpBlockTrigger(params, el, player);
+    }
   };
 };

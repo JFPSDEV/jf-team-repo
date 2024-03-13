@@ -1,5 +1,5 @@
 import { ELocale } from '@jfteam/types';
-import { getPercent } from '../utils';
+import { blockY, getPercent } from '../utils';
 import { Level } from './Level';
 
 export class HomeLevel extends Level {
@@ -10,12 +10,14 @@ export class HomeLevel extends Level {
     const centerX = getPercent(50, W);
     const centerY = getPercent(50, H);
 
+    console.log({ blockY });
+
     this.createGame({
       playerStart: { x: getPercent(10, W), y: centerY },
       spBlocks: [
         {
           x: centerX - 100,
-          y: getPercent(40, H),
+          y: blockY,
           skills: [
             { [ELocale.FR]: 'Optimisation', [ELocale.EN]: `Optimization` },
             { [ELocale.FR]: 'Test', [ELocale.EN]: `Test` },
@@ -27,7 +29,7 @@ export class HomeLevel extends Level {
         },
         {
           x: centerX,
-          y: getPercent(40, H),
+          y: blockY,
           skills: [
             { [ELocale.FR]: 'Performances', [ELocale.EN]: `Performance` },
             { [ELocale.FR]: 'Qualité', [ELocale.EN]: `Quality` },
@@ -36,7 +38,7 @@ export class HomeLevel extends Level {
         },
         {
           x: centerX + 100,
-          y: getPercent(40, H),
+          y: blockY,
           skills: [
             {
               [ELocale.FR]: 'Sécurité',

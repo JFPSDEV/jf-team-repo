@@ -4,10 +4,10 @@ import { Level } from '../level';
 import { EAnimation, Game, TCoordinate, TTarget } from '../types';
 import locale from '../assets/locale.png';
 import { ELocale } from '@jfteam/types';
-import { handleImpactTrigger } from '../utils';
+import { WebSiteBlockSize, handleImpactTrigger } from '../utils';
 
 const spriteKey = EAnimation.LOCALE;
-const sizeEl = 50;
+const sizeEl = WebSiteBlockSize;
 
 export class LocaleManager {
   private scene: Level;
@@ -20,7 +20,7 @@ export class LocaleManager {
     });
     this.initLocale();
     this.initAnims();
-    this.createSpBlock(localeList);
+    this.createLocales(localeList);
   }
 
   static load(loadScene: Phaser.Scene): void {
@@ -74,29 +74,39 @@ export class LocaleManager {
     }
   }
 
-  private createSpBlock(spBlocks: TCoordinate[]): void {
+  private createLocales(spBlocks: TCoordinate[]): void {
     spBlocks.forEach((_spBlock) => {
       this.localeGroup.create(_spBlock.x, _spBlock.y, spriteKey);
     });
 
     const handleAction = (target: TTarget) => () => {
-      handleImpactTrigger(
-        {
-          scene: this.scene,
-          scale: 150,
-          callBack: this.handleTrigger
-        },
-        target
-      );
+      if (!this.scene.getIsColider()) {
+        handleImpactTrigger(
+          {
+            scene: this.scene,
+            scale: 150,
+            callBack: this.handleTrigger
+          },
+          target
+        );
+      }
     };
+
+    const isFrench = this.scene.getLocale() === ELocale.FR;
 
     this.localeGroup.children.iterate(function (child) {
       const locale = child as Phaser.Physics.Arcade.Sprite;
+      locale.setDepth(1);
       locale.setImmovable(true);
       locale.anims.play('localeAnims');
       locale.setInteractive();
       locale.on('pointerdown', handleAction(child));
       locale.setScale(sizeEl / locale.width, sizeEl / locale.height);
+      if (isFrench) {
+        locale.play(ELocale.EN);
+      } else {
+        locale.play(ELocale.FR);
+      }
       return null;
     });
   }

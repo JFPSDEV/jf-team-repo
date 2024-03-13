@@ -1,0 +1,12 @@
+.slideRotateFade {
+  opacity: 0;
+  transform: rotate(20deg);
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.slideRotateFade.visible {
+  opacity: 1;
+  transform: rotate(0deg);
+}

@@ -27,9 +27,13 @@ export enum EAnimation {
   TREE_RIGHT = 'tree-right',
   DIALOGUE_CONTROLS = 'dialogue-controls',
   LOCALE = 'locale',
-  IMPACT = 'impact',
+  IMPACT_ANIM = 'impact-anim',
   EMPTY_BLOCK = 'empty-block',
   BLOCK_FULL = 'block-full'
+}
+
+export enum EKey {
+  IMPACT_KEY = 'impact-key'
 }
 
 export type TTarget = Phaser.Types.Tweens.TweenBuilderConfig['targets'];

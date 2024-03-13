@@ -7,6 +7,7 @@ import { EAnimation, TCoordinate } from '../types';
 import { Level } from '../level';
 import dialogueControls from '../assets/dialogue-game-controls.png';
 import { SpriteManager } from './SpriteManager';
+import { playerVelocity } from '../utils';
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   private direction: Direction;
@@ -40,7 +41,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     playerBody.setGravityY(600);
   }
 
-  goLeft(velocity: number = 160): void {
+  goLeft(velocity: number = playerVelocity): void {
     this.direction = Direction.LEFT;
     this.setVelocityX(-velocity);
     if (this.isJump) {
@@ -50,7 +51,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  goRight(velocity: number = 160): void {
+  goRight(velocity: number = playerVelocity): void {
     this.direction = Direction.RIGHT;
     this.setVelocityX(velocity);
     if (this.isJump) {

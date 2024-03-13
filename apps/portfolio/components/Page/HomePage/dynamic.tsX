@@ -1,6 +1,10 @@
 import dynamic from 'next/dynamic';
 
-export const DynamicPreface = dynamic(() => import('../../Section/Preface/Preface'));
+import { Skeleton } from '@jfteam/material';
+
+export const DynamicPreface = dynamic(() => import('../../Section/Preface/Preface'), {
+  loading: () => <Skeleton visible={true} />,
+});
 
 export const DynamicTechno = dynamic(() => import('../../Section/Techno/Techno'));
 
