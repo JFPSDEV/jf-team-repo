@@ -1,17 +1,20 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 
+import { Skeleton } from '@jfteam/material';
 import { useResponsive } from '@jfteam/hooks';
 
 import { EPageId, ICVPage } from '@/utils';
 import { Hero } from '@/components/Section';
-import {
-  DynamicPresentation,
-  DynamicStudy,
-  DynamicExperience,
-  DynamicSkill,
-  DynamicHobby,
-  DynamicFooter,
-} from './dynamic';
+
+const DynamicStudy = dynamic(() => import('../../Section/Study/Study'), {
+  loading: () => <Skeleton visible={true} />,
+});
+const DynamicSkill = dynamic(() => import('../../Section/Skill/Skill'));
+const DynamicHobby = dynamic(() => import('../../Section/Hobby/Hobby'));
+const DynamicFooter = dynamic(() => import('../../Section/Footer/Footer'));
+const DynamicPresentation = dynamic(() => import('../../Section/Presentation/Presentation'));
+const DynamicExperience = dynamic(() => import('../../Section/Experience/Experience'));
 
 interface CVPageProps {
   page: ICVPage;
