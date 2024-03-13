@@ -14,4 +14,6 @@ export const DynamicTestimonial = dynamic(() => import('../../Section/Testimonia
 
 export const DynamicContact = dynamic(() => import('../../Section/Contact/Contact'));
 
-export const DynamicFooter = dynamic(() => import('../../Section/Footer/Footer'));
+export const DynamicFooter = dynamic(() => import('../../Section/Footer/Footer'), {
+  loading: () => <Skeleton visible={true} />,
+});
