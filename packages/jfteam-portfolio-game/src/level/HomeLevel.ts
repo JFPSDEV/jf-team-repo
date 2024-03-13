@@ -1,3 +1,4 @@
+import { ELocale } from '@jfteam/types';
 import { getPercent } from '../utils';
 import { Level } from './Level';
 
@@ -6,12 +7,45 @@ export class HomeLevel extends Level {
     const W = this.cameras.main.width;
     var H = this.cameras.main.height;
 
+    const centerX = getPercent(50, W);
+    const centerY = getPercent(50, H);
+
     this.createGame({
-      playerStart: { x: getPercent(10, W), y: getPercent(50, H) },
+      playerStart: { x: getPercent(10, W), y: centerY },
       spBlocks: [
-        { x: getPercent(50, W) - 100, y: getPercent(40, H) },
-        { x: getPercent(50, W), y: getPercent(40, H) },
-        { x: getPercent(50, W) + 100, y: getPercent(40, H) }
+        {
+          x: centerX - 100,
+          y: getPercent(40, H),
+          skills: [
+            { [ELocale.FR]: 'Optimisation', [ELocale.EN]: `Optimization` },
+            { [ELocale.FR]: 'Test', [ELocale.EN]: `Test` },
+            {
+              [ELocale.FR]: 'Veille technologique',
+              [ELocale.EN]: `Technology watch`
+            }
+          ]
+        },
+        {
+          x: centerX,
+          y: getPercent(40, H),
+          skills: [
+            { [ELocale.FR]: 'Performances', [ELocale.EN]: `Performance` },
+            { [ELocale.FR]: 'Qualité', [ELocale.EN]: `Quality` },
+            { [ELocale.FR]: 'Débogage', [ELocale.EN]: `Debugging` }
+          ]
+        },
+        {
+          x: centerX + 100,
+          y: getPercent(40, H),
+          skills: [
+            {
+              [ELocale.FR]: 'Sécurité',
+              [ELocale.EN]: `Security`
+            },
+            { [ELocale.FR]: `Travail d'équipe`, [ELocale.EN]: `Teamwork` },
+            { [ELocale.FR]: 'Plannification', [ELocale.EN]: `Planning` }
+          ]
+        }
       ]
     });
   }

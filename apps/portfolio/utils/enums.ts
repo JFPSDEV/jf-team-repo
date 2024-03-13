@@ -21,6 +21,7 @@ export enum ENavlink {
   CV = 'cv',
   CONTACT = 'contact',
   PROJECT = 'project',
+  FEEDBACK = 'feedback',
 }
 
 export type TLocale = keyof typeof ELocale;

@@ -7,9 +7,10 @@ import { type Embla, cx, Group, ActionIcon, Stack } from '@jfteam/material';
 import { Section } from '../Section';
 import classes from './Testimonial.module.css';
 import { Title } from '@/components/Title/Title';
-import { EVartiant, ITestimonial, TSectionProps } from '@/utils';
+import { ENavlink, EVartiant, ITestimonial, TSectionProps, headerLink } from '@/utils';
 import { TestimonialCard } from './TestimonialCard/TestimonialCard';
 import { ETrigger, FadeTrigger } from '@jfteam/animated';
+import { useLocale } from '@/hooks';
 
 interface TestimonialProps extends TSectionProps {
   row: ITestimonial;
@@ -18,8 +19,12 @@ interface TestimonialProps extends TSectionProps {
 export const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
   const [embla, setEmbla] = useState<Embla | null>(null);
 
+  const { locale } = useLocale();
+
+  const anchor = headerLink.navlink[ENavlink.FEEDBACK][locale].anchor;
+
   return (
-    <Section variant={EVartiant.SECONDARY}>
+    <Section variant={EVartiant.SECONDARY} id={anchor}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <Stack gap={30}>
           <Title order={2} ta="center" rows={row.title} />

@@ -5,14 +5,21 @@ import 'phaser';
 import { Player } from './Player';
 
 import dude from '../assets/dude.png';
+import { TCoordinate } from '../types';
+import { Level } from '../level';
 
 export class DudePlayer extends Player {
-  constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y);
+  constructor(
+    scene: Level,
+    x: number,
+    y: number,
+    jumpCoordinate: TCoordinate[]
+  ) {
+    super(scene, x, y, jumpCoordinate);
     this.setupAnimations();
   }
 
-  static loadSprite(loadScene: Phaser.Scene): void {
+  static load(loadScene: Level): void {
     loadScene.load.spritesheet('dude', dude.src, {
       frameWidth: 16,
       frameHeight: 32

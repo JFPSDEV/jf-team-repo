@@ -8,10 +8,15 @@ export const useLocale = () => {
 
   const switchLocale = (newLocale: ELocale) => {
     const { pathname, query } = router;
-    router.push({
-      pathname,
-      query: { ...query, locale: newLocale },
-    });
+    const homePage = '/';
+    if (pathname === homePage) {
+      router.push(`/${newLocale}`);
+    } else {
+      router.push({
+        pathname,
+        query: { ...query, locale: newLocale },
+      });
+    }
   };
 
   const linkLocale = router?.query?.locale as ELocale;

@@ -9,7 +9,7 @@ interface IndexPageProps extends PageProps {
   page: IHomePage;
 }
 
-export default function IndexPage({ page, locale }: IndexPageProps) {
+export default function IndexPage({ page }: IndexPageProps) {
   return <HomePage page={page} />;
 }
 

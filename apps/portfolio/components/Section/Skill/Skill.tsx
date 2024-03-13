@@ -26,7 +26,7 @@ export const Skill = ({ row }: SkillProps) => {
               <Card shadow="sm" padding="md" radius="md" h="100%">
                 <Stack h="100%">
                   <Title order={3}>{title}</Title>
-                  <Text>{text}</Text>
+                  <Text c="dimmed">{text}</Text>
                   <Group p={0} m={0} style={{ flex: 1 }} align="end" justify="end">
                     <IconStyle value={icon} />
                   </Group>

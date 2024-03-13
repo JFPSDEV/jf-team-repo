@@ -1,43 +1,73 @@
 import 'phaser';
 
+import { ELocale, ETheme } from '@jfteam/types';
+
 import { DudePlayer } from '../class/DudePlayer';
 import { CoinManager } from '../class/CoinManager';
 import { SPBlockManager } from '../class/SPBlockManager';
 import { GroundBlockManager } from '../class/GroundBlockManager';
-import { PowBlockManager } from '../class/PowBlockManager';
-import { CastleManager } from '../class/CastleManager';
-import { FlagManager } from '../class/FlagManager';
+import { ThemeManager } from '../class/ThemeManager';
 import { SkyManager } from '../class/SkyManager';
-import { getPercent } from '../utils';
-import { TCoordinate } from '../types';
+import {
+  getPercent,
+  handleBlockSpColision,
+  handleImpactColision
+} from '../utils';
+import { EAnimation, TCoordinate, TSpBlocks } from '../types';
+import { LocaleManager } from '../class/LocaleManager';
+import { DecorManager } from '../class/DecorManager';
+
+import treeLeftPicture from '../assets/tree-left.png';
+import treeRightPicture from '../assets/tree-right.png';
+import dialogueControls from '../assets/dialogue-game-controls.png';
+import impact from '../assets/hit-animation.png';
 
 interface ILevelGame {
   playerStart: TCoordinate;
   coins?: TCoordinate[];
-  spBlocks?: TCoordinate[];
+  spBlocks?: TSpBlocks[];
 }
 
 export class Level extends Phaser.Scene {
+  protected theme: ETheme = ETheme.LIGHT;
+  protected themeManager!: ThemeManager;
+
+  protected locale: ELocale = ELocale.FR;
+  protected localeManager!: LocaleManager;
+
+  protected spBlockList: TSpBlocks[] = [];
+
+  protected sky!: SkyManager;
   protected player!: DudePlayer;
-  protected groundBlockManager!: GroundBlockManager;
-  protected cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
   protected coinManager!: CoinManager;
   protected sPBlockManager!: SPBlockManager;
-  protected castleManager!: CastleManager;
-  protected flagManager!: FlagManager;
-  protected powBlockManager!: PowBlockManager;
-  protected isLightMode: boolean = true;
-  protected sky!: SkyManager;
+  protected groundBlockManager!: GroundBlockManager;
+  protected cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+  protected treeLeft!: DecorManager;
+  protected treeRight!: DecorManager;
 
   preload(): void {
-    GroundBlockManager.loadSprite(this);
-    SkyManager.loadSprite(this);
-    DudePlayer.loadSprite(this);
-    CoinManager.loadSprite(this);
-    SPBlockManager.loadSprite(this);
-    CastleManager.loadSprite(this);
-    FlagManager.loadSprite(this);
-    PowBlockManager.loadSprite(this);
+    this.load.image(EAnimation.TREE_LEFT, treeLeftPicture.src);
+    this.load.image(EAnimation.TREE_RIGHT, treeRightPicture.src);
+    this.load.spritesheet(
+      EAnimation.DIALOGUE_CONTROLS,
+      dialogueControls.src,
+      {
+        frameWidth: 1316,
+        frameHeight: dialogueControls.height
+      }
+    );
+    this.load.spritesheet(EAnimation.IMPACT, impact.src, {
+      frameWidth: 415,
+      frameHeight: 416
+    });
+    LocaleManager.load(this);
+    GroundBlockManager.load(this);
+    SkyManager.load(this);
+    DudePlayer.load(this);
+    CoinManager.load(this);
+    SPBlockManager.load(this);
+    ThemeManager.load(this);
   }
 
   createGame(params: ILevelGame): void {
@@ -54,53 +84,42 @@ export class Level extends Phaser.Scene {
      */
     this.sky = new SkyManager(this);
 
+    /**
+     * CONTROLS
+     * -----------
+     */
     if (this.input?.keyboard) {
       this.cursors = this.input.keyboard.createCursorKeys();
     }
-
-    /**
-     * FLAG
-     * -----------
-     */
-
-    this.flagManager = new FlagManager(this, {
-      x: W - 170,
-      y: getPercent(44, H)
-    });
-
-    /**
-     * CASTLE
-     * -----------
-     */
-    this.castleManager = new CastleManager(this, {
-      x: W - 40,
-      y: getPercent(46, H)
-    });
 
     /**
      * BLOCK [?]
      * -----------
      */
     if (spBlocks && spBlocks?.length) {
+      this.setSpBlockList(spBlocks);
       this.sPBlockManager = new SPBlockManager(this, spBlocks);
     }
 
     /**
-     * BLOCK POW
+     * THEME
      * -----------
      */
     const isSmallScreen = W >= 1200 ? 300 : 250;
-    this.powBlockManager = new PowBlockManager(
-      this,
-      [
-        {
-          x: getPercent(isSmallScreen ? 30 : 35, W),
-          y: getPercent(40, H)
-        },
-        { x: getPercent(isSmallScreen ? 70 : 65, W), y: getPercent(40, H) }
-      ],
-      [this.castleManager.updateCastle]
-    );
+    this.themeManager = new ThemeManager(this, [
+      {
+        x: getPercent(isSmallScreen ? 30 : 35, W),
+        y: getPercent(40, H)
+      }
+    ]);
+
+    /**
+     * LOCALE
+     * -----------
+     */
+    this.localeManager = new LocaleManager(this, [
+      { x: getPercent(isSmallScreen ? 70 : 65, W), y: getPercent(40, H) }
+    ]);
 
     /**
      * GROUND
@@ -113,7 +132,12 @@ export class Level extends Phaser.Scene {
      * PLAYER
      * -----------
      */
-    this.player = new DudePlayer(this, playerStart.x, playerStart.y);
+    this.player = new DudePlayer(
+      this,
+      playerStart.x,
+      playerStart.y,
+      spBlocks || []
+    );
     this.player.setInteractive();
 
     this.physics.add.collider(
@@ -125,40 +149,132 @@ export class Level extends Phaser.Scene {
      * COINS
      * -----------
      */
-    // this.coinManager = new CoinManager(this, [
-    //   { x: W / 2 - 100, y: H / 1.5 },
-    //   { x: W / 2, y: H / 1.5 },
-    //   { x: W / 2 + 100, y: H / 1.5 }
-    // ]);
+    if (coins && coins?.length) {
+      this.coinManager = new CoinManager(this, coins);
+    }
 
-    if (spBlocks) {
+    /**
+     * COLISION ACTION BLOCK
+     * -----------
+     */
+    const colisionThemeBlock = handleImpactColision({
+      scene: this,
+      scale: 150,
+      callBack: this.themeManager.handleTrigger
+    });
+
+    const colisionLocaleBlock = handleImpactColision({
+      scene: this,
+      scale: 150,
+      callBack: this.localeManager.handleTrigger
+    });
+
+    /**
+     * PLAYER COLISION TO BLOCK [?]
+     * -----------
+     */
+    if (spBlocks && spBlocks?.length) {
+      const colisionSpBlock = handleBlockSpColision({
+        scene: this,
+        endAnim: EAnimation.BLOCK_FULL,
+        group: this.sPBlockManager.getSpBlockGroup()
+      });
+
       this.physics.add.collider(
         this.sPBlockManager.getSpBlockGroup(),
         this.player,
-        this.sPBlockManager
-          .handleSpBlockCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
+        colisionSpBlock as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
       );
     }
 
-    // this.physics.add.overlap(
-    //   this.player,
-    //   this.coinManager.getCoinsGroup(),
-    //   this.coinManager
-    //     .handleCoinCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
-    //   undefined,
-    //   this
-    // );
+    /**
+     * PLAYER COLISION TO COINS
+     * -----------
+     */
+    if (coins && coins?.length) {
+      this.physics.add.overlap(
+        this.player,
+        this.coinManager.getCoinsGroup(),
+        this.coinManager
+          .handleCoinCollision as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback,
+        undefined,
+        this
+      );
+    }
+
+    /**
+     * PLAYER COLISION TO THEME
+     * -----------
+     */
+
+    this.physics.add.collider(
+      this.themeManager.getThemeGroup(),
+      this.player,
+      colisionThemeBlock as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
+    );
+
+    /**
+     * PLAYER TO LOCALE
+     * -----------
+     */
+
+    this.physics.add.collider(
+      this.localeManager.getLocaleGroup(),
+      this.player,
+      colisionLocaleBlock as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
+    );
+
+    /**
+     * TREE
+     * -----------
+     */
+    this.treeLeft = new DecorManager(
+      this,
+      EAnimation.TREE_LEFT,
+      240,
+      treeRightPicture,
+      {
+        x: W - 40,
+        y: getPercent(39, H)
+      }
+    );
+    this.treeRight = new DecorManager(
+      this,
+      EAnimation.TREE_RIGHT,
+      240,
+      treeLeftPicture,
+      {
+        x: 40,
+        y: getPercent(39, H)
+      }
+    );
   }
 
   update(): void {
     this.player.update(this.cursors);
   }
 
-  public getIsLightMode(): boolean {
-    return this.isLightMode;
+  public getTheme(): ETheme {
+    return this.theme;
   }
 
-  public setIsLightMode(value: boolean): void {
-    this.isLightMode = value;
+  public setTheme(value: ETheme): void {
+    this.theme = value;
+  }
+
+  public getLocale(): ELocale {
+    return this.locale;
+  }
+
+  public setLocale(value: ELocale): void {
+    this.locale = value;
+  }
+
+  public getSpBlockList(): TSpBlocks[] {
+    return this.spBlockList;
+  }
+
+  public setSpBlockList(value: TSpBlocks[]): void {
+    this.spBlockList = value;
   }
 }

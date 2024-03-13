@@ -6,6 +6,7 @@ import {
   IconFileCv,
   IconPresentation,
   IconMail,
+  IconMessage,
 } from '@jfteam/icons';
 
 import { ELocale, ENavlink } from '../enums';
@@ -42,13 +43,18 @@ export const headerLink: THeader = {
   navlink: {
     [ENavlink.CV]: {
       Icon: IconFileCv,
-      [ELocale.EN]: { value: 'My CV', link: '/cv' },
-      [ELocale.FR]: { value: 'Mon CV', link: '/cv' },
+      [ELocale.EN]: { value: 'CV', link: '/cv' },
+      [ELocale.FR]: { value: 'CV', link: '/cv' },
     },
     [ENavlink.PROJECT]: {
       Icon: IconPresentation,
-      [ELocale.EN]: { value: 'My projects', anchor: 'projects', link: '/' },
-      [ELocale.FR]: { value: 'Mes projets', anchor: 'projets', link: '/' },
+      [ELocale.EN]: { value: 'Projects', anchor: 'projects', link: '/' },
+      [ELocale.FR]: { value: 'Projets', anchor: 'projets', link: '/' },
+    },
+    [ENavlink.FEEDBACK]: {
+      Icon: IconMessage,
+      [ELocale.EN]: { value: 'Feedback', anchor: 'feedback', link: '/' },
+      [ELocale.FR]: { value: 'Avis', anchor: 'avis', link: '/' },
     },
     [ENavlink.CONTACT]: {
       Icon: IconMail,

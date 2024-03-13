@@ -4,6 +4,9 @@ import 'phaser';
 
 import { TCoordinate } from '../types';
 import coins from '../assets/coins.png';
+import { coinScale } from '../utils';
+
+const sizeEl = coinScale;
 
 export class CoinManager {
   private score: number = 0;
@@ -21,10 +24,10 @@ export class CoinManager {
     this.handleCoinCollision = this.handleCoinCollision.bind(this);
   }
 
-  static loadSprite(loadScene: Phaser.Scene): void {
+  static load(loadScene: Phaser.Scene): void {
     loadScene.load.spritesheet('coins', coins.src, {
-      frameWidth: 10,
-      frameHeight: 14
+      frameWidth: coins.height,
+      frameHeight: coins.height
     });
   }
 
@@ -53,7 +56,7 @@ export class CoinManager {
     this.coinsGroup.children.iterate(function (child) {
       const coin = child as Phaser.Physics.Arcade.Sprite;
       coin.anims.play('coinAnims');
-      coin.setScale(12 / coin.width, 16.8 / coin.height);
+      coin.setScale(sizeEl / coin.width, sizeEl / coin.height);
       return null;
     });
   }

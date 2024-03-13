@@ -19,14 +19,12 @@ export class GroundBlockManager {
     this.groundBlocks = this.scene.physics.add.staticGroup();
   }
 
-  static loadSprite(loadScene: Level): void {
+  static load(loadScene: Level): void {
     loadScene.load.image('groundBlock1', groundBlock1.src);
     loadScene.load.image('groundBlock2', groundBlock2.src);
   }
 
   createGroundBlocks(): void {
-    const W = this.scene.cameras.main.width;
-
     for (let i = 0; i < 6; i++) {
       this.createGroundBlockLayer('groundBlock2', 0, i * sizeEl + 1);
     }
