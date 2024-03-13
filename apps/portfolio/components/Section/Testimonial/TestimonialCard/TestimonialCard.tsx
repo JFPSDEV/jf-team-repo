@@ -24,8 +24,8 @@ export const TestimonialCard = ({ row }: TestimonialCardProps) => {
             <Image
               src={row.picture}
               alt={row.title}
-              layout="fill"
-              objectFit="cover"
+              fill
+              style={{ objectFit: 'cover' }}
               className={classes.testimonialPicture}
             />
           </Box>

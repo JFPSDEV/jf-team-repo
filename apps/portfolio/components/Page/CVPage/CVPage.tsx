@@ -2,14 +2,22 @@ import React from 'react';
 
 import { useResponsive } from '@jfteam/hooks';
 
-import { ELocale, EPageId, ICVPage } from '@/utils';
-import { Experience, Footer, Hero, Hobby, Presentation, Skill, Study } from '@/components/Section';
+import { EPageId, ICVPage } from '@/utils';
+import { Hero } from '@/components/Section';
+import {
+  DynamicPresentation,
+  DynamicStudy,
+  DynamicExperience,
+  DynamicSkill,
+  DynamicHobby,
+  DynamicFooter,
+} from './dynamic';
 
 interface CVPageProps {
   page: ICVPage;
 }
 
-export const CVPage = ({ page }: CVPageProps) => {
+const CVPage = ({ page }: CVPageProps) => {
   const { ...props } = useResponsive();
 
   if (!page) return null;
@@ -19,12 +27,14 @@ export const CVPage = ({ page }: CVPageProps) => {
   return (
     <>
       <Hero {...props} mode={EPageId.CV} />
-      <Presentation row={presentation} {...props} />
-      <Study row={study} {...props} />
-      <Experience row={experience} {...props} />
-      <Skill row={skill} {...props} />
-      <Hobby row={hobby} {...props} />
-      <Footer {...props} />
+      <DynamicPresentation row={presentation} {...props} />
+      <DynamicStudy row={study} {...props} />
+      <DynamicExperience row={experience} {...props} />
+      <DynamicSkill row={skill} {...props} />
+      <DynamicHobby row={hobby} {...props} />
+      <DynamicFooter {...props} />
     </>
   );
 };
+
+export default CVPage;

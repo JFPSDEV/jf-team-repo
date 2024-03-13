@@ -1,16 +1,21 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 
 import { getPage } from '@/utils/get-page';
 import { ELocale, EPageId, EPageProps, IHomePage, PageProps, pageFound } from '@/utils';
 
-import { HomePage } from '../../components';
+import { Skeleton } from '@jfteam/material';
+
+const DynamicHomePage = dynamic(() => import('../../components/Page/HomePage/HomePage'), {
+  loading: () => <Skeleton visible={true} />,
+});
 
 interface LocaleHomePageProps extends PageProps {
   page: IHomePage;
 }
 
 export default function LocaleHomePage({ page }: LocaleHomePageProps) {
-  return <HomePage page={page} />;
+  return <DynamicHomePage page={page} />;
 }
 
 /**

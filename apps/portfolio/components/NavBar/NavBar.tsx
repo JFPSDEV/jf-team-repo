@@ -2,11 +2,12 @@ import React, { Fragment } from 'react';
 
 import { IconMenu2, IconMinus } from '@jfteam/icons';
 import { useDisclosure, useResponsive } from '@jfteam/hooks';
-import { cx, Group, Tooltip, type GroupProps, ActionIcon, Box } from '@jfteam/material';
+import { cx, Group, Tooltip, type GroupProps, ActionIcon } from '@jfteam/material';
 
-import { useLocale } from '@/hooks';
+import { useLocale } from '../../hooks/use-locale';
 import classes from './NavBar.module.css';
-import { ELocale, headerLink } from '@/utils';
+import { headerLink } from '../../utils/locales/header-link';
+import { ELocale } from '../../utils/enums';
 import NavBarLink from './NavBarLink/NavBarLink';
 import NavBarMobile from './NavBarMobile/NavBarMobile';
 

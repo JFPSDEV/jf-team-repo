@@ -22,7 +22,7 @@ interface StudyProps extends TSectionProps {
   row: IStudy;
 }
 
-export const Study = ({ row, isMobile }: StudyProps) => {
+const Study = ({ row, isMobile }: StudyProps) => {
   return (
     <Section variant={EVartiant.SECONDARY} className={classes.container}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
@@ -65,3 +65,5 @@ export const Study = ({ row, isMobile }: StudyProps) => {
     </Section>
   );
 };
+
+export default Study;

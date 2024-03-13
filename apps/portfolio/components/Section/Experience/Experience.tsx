@@ -16,7 +16,7 @@ interface ExperienceProps extends TSectionProps {
   row: IExperience;
 }
 
-export const Experience = ({ row, isDesktop }: ExperienceProps) => {
+const Experience = ({ row, isDesktop }: ExperienceProps) => {
   return (
     <Section>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
@@ -44,10 +44,9 @@ export const Experience = ({ row, isDesktop }: ExperienceProps) => {
                         <Image
                           src={img}
                           alt="JF Picture"
-                          layout="fill"
-                          objectFit="cover"
+                          fill
                           className={classes.zoomedImage}
-                          style={{}}
+                          style={{ objectFit: 'cover' }}
                         />
                       </Box>
                     </Link>
@@ -74,3 +73,5 @@ export const Experience = ({ row, isDesktop }: ExperienceProps) => {
     </Section>
   );
 };
+
+export default Experience;

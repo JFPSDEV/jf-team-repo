@@ -16,7 +16,7 @@ interface TestimonialProps extends TSectionProps {
   row: ITestimonial;
 }
 
-export const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
+const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
   const [embla, setEmbla] = useState<Embla | null>(null);
 
   const { locale } = useLocale();
@@ -69,3 +69,5 @@ export const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
     </Section>
   );
 };
+
+export default Testimonial;

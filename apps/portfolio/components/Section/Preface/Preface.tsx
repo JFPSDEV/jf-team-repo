@@ -11,15 +11,16 @@ import { type IPreface, type TSectionProps, poppins } from '@/utils';
 import { FadeTrigger, RotationTrigger } from '@jfteam/animated';
 
 const sizeBlock = 400;
+const duration = 2;
 
 interface PrefaceProps extends TSectionProps {
   row: IPreface;
 }
 
-export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
+const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
   return (
     <Section py={0} className={classes.section} bg="transparent">
-      <FadeTrigger direction="left" duration={1} startPosition={150}>
+      <FadeTrigger direction="left" duration={duration} startPosition={150}>
         <Grid gutter={{ base: 'lg', lg: 'var(--section-spacing)' }} className={classes.grid}>
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <Stack w="100%" h="100%" align="end">
@@ -29,7 +30,7 @@ export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
                 w={{ base: '100%', md: sizeBlock }}
                 h={{ base: '100%', md: sizeBlock }}
               >
-                <FadeTrigger direction="down">
+                <FadeTrigger direction="down" duration={duration}>
                   {row?.title && (
                     <Title order={1} rows={row.title} ta={isMobile ? 'center' : 'left'} mb="lg" />
                   )}
@@ -51,7 +52,7 @@ export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
             </Stack>
           </Grid.Col>
           <Grid.Col span={{ base: 12, sm: 6 }}>
-            <RotationTrigger>
+            <RotationTrigger duration={duration}>
               <Flex h="100%" w="100%" justify="start">
                 {row?.picture && (
                   <Image
@@ -71,3 +72,5 @@ export const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
     </Section>
   );
 };
+
+export default Preface;

@@ -12,7 +12,7 @@ interface SkillProps extends TSectionProps {
   row: ISkill;
 }
 
-export const Skill = ({ row }: SkillProps) => {
+const Skill = ({ row }: SkillProps) => {
   return (
     <Section variant={EVartiant.SECONDARY}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
@@ -39,3 +39,5 @@ export const Skill = ({ row }: SkillProps) => {
     </Section>
   );
 };
+
+export default Skill;

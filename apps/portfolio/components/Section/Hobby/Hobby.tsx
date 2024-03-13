@@ -16,7 +16,7 @@ interface HobbyProps extends TSectionProps {
   row: IHobby;
 }
 
-export const Hobby = ({ row }: HobbyProps) => {
+const Hobby = ({ row }: HobbyProps) => {
   const { isMobile } = useResponsive();
 
   const imageGrid = (
@@ -25,8 +25,8 @@ export const Hobby = ({ row }: HobbyProps) => {
         <Image
           src={`/images/hobby-${isMobile ? 'mobile' : 'desktop'}.png`}
           alt="hobby"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: 'cover' }}
         />
       </Box>
     </Grid.Col>
@@ -72,3 +72,5 @@ export const Hobby = ({ row }: HobbyProps) => {
     </Section>
   );
 };
+
+export default Hobby;

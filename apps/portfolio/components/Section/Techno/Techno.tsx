@@ -64,7 +64,7 @@ const technoList = [
 
 interface TechnoProps extends TSectionProps {}
 
-export const Techno = ({ isMobile }: TechnoProps) => {
+const Techno = ({ isMobile }: TechnoProps) => {
   const iconBand = (
     <Box>
       {[...technoList, ...technoList].map(({ Icon }) => (
@@ -90,3 +90,5 @@ export const Techno = ({ isMobile }: TechnoProps) => {
     </Flex>
   );
 };
+
+export default Techno;

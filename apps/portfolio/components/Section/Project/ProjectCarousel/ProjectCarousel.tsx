@@ -40,7 +40,7 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
                 position: 'relative',
               }}
             >
-              <Image alt={row.title} src={row.picture} layout="fill" objectFit="cover" />
+              <Image alt={row.title} src={row.picture} fill style={{ objectFit: 'cover' }} />
             </Box>
             {!isDesktop && (
               <>

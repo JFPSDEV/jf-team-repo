@@ -1,9 +1,17 @@
 import React from 'react';
 
-import { useLoading, useResponsive } from '@jfteam/hooks';
+import { useResponsive } from '@jfteam/hooks';
 
 import { EPageId, IHomePage } from '@/utils';
-import { Contact, Footer, Hero, Preface, Project, Techno, Testimonial } from '@/components/Section';
+import { Hero } from '@/components/Section';
+import {
+  DynamicContact,
+  DynamicFooter,
+  DynamicPreface,
+  DynamicProject,
+  DynamicTechno,
+  DynamicTestimonial,
+} from './dynamic';
 
 interface HomePageProps {
   page: IHomePage;
@@ -12,8 +20,6 @@ interface HomePageProps {
 export const HomePage = ({ page }: HomePageProps) => {
   const { ...props } = useResponsive();
 
-  const loading = useLoading();
-
   if (!page) return null;
 
   const { preface, project, testimonial, contact } = page;
@@ -21,12 +27,14 @@ export const HomePage = ({ page }: HomePageProps) => {
   return (
     <>
       <Hero {...props} mode={EPageId.HOME} />
-      <Preface row={preface} {...props} />
-      <Techno {...props} />
-      <Project row={project} {...props} />
-      <Testimonial row={testimonial} {...props} />
-      <Contact row={contact} {...props} />
-      <Footer {...props} />
+      <DynamicPreface row={preface} {...props} />
+      <DynamicTechno {...props} />
+      <DynamicProject row={project} {...props} />
+      <DynamicTestimonial row={testimonial} {...props} />
+      <DynamicContact row={contact} {...props} />
+      <DynamicFooter {...props} />
     </>
   );
 };
+
+export default HomePage;

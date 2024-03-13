@@ -13,7 +13,7 @@ interface ContactProps extends TSectionProps {
   row: IContact;
 }
 
-export const Contact = ({ row }: ContactProps) => {
+const Contact = ({ row }: ContactProps) => {
   const { locale } = useLocale();
 
   const anchor = headerLink.navlink[ENavlink.CONTACT][locale].anchor;
@@ -24,8 +24,10 @@ export const Contact = ({ row }: ContactProps) => {
         <FadeTrigger trigger={ETrigger.ScrollTrigger}>
           <Title order={2} ta="center" rows={row.title} />
         </FadeTrigger>
-        {row.fields && <ContactForm row={row.fields}  />}
+        {row.fields && <ContactForm row={row.fields} />}
       </Stack>
     </Section>
   );
 };
+
+export default Contact;

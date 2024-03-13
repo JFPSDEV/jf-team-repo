@@ -14,18 +14,19 @@ import { FadeTrigger, RotationTrigger } from '@jfteam/animated';
 
 const lineWidth = '25%';
 const baseWidth = 270;
+const duration = 2;
 
 interface PresentationProps extends TSectionProps {
   row: IPresentation;
 }
 
-export const Presentation = ({ row, isMobile }: PresentationProps) => {
+const Presentation = ({ row, isMobile }: PresentationProps) => {
   const image = (
     <Image
       src={row.picture}
       alt={row.title.join()}
-      layout="fill"
-      objectFit="cover"
+      fill
+      style={{ objectFit: 'cover' }}
       className={classes.mainPicture}
     />
   );
@@ -34,7 +35,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
     <FadeTrigger
       className={classes.titleContainer}
       direction="up"
-      duration={1.5}
+      duration={duration}
       startPosition={50}
     >
       <MultiLineTitle order={1} rows={row.title} w="100%" ta="center" />
@@ -50,7 +51,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
           <FadeTrigger
             style={{ position: 'relative', height: 440 }}
             direction="right"
-            duration={1.5}
+            duration={duration}
           >
             <HTimeline>
               <HTimeline.Item
@@ -88,7 +89,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
                 </CVTimeline.Item>
 
                 <CVTimeline.Item bullet={<IconStyle value="ti ti-mood-smile-beam" />}>
-                  <FadeTrigger direction="up" duration={1.5}>
+                  <FadeTrigger direction="up" duration={duration}>
                     {row?.description && (
                       <Text
                         style={{ transformOrigin: 'center', transform: 'translateY(-30%)' }}
@@ -100,6 +101,7 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
               </CVTimeline>
               <Box style={{ position: 'absolute', top: 0, bottom: 0 }}>
                 <RotationTrigger
+                  duration={duration}
                   style={{ width: baseWidth, height: baseWidth, position: 'relative', zIndex: 2 }}
                 >
                   {image}
@@ -136,3 +138,5 @@ export const Presentation = ({ row, isMobile }: PresentationProps) => {
     </>
   );
 };
+
+export default Presentation;

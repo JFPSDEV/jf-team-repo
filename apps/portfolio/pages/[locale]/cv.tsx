@@ -1,15 +1,20 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
 
-import { CVPage } from '@/components';
 import { getPage } from '@/utils/get-page';
+import { Skeleton } from '@jfteam/material';
 import { ELocale, EPageId, EPageProps, ICVPage, PageProps, pageFound } from '@/utils';
+
+const DynamicCVPage = dynamic(() => import('../../components/Page/CVPage/CVPage'), {
+  loading: () => <Skeleton visible={true} />,
+});
 
 interface LocaleCVPageProps extends PageProps {
   page: ICVPage;
 }
 
 export default function LocaleCVPage({ page }: LocaleCVPageProps) {
-  return <CVPage page={page} />;
+  return <DynamicCVPage page={page} />;
 }
 
 /**

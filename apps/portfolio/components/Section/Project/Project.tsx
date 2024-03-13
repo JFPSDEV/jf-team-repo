@@ -15,7 +15,7 @@ interface ProjectProps extends TSectionProps {
   row: IProject;
 }
 
-export const Project = ({ row, isMobile }: ProjectProps) => {
+const Project = ({ row, isMobile }: ProjectProps) => {
   const { locale } = useLocale();
   const { isDesktop } = useResponsive();
 
@@ -57,3 +57,5 @@ export const Project = ({ row, isMobile }: ProjectProps) => {
     </Section>
   );
 };
+
+export default Project;

@@ -13,7 +13,7 @@ import NavBarLink from '@/components/NavBar/NavBarLink/NavBarLink';
 
 interface FooterProps extends TSectionProps {}
 
-export const Footer = (props: FooterProps) => {
+const Footer = (props: FooterProps) => {
   const {} = props;
 
   const { locale: linkLocale } = useLocale();
@@ -67,3 +67,5 @@ export const Footer = (props: FooterProps) => {
     </footer>
   );
 };
+
+export default Footer;
