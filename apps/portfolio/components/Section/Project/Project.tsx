@@ -45,6 +45,7 @@ const Project = ({ row, isMobile }: ProjectProps) => {
                 <FadeTrigger trigger={ETrigger.ScrollTrigger} direction="right">
                   <ProjectCardList
                     list={row.rows}
+                    webSiteLabel={row.webSiteLabel}
                     index={index}
                     onClick={(_idx: number) => embla?.scrollTo(_idx)}
                   />

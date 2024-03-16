@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import Image from 'next/image';
 import { FunnyArrowIcon } from '@jfteam/icons';
-import { Grid, Stack, Text, Flex } from '@jfteam/material';
+import { Grid, Stack, Text, Flex, Button, Box } from '@jfteam/material';
 
 import { Section } from '../Section';
 import classes from './Preface.module.css';
 import { Title } from '@/components/Title/Title';
-import { type IPreface, type TSectionProps, poppins } from '@/utils';
-import { RightFadeTrigger, RotateTrigger, BottomFadeTrigger } from '@jfteam/animated';
+import { type IPreface, type TSectionProps, poppins, poetsenOneRegular, ELocale } from '@/utils';
+import { RightFadeTrigger, RotateTrigger, BottomFadeTrigger, GhostTrigger } from '@jfteam/animated';
+import { useLocale } from '@/hooks';
+import Link from 'next/link';
 
 const sizeBlock = 400;
 
@@ -17,6 +19,13 @@ interface PrefaceProps extends TSectionProps {
 }
 
 const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
+  const { locale: linkLocale } = useLocale();
+  const locale: ELocale = linkLocale || ELocale.FR;
+
+  const CVLink = ({ children }: { children: ReactNode }) => {
+    return <Link href={`/${locale}/cv`}>{children}</Link>;
+  };
+
   return (
     <Section py={0} className={classes.section} bg="transparent">
       <RightFadeTrigger>
@@ -28,6 +37,7 @@ const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
                 justify="center"
                 w={{ base: '100%', md: sizeBlock }}
                 h={{ base: '100%', md: sizeBlock }}
+                style={{ position: 'relative' }}
               >
                 <BottomFadeTrigger>
                   {row?.title && (
@@ -36,32 +46,54 @@ const Preface = ({ row, isMobile, isDesktop }: PrefaceProps) => {
 
                   {row?.description && (
                     <Text
-                      ff={poppins.style.fontFamily}
                       ta={isMobile ? 'center' : 'left'}
-                      fw={100}
                       fz={16}
-                      lh="normal"
-                    >
-                      {row.description}
-                    </Text>
+                      dangerouslySetInnerHTML={{ __html: row.description }}
+                    />
                   )}
                 </BottomFadeTrigger>
-                {isDesktop && <FunnyArrowIcon size={70} className={classes.arrow} />}
+
+                {isDesktop && (
+                  <GhostTrigger>
+                    <CVLink>
+                      <FunnyArrowIcon
+                        size={70}
+                        fz={25}
+                        ff={poetsenOneRegular.style.fontFamily}
+                        fw={400}
+                        label="CV"
+                        className={classes.arrow}
+                      />
+                    </CVLink>
+                  </GhostTrigger>
+                )}
               </Stack>
             </Stack>
           </Grid.Col>
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <RotateTrigger>
-              <Flex h="100%" w="100%" justify="start">
+              <Flex h="100%" w="100%" justify={{ base: 'center', md: 'start' }}>
                 {row?.picture && (
-                  <Image
-                    src={row.picture}
-                    alt={row?.title?.join()}
-                    style={{ borderRadius: 25 }}
-                    layout={isMobile ? 'responsive' : 'none'}
-                    width={sizeBlock}
-                    height={sizeBlock}
-                  />
+                  <Box
+                    h={{ md: sizeBlock }}
+                    w={{ md: sizeBlock }}
+                    className={classes.imageContainer}
+                  >
+                    <CVLink>
+                      <Box className={classes.imageOverlay}>
+                        <span>{row.linkCv}</span>
+                      </Box>
+                      <Image
+                        src={row.picture}
+                        alt={row?.title?.join()}
+                        style={{ borderRadius: 25 }}
+                        layout={isMobile ? 'responsive' : 'none'}
+                        width={sizeBlock}
+                        height={sizeBlock}
+                        className={classes.picture}
+                      />
+                    </CVLink>
+                  </Box>
                 )}
               </Flex>
             </RotateTrigger>

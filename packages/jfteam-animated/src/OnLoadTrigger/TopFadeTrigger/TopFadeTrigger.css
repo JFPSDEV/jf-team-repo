@@ -1,0 +1,12 @@
+.slideTopFade {
+  opacity: 0;
+  transform: translateY(-40%);
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.slideTopFade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

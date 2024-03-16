@@ -2,11 +2,11 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import './RotateTrigger.css';
 
-interface RotateTriggerProps {
+interface RotateTriggerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const RotateTrigger = ({ children }: RotateTriggerProps) => {
+export const RotateTrigger = ({ ...props }: RotateTriggerProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -17,8 +17,9 @@ export const RotateTrigger = ({ children }: RotateTriggerProps) => {
   }, []);
 
   return (
-    <div className={`slideRotateFade ${isVisible ? 'visible' : ''}`}>
-      {children}
-    </div>
+    <div
+      className={`slideRotateFade ${isVisible ? 'visible' : ''}`}
+      {...props}
+    />
   );
 };

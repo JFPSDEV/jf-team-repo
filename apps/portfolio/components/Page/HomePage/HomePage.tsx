@@ -5,7 +5,8 @@ import { useResponsive } from '@jfteam/hooks';
 
 import { EPageId, IHomePage } from '@/utils';
 import { Hero } from '@/components/Section';
-import { Skeleton } from '@jfteam/material';
+import { Box, Skeleton } from '@jfteam/material';
+import classes from './HomePage.module.css';
 
 const DynamicPreface = dynamic(() => import('../../Section/Preface/Preface'), {
   loading: () => <Skeleton visible={true} />,
@@ -33,7 +34,7 @@ export const HomePage = ({ page }: HomePageProps) => {
   const { preface, project, testimonial, contact } = page;
 
   return (
-    <>
+    <Box className={classes.page}>
       <Hero {...props} mode={EPageId.HOME} />
       <DynamicPreface row={preface} {...props} />
       <DynamicTechno {...props} />
@@ -41,7 +42,7 @@ export const HomePage = ({ page }: HomePageProps) => {
       <DynamicTestimonial row={testimonial} {...props} />
       <DynamicContact row={contact} {...props} />
       <DynamicFooter {...props} />
-    </>
+    </Box>
   );
 };
 

@@ -1,0 +1,45 @@
+.ghostTrigger {
+  position: relative;
+  animation: ghostMove 4s linear infinite;
+}
+
+.ghostTrigger:hover {
+  position: relative;
+  animation: ghostHover 0.5s linear infinite;
+}
+
+@keyframes ghostMove {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-10px) translateY(5px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(10px) translateY(5px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes ghostHover {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(20px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}

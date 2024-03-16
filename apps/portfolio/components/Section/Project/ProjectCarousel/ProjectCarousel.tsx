@@ -26,7 +26,7 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
       <Carousel
         loop
         rows={list}
-        delay={5000}
+        delay={8000}
         getEmblaApi={getEmblaApi}
         onSlideChange={onIndexChange}
         className={classes.carousel}

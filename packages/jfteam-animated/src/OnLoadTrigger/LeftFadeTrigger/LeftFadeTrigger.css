@@ -1,0 +1,12 @@
+.slideLeftFade {
+  opacity: 0;
+  transform: translateX(-40%);
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
+}
+
+.slideLeftFade.visible {
+  opacity: 1;
+  transform: translateX(0);
+}

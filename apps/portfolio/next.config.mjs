@@ -1,19 +1,20 @@
 import bundleAnalyzer from '@next/bundle-analyzer';
-import withPWA from 'next-pwa';
+import nextPWA from 'next-pwa';
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
-export default withBundleAnalyzer({
+const withPWA = nextPWA({
+  dest: 'public',
+  register: true,
+  skipWaitin: true,
+});
+
+const nextConfig = withBundleAnalyzer({
+  ...withPWA,
+
   reactStrictMode: true,
-
-  ...withPWA({
-    dest: 'public',
-    register: true,
-    skipWaitin: true,
-  }),
-
   transpilePackages: [
     '@jfteam/material',
     '@jfteam/phaser-next',
@@ -40,4 +41,15 @@ export default withBundleAnalyzer({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/fr',
+        permanent: true,
+      },
+    ];
+  },
 });
+
+export default nextConfig;

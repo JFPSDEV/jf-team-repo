@@ -5,16 +5,22 @@ import Image from 'next/image';
 import classes from './TestimonialCard.module.css';
 
 import { Grid, Box, Stack, Text, Title, Rating, Flex, Spoiler } from '@jfteam/material';
-import { ESpoiler, ITestimonialRow } from '@/utils';
+import { ELocale, ESpoiler, ITestimonialRow, spoiler } from '@/utils';
 import { useResponsive } from '@jfteam/hooks';
 import { ETrigger, FadeTrigger } from '@jfteam/animated';
+import { useLocale } from '@/hooks';
 
 interface TestimonialCardProps {
   row: ITestimonialRow;
 }
 
 export const TestimonialCard = ({ row }: TestimonialCardProps) => {
+  const { locale: linkLocale } = useLocale();
+  const locale: ELocale = linkLocale || ELocale.FR;
+
   const { isMobile } = useResponsive();
+
+  const reade = spoiler[locale];
 
   return (
     <Box p="md" className={classes.container}>
@@ -41,8 +47,8 @@ export const TestimonialCard = ({ row }: TestimonialCardProps) => {
                 <Spoiler
                   ta={isMobile ? 'center' : undefined}
                   maxHeight={100}
-                  showLabel={ESpoiler.READ_MORE}
-                  hideLabel={ESpoiler.READ_LESS}
+                  showLabel={reade.more}
+                  hideLabel={reade.less}
                 >
                   {row.description}
                 </Spoiler>

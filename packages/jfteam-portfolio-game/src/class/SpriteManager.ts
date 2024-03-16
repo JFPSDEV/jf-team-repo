@@ -11,14 +11,17 @@ export class SpriteManager {
   private picture!: StaticImageData;
   private coordinate!: TCoordinate[];
   private sprites!: Phaser.Physics.Arcade.Group;
+  private depth: number = 0;
 
   constructor(
     scene: Level,
     keyName: EAnimation,
     scale: number,
     picture: StaticImageData,
-    coordinate: TCoordinate[]
+    coordinate: TCoordinate[],
+    depth: number = 0
   ) {
+    this.depth = depth;
     this.sprites = scene.physics.add.group({
       allowGravity: false
     });
@@ -50,10 +53,13 @@ export class SpriteManager {
     const sizeEl = this.scale;
     const keyName = this.keyName;
 
+    const depth = this.depth;
+
     this.sprites.children.iterate(function (child) {
-      const coin = child as Phaser.Physics.Arcade.Sprite;
-      coin.anims.play(keyName);
-      coin.setScale(sizeEl / coin.width, sizeEl / coin.height);
+      const sprite = child as Phaser.Physics.Arcade.Sprite;
+      sprite.anims.play(keyName);
+      sprite.setScale(sizeEl / sprite.width, sizeEl / sprite.height);
+      sprite.setDepth(depth);
       return null;
     });
   }

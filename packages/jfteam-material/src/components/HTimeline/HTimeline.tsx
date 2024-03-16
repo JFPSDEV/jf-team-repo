@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ElementType, ReactNode } from 'react';
 
 import {
   ActionIcon,
@@ -18,9 +18,11 @@ export interface HTimelineItemProps {
   color?: string;
   children?: ReactNode;
   icon?: ReactNode;
+  container?: ElementType;
 }
 
 const HTimelineItem = (props: HTimelineItemProps) => {
+  const Container = props.container || Box;
   const { children, color, bulletSize, lineHeight, lineWidth, icon } =
     props;
   return (
@@ -29,17 +31,19 @@ const HTimelineItem = (props: HTimelineItemProps) => {
       w={`calc(${lineWidth} + ${bulletSize}px)`}
       className={classes.groupItemContainer}
     >
-      <Box className={classes.itemContainer}>
-        <ActionIcon
-          className={classes.actionIcon}
-          h={bulletSize}
-          w={bulletSize}
-          bg={color}
-        >
-          {icon}
-        </ActionIcon>
-        <Box className={classes.childrenItemContainer}>{children}</Box>
-      </Box>
+      <Container>
+        <Box className={classes.itemContainer}>
+          <ActionIcon
+            className={classes.actionIcon}
+            h={bulletSize}
+            w={bulletSize}
+            bg={color}
+          >
+            {icon}
+          </ActionIcon>
+          <Box className={classes.childrenItemContainer}>{children}</Box>
+        </Box>
+      </Container>
       <Box bg={color} h={lineHeight} w={`calc(100% - ${bulletSize}px)`} />
     </Group>
   );

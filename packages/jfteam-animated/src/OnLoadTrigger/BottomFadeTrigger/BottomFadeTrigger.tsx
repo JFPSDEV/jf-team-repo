@@ -2,13 +2,12 @@ import React, { ReactNode, useEffect, useState } from 'react';
 
 import './BottomFadeTrigger.css';
 
-interface BottomFadeTriggerProps {
+interface BottomFadeTriggerProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-export const BottomFadeTrigger = ({
-  children
-}: BottomFadeTriggerProps) => {
+export const BottomFadeTrigger = (props: BottomFadeTriggerProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,8 +18,9 @@ export const BottomFadeTrigger = ({
   }, []);
 
   return (
-    <div className={`slideBottomFade ${isVisible ? 'visible' : ''}`}>
-      {children}
-    </div>
+    <div
+      className={`slideBottomFade ${isVisible ? 'visible' : ''}`}
+      {...props}
+    />
   );
 };

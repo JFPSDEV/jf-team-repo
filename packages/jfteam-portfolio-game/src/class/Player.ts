@@ -3,7 +3,7 @@
 import 'phaser';
 
 import { Direction } from '../enum/direction';
-import { EAnimation, TCoordinate } from '../types';
+import { EAnimation, EKey, TCoordinate } from '../types';
 import { Level } from '../level';
 import dialogueControls from '../assets/dialogue-game-controls.png';
 import { SpriteManager } from './SpriteManager';
@@ -24,7 +24,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     y: number,
     jumpCoordinate: TCoordinate[]
   ) {
-    super(scene, x, y, 'dude');
+    super(scene, x, y, EKey.PLAYER_KEY);
     this.setScale(25 / this.width, 50 / this.height);
 
     this.jumpCoordinate = jumpCoordinate;
@@ -45,9 +45,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.direction = Direction.LEFT;
     this.setVelocityX(-velocity);
     if (this.isJump) {
-      this.anims.play('jumpLeft');
+      this.anims.play(EAnimation.PLAYER_JUMP_LEFT, true);
     } else {
-      this.anims.play('left', true);
+      this.anims.play(EAnimation.PLAYER_LEFT, true);
     }
   }
 
@@ -55,17 +55,17 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.direction = Direction.RIGHT;
     this.setVelocityX(velocity);
     if (this.isJump) {
-      this.anims.play('jumpRight');
+      this.anims.play(EAnimation.PLAYER_JUMP_RIGHT, true);
     } else {
-      this.anims.play('right', true);
+      this.anims.play(EAnimation.PLAYER_RIGHT, true);
     }
   }
 
   inJump(): void {
     if (this.direction === Direction.LEFT) {
-      this.anims.play('jumpLeft');
+      this.anims.play(EAnimation.PLAYER_JUMP_LEFT, true);
     } else {
-      this.anims.play('jumpRight');
+      this.anims.play(EAnimation.PLAYER_JUMP_RIGHT, true);
     }
   }
 
@@ -77,9 +77,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.setVelocityX(0);
 
     if (this.direction === Direction.LEFT) {
-      this.anims.play('turnLeft');
+      this.anims.play(EAnimation.PLAYER_PASSIVE_LEFT);
     } else {
-      this.anims.play('turnRight');
+      this.anims.play(EAnimation.PLAYER_PASSIVE_RIGHT);
     }
   }
 
@@ -96,7 +96,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             x: this.x + 80,
             y: this.y - 100
           }
-        ]
+        ],
+        2
       );
     }
   }
@@ -109,18 +110,18 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       ) {
         this.goRight();
       } else if (
-        parseInt(`${this.x}`) - 60 >
+        parseInt(`${this.x}`) - 52 >
         parseInt(
           `${this.jumpCoordinate[this.jumpCoordinate.length - 1].x}`
         )
       ) {
-        this.goLeft(1);
-        this.passive();
+        this.goLeft(0);
         if (!this.isJump) {
           this.jump();
         }
         if (this.isJump) {
-          this.anims.play('jumpLeft');
+          console.log('on saute');
+          this.inJump();
         }
         this.loadDialogueControls();
       } else {

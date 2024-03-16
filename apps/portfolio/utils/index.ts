@@ -8,6 +8,7 @@ export * from './type';
 export * from './locales';
 export * from './page-found';
 export * from './const';
+export * from './meta';
 
 import lightDarkModeClasses from './global.module.css';
 

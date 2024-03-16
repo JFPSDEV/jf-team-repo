@@ -4,13 +4,15 @@ export interface IPresentationRow {
   id: string;
   value: string;
   icon: string;
+  label: string;
 }
 
 export interface IPresentation {
   title: string[];
   picture: string;
   description: string;
-  rows: IPresentationRow[];
+  mail: IPresentationRow;
+  phone: IPresentationRow;
 }
 
 export interface IStudyRow {
@@ -82,6 +84,7 @@ export interface IProjectRow {
 
 export interface IProject {
   title: string[];
+  webSiteLabel: string;
   rows: IProjectRow[];
 }
 
@@ -104,6 +107,7 @@ export interface IPreface {
   title: string[];
   description: string;
   picture: string;
+  linkCv: string;
 }
 
 export interface IContactForm {

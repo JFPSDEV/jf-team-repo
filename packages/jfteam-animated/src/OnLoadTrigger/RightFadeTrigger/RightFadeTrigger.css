@@ -1,4 +1,4 @@
-.slideFade {
+.slideRightFade {
   opacity: 0;
   transform: translateX(40%);
   transition:
@@ -6,7 +6,7 @@
     transform 2s ease;
 }
 
-.slideFade.visible {
+.slideRightFade.visible {
   opacity: 1;
   transform: translateX(0);
 }

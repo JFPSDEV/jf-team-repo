@@ -53,7 +53,11 @@ const Experience = ({ row, isDesktop }: ExperienceProps) => {
                   </Grid.Col>
                   <Grid.Col span={{ base: 12, md: 6 }}>
                     <Stack gap="sm" p="md">
-                      <Link href={link} target="_blank" style={{ textDecoration: 'none' }}>
+                      <Link
+                        href={link}
+                        target="_blank"
+                        style={{ textDecoration: 'none', color: 'inherit' }}
+                      >
                         <Title order={3}>{studyTitle}</Title>
                       </Link>
                       <Text c="dimmed" size="sm">

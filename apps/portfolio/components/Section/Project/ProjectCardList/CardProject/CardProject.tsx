@@ -1,16 +1,18 @@
 import React from 'react';
 
-import { Accordion, Button, Stack, Text } from '@jfteam/material';
-import { IconWorldWww } from '@jfteam/icons';
+import { Accordion, Box, Button, Group, Stack, Text } from '@jfteam/material';
+import { IconCornerDownRight, IconWorldWww } from '@jfteam/icons';
 import { IProjectRow } from '@/utils';
+import Link from 'next/link';
 
 interface CardProjectProps extends Omit<IProjectRow, 'picture'> {
   onClick?: () => void;
   currentIndex: number;
+  webSiteLabel: string;
 }
 
 export const CardProject = (props: CardProjectProps) => {
-  const { id, title, description, link, currentIndex, onClick } = props;
+  const { id, title, webSiteLabel, description, link, currentIndex, onClick } = props;
 
   return (
     <Accordion.Item
@@ -34,17 +36,15 @@ export const CardProject = (props: CardProjectProps) => {
       </Accordion.Control>
       <Accordion.Panel>
         <Stack justify="space-evenly" h={currentIndex === +id ? 200 : undefined}>
-          <Text>{description}</Text>
-          <Button
-            variant="subtle"
-            component="a"
-            href={link}
-            target="_blank"
-            style={{ objectFit: 'contain', width: 'fit-content' }}
-          >
-            <IconWorldWww />
-            &nbsp; Voir le site
-          </Button>
+          <Text c="dimmed">{description}</Text>
+          <Group align="center">
+            <Box>
+              <IconCornerDownRight />
+            </Box>
+            <Link href={link} target="_blank" style={{ textDecoration: 'none' }}>
+              {webSiteLabel}
+            </Link>
+          </Group>
         </Stack>
       </Accordion.Panel>
     </Accordion.Item>

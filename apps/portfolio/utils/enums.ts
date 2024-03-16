@@ -1,8 +1,3 @@
-export enum ESpoiler {
-  READ_MORE = '...Lire plus',
-  READ_LESS = 'Lire moin',
-}
-
 export enum EVartiant {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
@@ -41,3 +36,21 @@ export enum EPageId {
   CV = 'cv',
   HOME = 'home',
 }
+
+export enum ESpoiler {
+  READ_MORE_FR = '...Lire plus',
+  READ_LESS_FR = 'Lire moin',
+  READ_MORE_EN = '...Reade more',
+  READ_LESS_EN = 'Read less',
+}
+
+export const spoiler = {
+  [ELocale.FR]: {
+    more: ESpoiler.READ_MORE_FR,
+    less: ESpoiler.READ_LESS_FR,
+  },
+  [ELocale.EN]: {
+    more: ESpoiler.READ_MORE_EN,
+    less: ESpoiler.READ_LESS_EN,
+  },
+};

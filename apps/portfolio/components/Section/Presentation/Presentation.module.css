@@ -20,3 +20,8 @@
   border: 5px solid var(--orange-main);
   z-index: 1;
 }
+
+.phoneContainer {
+  text-decoration: none;
+  color: inherit;
+}

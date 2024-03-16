@@ -9,12 +9,13 @@ import { IProjectRow } from '@/utils';
 
 interface ProjectCardListProps {
   list: IProjectRow[];
+  webSiteLabel: string;
   index: number;
   onClick: (index: number) => void;
 }
 
 const ProjectCardList = (props: ProjectCardListProps) => {
-  const { list, index, onClick } = props;
+  const { list, webSiteLabel, index, onClick } = props;
 
   return (
     <Accordion defaultValue={list[0].title} chevron={null} value={`${index}`}>
@@ -22,6 +23,7 @@ const ProjectCardList = (props: ProjectCardListProps) => {
         <CardProject
           key={item.title}
           id={idx.toString()}
+          webSiteLabel={webSiteLabel}
           currentIndex={index}
           onClick={() => onClick(idx)}
           link={item.link}

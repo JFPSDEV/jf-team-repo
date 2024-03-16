@@ -24,7 +24,7 @@ const Testimonial = ({ row, isDesktop }: TestimonialProps) => {
   const anchor = headerLink.navlink[ENavlink.FEEDBACK][locale].anchor;
 
   return (
-    <Section variant={EVartiant.SECONDARY} id={anchor}>
+    <Section variant={EVartiant.SECONDARY} id={anchor} className={classes.section}>
       <FadeTrigger trigger={ETrigger.ScrollTrigger}>
         <Stack gap={30}>
           <Title order={2} ta="center" rows={row.title} />

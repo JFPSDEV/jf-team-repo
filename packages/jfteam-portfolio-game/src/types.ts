@@ -29,11 +29,18 @@ export enum EAnimation {
   LOCALE = 'locale',
   IMPACT_ANIM = 'impact-anim',
   EMPTY_BLOCK = 'empty-block',
-  BLOCK_FULL = 'block-full'
+  BLOCK_FULL = 'block-full',
+  PLAYER_RIGHT = 'player-right',
+  PLAYER_LEFT = 'player-left',
+  PLAYER_JUMP_RIGHT = 'player-jump-right',
+  PLAYER_JUMP_LEFT = 'player-jump-left',
+  PLAYER_PASSIVE_RIGHT = 'player-passive-right',
+  PLAYER_PASSIVE_LEFT = 'player-passive-left'
 }
 
 export enum EKey {
-  IMPACT_KEY = 'impact-key'
+  IMPACT_KEY = 'impact-key',
+  PLAYER_KEY = 'player-key'
 }
 
 export type TTarget = Phaser.Types.Tweens.TweenBuilderConfig['targets'];

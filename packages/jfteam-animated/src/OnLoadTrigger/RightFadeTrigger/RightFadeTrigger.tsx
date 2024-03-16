@@ -17,7 +17,7 @@ export const RightFadeTrigger = ({ children }: RightFadeTriggerProps) => {
   }, []);
 
   return (
-    <div className={`slideFade ${isVisible ? 'visible' : ''}`}>
+    <div className={`slideRightFade ${isVisible ? 'visible' : ''}`}>
       {children}
     </div>
   );
