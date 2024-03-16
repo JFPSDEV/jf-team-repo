@@ -1,5 +1,7 @@
 import React, { type CSSProperties } from 'react';
 
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 import { ColorSchemeScript } from '@jfteam/material';
 import { Html, Head, Main, NextScript } from 'next/document';
 import { meta } from '@/utils';
@@ -27,6 +29,7 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
+      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
     </Html>
   );
 }
