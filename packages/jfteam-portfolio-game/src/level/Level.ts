@@ -88,7 +88,7 @@ export class Level extends Phaser.Scene {
     this.themeManager = new ThemeManager(this, [
       {
         x: getPercent(isSmallScreen ? 30 : 35, W),
-        y: H - 275
+        y: getPercent(40, H)
       }
     ]);
 
@@ -97,7 +97,7 @@ export class Level extends Phaser.Scene {
      * -----------
      */
     this.localeManager = new LocaleManager(this, [
-      { x: getPercent(isSmallScreen ? 70 : 65, W), y: H - 275 }
+      { x: getPercent(isSmallScreen ? 70 : 65, W), y: getPercent(40, H) }
     ]);
 
     /**

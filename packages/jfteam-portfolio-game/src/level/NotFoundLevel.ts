@@ -15,8 +15,8 @@ export class NotFoundLevel extends Level {
 
     const centerX = getPercent(50, W);
 
-    const startY = H - 315;
-    const startX = centerX - (notFoundNumberInWidth * coinScale) / 2;
+    const startY = getPercent(35, H);
+    const startX = centerX - (notFoundNumberInWidth * coinScale) / 2 + 10;
 
     this.createGame({
       playerStart: { x: getPercent(10, W), y: getPercent(60, H) },
