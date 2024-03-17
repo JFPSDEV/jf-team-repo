@@ -4,12 +4,13 @@ import { getPage } from '@/utils/get-page';
 
 interface IndexPageProps extends PageProps {
   page: IHomePage;
+  locale: ELocale;
 }
 
 export default function IndexPage(props: IndexPageProps) {
-  const { page } = props;
+  const { page, locale } = props;
 
-  return <HomePage page={page} />;
+  return <HomePage locale={locale} page={page} />;
 }
 
 /**
