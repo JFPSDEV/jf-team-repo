@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 
-import { Skeleton } from '@jfteam/material';
+import { Skeleton, TextInput } from '@jfteam/material';
 import { useResponsive } from '@jfteam/hooks';
 
 import { ELocale, EPageId, ICVPage } from '@/utils';

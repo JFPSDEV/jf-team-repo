@@ -102,15 +102,6 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  autoJump(): void {
-    if (!this.isJump) {
-      this.jump();
-    }
-    if (this.isJump) {
-      this.inJump();
-    }
-  }
-
   autoPlay(): void {
     if (this.jumpCoordinate?.length) {
       if (
@@ -125,7 +116,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         )
       ) {
         this.goLeft(0);
-        this.autoJump();
+        if (!this.isJump) {
+          this.jump();
+        }
+        if (this.isJump) {
+          this.inJump();
+        }
         this.loadDialogueControls();
       } else {
         this.goRight(100);
@@ -136,8 +132,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
       });
     } else {
-      this.autoJump();
-      this.loadDialogueControls();
+      this.isAuto = false;
     }
   }
 

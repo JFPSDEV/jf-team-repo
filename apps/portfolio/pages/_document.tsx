@@ -29,7 +29,6 @@ export default function Document() {
         <Main />
         <NextScript />
       </body>
-      <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
     </Html>
   );
 }

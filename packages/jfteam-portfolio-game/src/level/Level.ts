@@ -114,6 +114,20 @@ export class Level extends Phaser.Scene {
       this.cursors = this.input.keyboard.createCursorKeys();
     }
 
+    document.addEventListener(
+      'keydown',
+      (event) => {
+        const isKeyControls =
+          event.key === 'ArrowLeft' ||
+          event.key === 'ArrowRight' ||
+          event.key === 'ArrowUp';
+        if (!isKeyControls) {
+          event.stopPropagation();
+        }
+      },
+      true
+    );
+
     /**
      * BLOCK [?]
      * -----------
@@ -129,31 +143,6 @@ export class Level extends Phaser.Scene {
      */
     this.groundBlockManager = new GroundBlockManager(this);
     this.groundBlockManager.createGroundBlocks();
-
-    /**
-     * TREE
-     * -----------
-     */
-    this.treeLeft = new DecorManager(
-      this,
-      EAnimation.TREE_LEFT,
-      240,
-      treeRightPicture,
-      {
-        x: W - 40,
-        y: H - 275
-      }
-    );
-    this.treeRight = new DecorManager(
-      this,
-      EAnimation.TREE_RIGHT,
-      240,
-      treeLeftPicture,
-      {
-        x: 40,
-        y: H - 275
-      }
-    );
 
     /**
      * PLAYER
@@ -249,6 +238,31 @@ export class Level extends Phaser.Scene {
       this.localeManager.getLocaleGroup(),
       this.player,
       colisionLocaleBlock as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback
+    );
+
+    /**
+     * TREE
+     * -----------
+     */
+    this.treeLeft = new DecorManager(
+      this,
+      EAnimation.TREE_LEFT,
+      240,
+      treeRightPicture,
+      {
+        x: W - 40,
+        y: getPercent(39, H)
+      }
+    );
+    this.treeRight = new DecorManager(
+      this,
+      EAnimation.TREE_RIGHT,
+      240,
+      treeLeftPicture,
+      {
+        x: 40,
+        y: getPercent(39, H)
+      }
     );
   }
 

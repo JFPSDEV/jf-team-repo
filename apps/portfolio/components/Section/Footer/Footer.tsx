@@ -24,7 +24,7 @@ const Footer = (props: FooterProps) => {
   const { logo, socialMedia } = headerLink;
 
   const copyright = (
-    <Text ff={poppins.style.fontFamily} c="white" fz={20}>
+    <Text ff={poppins.style.fontFamily} c="white" fz={16}>
       © {new Date().getFullYear()} {appName}.
     </Text>
   );

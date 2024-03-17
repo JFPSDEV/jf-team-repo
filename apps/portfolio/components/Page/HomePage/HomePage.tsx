@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 
 import { useResponsive } from '@jfteam/hooks';
 
 import { ELocale, EPageId, IHomePage } from '@/utils';
 import { Hero } from '@/components/Section';
-import { Box, Skeleton } from '@jfteam/material';
+import { Box, Skeleton, TextInput } from '@jfteam/material';
 import classes from './HomePage.module.css';
 
 const DynamicPreface = dynamic(() => import('../../Section/Preface/Preface'), {
