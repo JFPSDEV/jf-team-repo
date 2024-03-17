@@ -20,7 +20,7 @@ export class CoinManager {
       allowGravity: false
     });
     this.createCoins(coins);
-    this.initScoreText();
+    // this.initScoreText();
     this.handleCoinCollision = this.handleCoinCollision.bind(this);
   }
 
@@ -65,6 +65,9 @@ export class CoinManager {
     player: Phaser.Physics.Arcade.Sprite,
     coin: Phaser.Physics.Arcade.Image
   ): void {
+    this.scene.physics.world.disableBody(
+      coin?.body as Phaser.Physics.Arcade.Body
+    );
     coin.disableBody(true, true);
     this.score += 10;
     if (this.scoreText) {

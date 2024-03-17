@@ -5,20 +5,21 @@ import { Box, Skeleton, cx } from '@jfteam/material';
 import { NavBar } from '../..';
 import { Section } from '../Section';
 import classes from './Hero.module.css';
-import { EPageId, EVartiant, type TSectionProps } from '@/utils';
+import { ELocale, EPageId, EVartiant, type TSectionProps } from '@/utils';
 import { HeroRadiusContainer } from './HeroRadiusContainer/HeroRadiusContainer';
 import { Game } from '@/components';
 
 interface HeroProps extends TSectionProps {
   mode: EPageId;
+  locale: ELocale;
 }
 
-export const Hero = ({ isMobile, mode }: HeroProps) => {
+export const Hero = ({ isMobile, mode, locale }: HeroProps) => {
   return (
     <header className={classes.navMobile}>
       {isMobile ? (
         <Section variant={EVartiant.TERTIARY} py={0}>
-          <NavBar />
+          <NavBar locale={locale} />
         </Section>
       ) : (
         <Box className={classes.mainContainer}>
@@ -27,7 +28,7 @@ export const Hero = ({ isMobile, mode }: HeroProps) => {
 
           <Box className={classes.navBarContainer}>
             <Section py={0} bg="none">
-              <NavBar />
+              <NavBar locale={locale} />
             </Section>
           </Box>
 

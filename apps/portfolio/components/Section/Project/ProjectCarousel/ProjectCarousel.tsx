@@ -3,21 +3,23 @@ import React from 'react';
 import Image from 'next/image';
 
 import { Carousel } from '@jfteam/carousel';
-import { Box, Stack, type Embla, Title, Text, Button } from '@jfteam/material';
+import { Box, Stack, type Embla, Title, Text, Button, Group } from '@jfteam/material';
 
 import classes from './ProjectCarousel.module.css';
 import { useResponsive } from '@jfteam/hooks';
-import { IconWorldWww } from '@jfteam/icons';
+import { IconCornerDownRight, IconWorldWww } from '@jfteam/icons';
 import { IProjectRow } from '@/utils';
+import Link from 'next/link';
 
 interface ProjectCarouselProps {
   list: IProjectRow[];
+  webSiteLabel: string;
   getEmblaApi: ((embla: Embla) => void) | undefined;
   onIndexChange: (idx: number) => void;
 }
 
 export const ProjectCarousel = (props: ProjectCarouselProps) => {
-  const { list, getEmblaApi, onIndexChange } = props;
+  const { list, webSiteLabel, getEmblaApi, onIndexChange } = props;
 
   const { isDesktop, isMobile } = useResponsive();
 
@@ -44,19 +46,13 @@ export const ProjectCarousel = (props: ProjectCarouselProps) => {
             </Box>
             {!isDesktop && (
               <>
-                <Stack justify="space-evenly" align="center" h={200} p="md">
+                <Stack justify="space-evenly" align="center" h={250} p="md">
                   <Title order={3}> {row.title}</Title>
                   <Text ta="center">{row.description}</Text>
-                  <Button
-                    variant="subtle"
-                    component="a"
-                    href={row.link}
-                    target="_blank"
-                    style={{ objectFit: 'contain', width: 'fit-content' }}
-                  >
-                    <IconWorldWww />
-                    &nbsp; Voir le site
-                  </Button>
+
+                  <Link href={row.link} target="_blank" style={{ textDecoration: 'none' }}>
+                    {webSiteLabel}
+                  </Link>
                 </Stack>
               </>
             )}

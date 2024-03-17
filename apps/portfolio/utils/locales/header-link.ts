@@ -7,6 +7,7 @@ import {
   IconPresentation,
   IconMail,
   IconMessage,
+  IconHome,
 } from '@jfteam/icons';
 
 import { ELocale, ENavlink } from '../enums';
@@ -41,6 +42,11 @@ export const headerLink: THeader = {
     link: '/',
   },
   navlink: {
+    [ENavlink.HOME]: {
+      Icon: IconHome,
+      [ELocale.EN]: { value: 'Home', link: '/' },
+      [ELocale.FR]: { value: 'Accueil', link: '/' },
+    },
     [ENavlink.CV]: {
       Icon: IconFileCv,
       [ELocale.EN]: { value: 'CV', link: '/cv' },

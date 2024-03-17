@@ -14,8 +14,8 @@ interface LocaleHomePageProps extends PageProps {
   page: IHomePage;
 }
 
-export default function LocaleHomePage({ page }: LocaleHomePageProps) {
-  return <DynamicHomePage page={page} />;
+export default function LocaleHomePage({ page, locale }: LocaleHomePageProps) {
+  return <DynamicHomePage page={page} locale={locale} />;
 }
 
 /**

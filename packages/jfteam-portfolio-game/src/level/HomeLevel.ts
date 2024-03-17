@@ -8,12 +8,10 @@ export class HomeLevel extends Level {
     var H = this.cameras.main.height;
 
     const centerX = getPercent(50, W);
-    const centerY = getPercent(50, H);
-
-    console.log({ blockY });
+    const centerY = H - 275;
 
     this.createGame({
-      playerStart: { x: getPercent(10, W), y: centerY },
+      playerStart: { x: getPercent(10, W), y: centerY + 10 },
       spBlocks: [
         {
           x: centerX - 100,

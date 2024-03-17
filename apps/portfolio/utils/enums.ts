@@ -17,6 +17,7 @@ export enum ENavlink {
   CONTACT = 'contact',
   PROJECT = 'project',
   FEEDBACK = 'feedback',
+  HOME = 'home',
 }
 
 export type TLocale = keyof typeof ELocale;
@@ -35,6 +36,7 @@ export interface PageProps {
 export enum EPageId {
   CV = 'cv',
   HOME = 'home',
+  NOT_FOUND = 'not-found',
 }
 
 export enum ESpoiler {

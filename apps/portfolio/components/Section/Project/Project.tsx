@@ -37,7 +37,12 @@ const Project = ({ row, isMobile }: ProjectProps) => {
                 direction="down"
                 style={{ height: '100%' }}
               >
-                <ProjectCarousel list={row.rows} getEmblaApi={setEmbla} onIndexChange={setIndex} />
+                <ProjectCarousel
+                  webSiteLabel={row.webSiteLabel}
+                  list={row.rows}
+                  getEmblaApi={setEmbla}
+                  onIndexChange={setIndex}
+                />
               </FadeTrigger>
             </Grid.Col>
             {isDesktop && (

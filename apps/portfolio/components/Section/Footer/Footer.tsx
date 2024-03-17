@@ -8,20 +8,20 @@ import classes from './Footer.module.css';
 
 import { Section } from '../Section';
 import { useResponsive } from '@jfteam/hooks';
-import { useLocale } from '@/hooks';
 import NavBarLink from '@/components/NavBar/NavBarLink/NavBarLink';
+import NextPageFooter from './NextPageFooter/NextPageFooter';
 
-interface FooterProps extends TSectionProps {}
+interface FooterProps extends TSectionProps {
+  locale: ELocale;
+  style?: React.CSSProperties;
+}
 
 const Footer = (props: FooterProps) => {
-  const {} = props;
+  const { locale, style } = props;
 
-  const { locale: linkLocale } = useLocale();
   const { isDesktop } = useResponsive();
 
   const { logo, socialMedia } = headerLink;
-
-  const locale: ELocale = linkLocale || ELocale.FR;
 
   const copyright = (
     <Text ff={poppins.style.fontFamily} c="white" fz={20}>
@@ -35,7 +35,10 @@ const Footer = (props: FooterProps) => {
         variant={EVartiant.QUATERNARY}
         py={{ base: 'md', md: 'var(--section-spacing)' }}
         className={classes.footerContainer}
+        style={style}
       >
+        {isDesktop && <NextPageFooter locale={locale} />}
+
         <Group justify="space-between">
           <Stack gap="lg">
             <NavBarLink href={`${logo.link}${locale === ELocale.FR ? '' : locale}`}>

@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { Skeleton } from '@jfteam/material';
 import { useResponsive } from '@jfteam/hooks';
 
-import { EPageId, ICVPage } from '@/utils';
+import { ELocale, EPageId, ICVPage } from '@/utils';
 import { Hero } from '@/components/Section';
 
 const DynamicStudy = dynamic(() => import('../../Section/Study/Study'), {
@@ -18,9 +18,10 @@ const DynamicExperience = dynamic(() => import('../../Section/Experience/Experie
 
 interface CVPageProps {
   page: ICVPage;
+  locale: ELocale;
 }
 
-const CVPage = ({ page }: CVPageProps) => {
+const CVPage = ({ page, locale }: CVPageProps) => {
   const { ...props } = useResponsive();
 
   if (!page) return null;
@@ -29,13 +30,13 @@ const CVPage = ({ page }: CVPageProps) => {
 
   return (
     <>
-      <Hero {...props} mode={EPageId.CV} />
+      <Hero {...props} locale={locale} mode={EPageId.CV} />
       <DynamicPresentation row={presentation} {...props} />
       <DynamicStudy row={study} {...props} />
       <DynamicExperience row={experience} {...props} />
       <DynamicSkill row={skill} {...props} />
       <DynamicHobby row={hobby} {...props} />
-      <DynamicFooter {...props} />
+      <DynamicFooter {...props} locale={locale} />
     </>
   );
 };

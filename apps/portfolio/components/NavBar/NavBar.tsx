@@ -4,31 +4,29 @@ import { IconMenu2, IconMinus } from '@jfteam/icons';
 import { useDisclosure, useResponsive } from '@jfteam/hooks';
 import { cx, Group, Tooltip, type GroupProps, ActionIcon } from '@jfteam/material';
 
-import { useLocale } from '../../hooks/use-locale';
 import classes from './NavBar.module.css';
 import { headerLink } from '../../utils/locales/header-link';
 import { ELocale } from '../../utils/enums';
 import NavBarLink from './NavBarLink/NavBarLink';
 import NavBarMobile from './NavBarMobile/NavBarMobile';
 
-interface NavBarProps extends GroupProps {}
+interface NavBarProps extends GroupProps {
+  locale: ELocale;
+}
 
 export const NavBar = (props: NavBarProps) => {
-  const { className, ...groupProps } = props;
+  const { locale, className, ...groupProps } = props;
 
-  const { locale: linkLocale } = useLocale();
   const { isDesktop } = useResponsive();
   const [opened, { open, close }] = useDisclosure(false);
 
   const { logo, navlink, socialMedia } = headerLink;
 
-  const locale: ELocale = linkLocale || ELocale.FR;
-
   const MenuIcon = opened ? IconMinus : IconMenu2;
 
   return (
     <>
-      {!isDesktop && <NavBarMobile opened={opened} onClose={close} />}
+      {!isDesktop && <NavBarMobile locale={locale} opened={opened} onClose={close} />}
 
       <Group
         justify="space-between"

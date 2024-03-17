@@ -13,8 +13,8 @@ interface LocaleCVPageProps extends PageProps {
   page: ICVPage;
 }
 
-export default function LocaleCVPage({ page }: LocaleCVPageProps) {
-  return <DynamicCVPage page={page} />;
+export default function LocaleCVPage({ page, locale }: LocaleCVPageProps) {
+  return <DynamicCVPage page={page} locale={locale} />;
 }
 
 /**

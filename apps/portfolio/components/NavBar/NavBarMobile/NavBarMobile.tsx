@@ -17,19 +17,20 @@ import NavBarMobileLink from './NavBarMobileLink/NavBarMobileLink';
 import { ENIcon, FRIcon, IconMoonStars, IconSun } from '@jfteam/icons';
 import { capitalize } from '@jfteam/utils';
 
-interface NavBarMobileProps extends DrawerProps {}
+interface NavBarMobileProps extends DrawerProps {
+  locale: ELocale;
+}
 
 const NavBarMobile = (props: NavBarMobileProps) => {
-  const { ...drawerProps } = props;
+  const { locale, ...drawerProps } = props;
 
-  const { locale: linkLocale, switchLocale } = useLocale();
+  const { switchLocale } = useLocale();
   const { navlink, socialMedia } = headerLink;
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   const color = colorScheme === 'dark' ? 'white' : 'black';
   const viewMode = colorScheme === 'dark' ? 'light' : 'dark';
 
-  const locale: ELocale = linkLocale || ELocale.FR;
   const otherLocale = locale === ELocale.FR ? ELocale.EN : ELocale.FR;
 
   return (

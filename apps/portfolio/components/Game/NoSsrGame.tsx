@@ -7,7 +7,7 @@ import { useLocale } from '@/hooks';
 import { ELocale } from '@/utils';
 
 interface NoSsrGameProps {
-  mode?: 'home' | 'cv';
+  mode?: 'home' | 'cv' | 'not-found';
 }
 
 const NoSsrGame = ({ mode = EGameKey.HOME }: NoSsrGameProps) => {

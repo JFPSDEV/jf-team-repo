@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 
 import { useResponsive } from '@jfteam/hooks';
 
-import { EPageId, IHomePage } from '@/utils';
+import { ELocale, EPageId, IHomePage } from '@/utils';
 import { Hero } from '@/components/Section';
 import { Box, Skeleton } from '@jfteam/material';
 import classes from './HomePage.module.css';
@@ -24,9 +24,10 @@ const DynamicFooter = dynamic(() => import('../../Section/Footer/Footer'));
 
 interface HomePageProps {
   page: IHomePage;
+  locale: ELocale;
 }
 
-export const HomePage = ({ page }: HomePageProps) => {
+export const HomePage = ({ page, locale }: HomePageProps) => {
   const { ...props } = useResponsive();
 
   if (!page) return null;
@@ -35,13 +36,13 @@ export const HomePage = ({ page }: HomePageProps) => {
 
   return (
     <Box className={classes.page}>
-      <Hero {...props} mode={EPageId.HOME} />
+      <Hero {...props} locale={locale} mode={EPageId.HOME} />
       <DynamicPreface row={preface} {...props} />
       <DynamicTechno {...props} />
       <DynamicProject row={project} {...props} />
       <DynamicTestimonial row={testimonial} {...props} />
       <DynamicContact row={contact} {...props} />
-      <DynamicFooter {...props} />
+      <DynamicFooter {...props} locale={locale} />
     </Box>
   );
 };
