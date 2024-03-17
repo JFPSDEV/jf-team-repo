@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { useForm } from '@jfteam/form';
 import { TEmailForm } from '@jfteam/types';
@@ -61,19 +61,12 @@ export const ContactForm = ({ row }: ContactFormProps) => {
     }
   };
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    e.stopPropagation();
-    const value = e.target.value;
-    console.log({ value });
-    form.setFieldValue('email', value);
-  };
-
   return (
     <form
       onSubmit={form.onSubmit((values, event) => handleSendEMail(values, event))}
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <Stack w="100%">
+      <Stack w={{ base: '100%', md: 900 }}>
         <FadeTrigger trigger={ETrigger.ScrollTrigger}>
           <TextInput
             disabled={loading}
@@ -81,7 +74,6 @@ export const ContactForm = ({ row }: ContactFormProps) => {
             label={row.email.label}
             placeholder={row.email.placeholder}
             {...form.getInputProps('email')}
-            onChange={handleChange}
           />
         </FadeTrigger>
         <FadeTrigger trigger={ETrigger.ScrollTrigger}>
