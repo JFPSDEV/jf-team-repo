@@ -17,7 +17,6 @@ import {
 import classes from './Techno.module.css';
 import { generateUUID } from '@jfteam/utils';
 import { lightDarkModeClasses, type TSectionProps } from '@/utils';
-import { ETrigger, FadeTrigger } from '@jfteam/animated';
 
 const technoList = [
   {
@@ -79,14 +78,10 @@ const Techno = ({ isMobile }: TechnoProps) => {
       align="center"
       py="var(--section-spacing)"
     >
-      <FadeTrigger
-        className={cx(classes.scroll, classes.imgBox)}
-        trigger={ETrigger.ScrollTrigger}
-        startPosition={isMobile ? 0 : 100}
-      >
+      <Box className={cx(classes.scroll, classes.imgBox)}>
         {iconBand}
         {iconBand}
-      </FadeTrigger>
+      </Box>
     </Flex>
   );
 };
