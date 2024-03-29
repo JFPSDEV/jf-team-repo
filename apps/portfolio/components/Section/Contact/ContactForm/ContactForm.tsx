@@ -87,7 +87,11 @@ export const ContactForm = ({ row }: ContactFormProps) => {
         </FadeTrigger>
         <FadeTrigger trigger={ETrigger.ScrollTrigger}>
           {' '}
-          <ContactDrop disabled={loading} {...form.getInputProps('attachments')} />
+          <ContactDrop
+            label={row.attachment.label}
+            disabled={loading}
+            {...form.getInputProps('attachments')}
+          />
         </FadeTrigger>
         <FadeTrigger
           trigger={ETrigger.ScrollTrigger}

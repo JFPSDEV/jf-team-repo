@@ -19,11 +19,12 @@ export interface TFiles extends FileWithPath {
 interface ContactDropProps extends Partial<Omit<DropzoneProps, 'onChange'>> {
   onChange?: (value: TFiles[]) => void;
   value?: TFiles[];
+  label: string;
 }
 const maxSize = 20000 * 1024;
 
 export const ContactDrop = (props: ContactDropProps) => {
-  const { value = [], onChange, ...dropZoneProps } = props;
+  const { value = [], label, onChange, ...dropZoneProps } = props;
 
   const [files, setFiles] = useState<TFiles[]>([]);
   const [totalSize, setTotalSize] = useState<number>(0);
@@ -140,7 +141,7 @@ export const ContactDrop = (props: ContactDropProps) => {
 
           <div>
             <Text size="xl" p="md" ta="center" inline>
-              Clicker, ou glisser vos images et pdf ici
+              {label}
             </Text>
           </div>
         </Group>
