@@ -12,6 +12,8 @@ import {
   TurboRepoIcon,
   TypescriptIcon,
   VueJSIcon,
+  JavaIcon,
+  SpringBootIcon,
 } from '@jfteam/icons';
 
 import classes from './Techno.module.css';
@@ -19,46 +21,18 @@ import { generateUUID } from '@jfteam/utils';
 import { lightDarkModeClasses, type TSectionProps } from '@/utils';
 
 const technoList = [
-  {
-    id: 1,
-    Icon: ReactIcon,
-  },
-  {
-    id: 2,
-    Icon: TypescriptIcon,
-  },
-  {
-    id: 3,
-    Icon: GraphqlIcon,
-  },
-  {
-    id: 4,
-    Icon: ApolloIcon,
-  },
-  {
-    id: 5,
-    Icon: NextJSIcon,
-  },
-  {
-    id: 6,
-    Icon: TurboRepoIcon,
-  },
-  {
-    id: 7,
-    Icon: NestJsIcon,
-  },
-  {
-    id: 8,
-    Icon: NodeJSIcon,
-  },
-  {
-    id: 9,
-    Icon: AngularIcon,
-  },
-  {
-    id: 10,
-    Icon: VueJSIcon,
-  },
+  ReactIcon,
+  TypescriptIcon,
+  GraphqlIcon,
+  JavaIcon,
+  ApolloIcon,
+  NextJSIcon,
+  TurboRepoIcon,
+  NestJsIcon,
+  SpringBootIcon,
+  NodeJSIcon,
+  AngularIcon,
+  VueJSIcon,
 ];
 
 interface TechnoProps extends TSectionProps {}
@@ -66,7 +40,7 @@ interface TechnoProps extends TSectionProps {}
 const Techno = ({ isMobile }: TechnoProps) => {
   const iconBand = (
     <Box>
-      {[...technoList, ...technoList].map(({ Icon }) => (
+      {[...technoList, ...technoList].map((Icon) => (
         <Icon key={generateUUID()} size={70} className={classes.icon} />
       ))}
     </Box>

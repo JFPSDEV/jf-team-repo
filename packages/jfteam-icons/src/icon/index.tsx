@@ -15,3 +15,5 @@ export * from './VueJSIcon';
 export * from './NewTabIcon';
 export * from './ENIcon';
 export * from './FRIcon';
+export * from './JavaIcon';
+export * from './SpringBootIcon';
