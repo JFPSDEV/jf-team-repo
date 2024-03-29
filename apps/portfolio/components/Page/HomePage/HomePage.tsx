@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
-
 import { useResponsive } from '@jfteam/hooks';
-
 import { ELocale, EPageId, IHomePage } from '@/utils';
-import { Hero } from '@/components/Section';
-import { Box, Skeleton, TextInput } from '@jfteam/material';
-import classes from './HomePage.module.css';
+import { Skeleton } from '@jfteam/material';
+import { Page } from '../Page';
 
 const DynamicPreface = dynamic(() => import('../../Section/Preface/Preface'), {
   loading: () => <Skeleton visible={true} />,
@@ -35,15 +32,14 @@ export const HomePage = ({ page, locale }: HomePageProps) => {
   const { preface, project, testimonial, contact } = page;
 
   return (
-    <Box className={classes.page}>
-      <Hero {...props} locale={locale} mode={EPageId.HOME} />
+    <Page {...props} locale={locale} page={EPageId.HOME}>
       <DynamicPreface row={preface} {...props} />
       <DynamicTechno {...props} />
       <DynamicProject row={project} {...props} />
       <DynamicTestimonial row={testimonial} {...props} />
       <DynamicContact row={contact} {...props} />
       <DynamicFooter {...props} locale={locale} />
-    </Box>
+    </Page>
   );
 };
 

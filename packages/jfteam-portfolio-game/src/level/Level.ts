@@ -251,7 +251,7 @@ export class Level extends Phaser.Scene {
       treeRightPicture,
       {
         x: W - 40,
-        y: getPercent(39, H)
+        y: H - 275
       }
     );
     this.treeRight = new DecorManager(
@@ -261,7 +261,7 @@ export class Level extends Phaser.Scene {
       treeLeftPicture,
       {
         x: 40,
-        y: getPercent(39, H)
+        y: H - 275
       }
     );
   }

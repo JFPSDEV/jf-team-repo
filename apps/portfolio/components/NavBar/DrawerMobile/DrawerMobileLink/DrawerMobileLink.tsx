@@ -3,18 +3,18 @@ import { IconProps } from '@jfteam/icons';
 import { Group, GroupProps, Text } from '@jfteam/material';
 import React from 'react';
 
-interface NavBarMobileLinkProps extends GroupProps {
+interface DrawerMobileLinkProps extends GroupProps {
   Icon: (props: IconProps) => React.JSX.Element;
   children: string;
   color?: string;
 }
 
-export const NavBarMobileLink = ({
+export const DrawerMobileLink = ({
   Icon,
   color = 'white',
   children,
   ...groupProps
-}: NavBarMobileLinkProps) => {
+}: DrawerMobileLinkProps) => {
   return (
     <Group {...groupProps}>
       <Icon color={color} size={22} />
@@ -25,4 +25,4 @@ export const NavBarMobileLink = ({
   );
 };
 
-export default NavBarMobileLink;
+export default DrawerMobileLink;

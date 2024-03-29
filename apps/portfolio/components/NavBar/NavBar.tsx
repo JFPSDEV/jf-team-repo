@@ -8,7 +8,7 @@ import classes from './NavBar.module.css';
 import { headerLink } from '../../utils/locales/header-link';
 import { ELocale } from '../../utils/enums';
 import NavBarLink from './NavBarLink/NavBarLink';
-import NavBarMobile from './NavBarMobile/NavBarMobile';
+import DrawerMobile from './DrawerMobile/DrawerMobile';
 
 interface NavBarProps extends GroupProps {
   locale: ELocale;
@@ -26,7 +26,7 @@ export const NavBar = (props: NavBarProps) => {
 
   return (
     <>
-      {!isDesktop && <NavBarMobile locale={locale} opened={opened} onClose={close} />}
+      {!isDesktop && <DrawerMobile locale={locale} opened={opened} onClose={close} />}
 
       <Group
         justify="space-between"

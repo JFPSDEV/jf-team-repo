@@ -41,7 +41,7 @@ export enum EPageId {
 
 export enum ESpoiler {
   READ_MORE_FR = '...Lire plus',
-  READ_LESS_FR = 'Lire moin',
+  READ_LESS_FR = 'Lire moins',
   READ_MORE_EN = '...Reade more',
   READ_LESS_EN = 'Read less',
 }

@@ -13,16 +13,16 @@ import {
 } from '@jfteam/material';
 
 import NavBarLink from '../NavBarLink/NavBarLink';
-import NavBarMobileLink from './NavBarMobileLink/NavBarMobileLink';
+import DrawerMobileLink from './DrawerMobileLink/DrawerMobileLink';
 import { ENIcon, FRIcon, IconMoonStars, IconSun } from '@jfteam/icons';
 import { capitalize } from '@jfteam/utils';
 
-interface NavBarMobileProps extends DrawerProps {
+interface DrawerMobileProps extends DrawerProps {
   locale: ELocale;
 }
 
-const NavBarMobile = (props: NavBarMobileProps) => {
-  const { locale, ...drawerProps } = props;
+const DrawerMobile = (props: DrawerMobileProps) => {
+  const { locale, onClose, ...drawerProps } = props;
 
   const { switchLocale } = useLocale();
   const { navlink, socialMedia } = headerLink;
@@ -34,7 +34,7 @@ const NavBarMobile = (props: NavBarMobileProps) => {
   const otherLocale = locale === ELocale.FR ? ELocale.EN : ELocale.FR;
 
   return (
-    <Drawer position="right" {...drawerProps}>
+    <Drawer position="right" {...drawerProps} onClose={onClose}>
       <Stack>
         {Object.values(navlink).map((nav, index) => {
           const current = nav[locale]?.anchor;
@@ -42,10 +42,10 @@ const NavBarMobile = (props: NavBarMobileProps) => {
 
           return (
             <Fragment key={index}>
-              <NavBarLink href={`/${locale}${nav[locale].link}${anchor}`}>
-                <NavBarMobileLink Icon={nav.Icon} color={color}>
+              <NavBarLink href={`/${locale}${nav[locale].link}${anchor}`} onClick={onClose}>
+                <DrawerMobileLink Icon={nav.Icon} color={color}>
                   {nav[locale].value}
-                </NavBarMobileLink>
+                </DrawerMobileLink>
               </NavBarLink>
 
               <Divider />
@@ -62,33 +62,33 @@ const NavBarMobile = (props: NavBarMobileProps) => {
               rel="noopener noreferrer"
               style={{ textDecoration: 'none' }}
             >
-              <NavBarMobileLink Icon={Icon} color={color}>
+              <DrawerMobileLink Icon={Icon} color={color}>
                 {label}
-              </NavBarMobileLink>
+              </DrawerMobileLink>
             </a>
             <Divider />
           </Fragment>
         ))}
 
-        <NavBarMobileLink
+        <DrawerMobileLink
           onClick={() => switchLocale(otherLocale)}
           Icon={otherLocale === ELocale.FR ? FRIcon : ENIcon}
           color={color}
           style={{ cursor: 'pointer' }}
         >
           {otherLocale.toUpperCase()}
-        </NavBarMobileLink>
+        </DrawerMobileLink>
 
         <Divider />
 
-        <NavBarMobileLink
+        <DrawerMobileLink
           onClick={() => setColorScheme(viewMode)}
           Icon={colorScheme === 'dark' ? IconSun : IconMoonStars}
           color={color}
           style={{ cursor: 'pointer' }}
         >
           {capitalize(`${viewMode} mode`)}
-        </NavBarMobileLink>
+        </DrawerMobileLink>
 
         <Divider />
       </Stack>
@@ -96,4 +96,4 @@ const NavBarMobile = (props: NavBarMobileProps) => {
   );
 };
 
-export default NavBarMobile;
+export default DrawerMobile;
